@@ -1,0 +1,111 @@
+"use client"
+import React, { useState } from "react"
+import Header from "@/components/Header"
+import { Box, Button, Typography } from "@mui/material"
+
+import Image from "next/image"
+import {
+  BackButton,
+  DeepFilterButton,
+  FilterButton,
+  FurtherButton,
+  ProjectsButtons,
+  ProjectsContainer,
+  ProjectsDescription,
+  ProjectsHeader,
+  ProjectsItems,
+  ProjectsTitle,
+  ProjectsUpperButtons,
+  ProjectsWrapper,
+} from "./styled"
+import Link from "next/link"
+import { CARDS, FILTER_BUTTONS } from "./constants"
+import ProjectCard from "./components/ProjectCard"
+import Footer from "@/components/Footer"
+import ProjectsModal from "./components/ProjectsModal"
+
+const Tools = () => {
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([])
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalData, setModalData] = useState<{
+    title: string
+    description: string
+    redirectTo: string
+  } | null>(null)
+  return (
+    <ProjectsWrapper>
+      <Header isOnMainPage={false} />
+      <ProjectsContainer>
+        <ProjectsHeader>
+          <ProjectsTitle>הכלים שמתאימים לרשות שלך</ProjectsTitle>
+          <ProjectsDescription>
+            אנא בחר/י סוג אחד או מספר סוגים כדי להתחיל ולבחור כלים ופתרונות
+            לצרכים ולשיפורים לרשות.
+          </ProjectsDescription>
+        </ProjectsHeader>
+        <ProjectsUpperButtons>
+          <Box
+            sx={{
+              display: "flex",
+              justifySelf: "center",
+              textAlign: "center",
+              gap: "20px",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            {FILTER_BUTTONS.map((button, index) => {
+              const isSelected = selectedFilters.includes(button.title)
+              return (
+                <FilterButton
+                  key={index}
+                  onClick={() => {
+                    setSelectedFilters((prev) =>
+                      prev.includes(button.title)
+                        ? prev.filter((t) => t !== button.title)
+                        : [...prev, button.title]
+                    )
+                  }}
+                  selected={isSelected}
+                >
+                  {button.title}
+                </FilterButton>
+              )
+            })}
+          </Box>
+          <DeepFilterButton>פתיחת פרויקט</DeepFilterButton>
+        </ProjectsUpperButtons>
+        <ProjectsItems>
+          {CARDS.map((card, index) => (
+            <ProjectCard
+              key={index}
+              {...card}
+              onClick={() => {
+                setModalData(card.modal)
+                setModalOpen(true)
+              }}
+            />
+          ))}
+        </ProjectsItems>
+        <ProjectsButtons>
+          <Link href="/vizualization">
+            <BackButton>חזור</BackButton>
+          </Link>
+          <Link href="/vizualization">
+            <FurtherButton type="submit">המשך</FurtherButton>
+          </Link>
+        </ProjectsButtons>
+      </ProjectsContainer>
+      {modalOpen && modalData && (
+        <ProjectsModal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          {...modalData}
+        />
+      )}
+      <Footer />
+    </ProjectsWrapper>
+  )
+}
+
+export default Tools

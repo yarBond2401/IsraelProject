@@ -17,6 +17,7 @@ body {
 }
 
 body {
+  direction: rtl;
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
