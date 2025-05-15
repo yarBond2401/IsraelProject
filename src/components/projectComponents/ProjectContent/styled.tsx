@@ -39,7 +39,7 @@ export const ProjectContentTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   marginBlockEnd: "15px",
 }))
-export const ProjectHeaderLink = styled(Link)(({ theme }) => ({
+export const ProjectHeaderTag = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
   color: theme.palette.custom.purple,
 }))
@@ -55,7 +55,7 @@ export const DataBlock = styled(Box)(({ theme }) => ({
   marginBlockEnd: "20px",
   flexWrap: "wrap",
 }))
-export const ProjectArticle = styled(Box)(({ theme }) => ({
+export const ProjectArticle = styled(Box)(() => ({
   marginBlockEnd: "30px",
 }))
 export const ContactBlock = styled(Box)(({ theme }) => ({
@@ -86,7 +86,7 @@ export const ContactLink = styled(Link)(({ theme }) => ({
   textDecoration: "underline",
   fontWeight: 300,
 }))
-export const ContactButtonTitle = styled(Typography)(({ theme }) => ({
+export const ContactButtonTitle = styled(Typography)(() => ({
   fontSize: "12px",
   padding: "5px",
   backgroundColor: "#fff",

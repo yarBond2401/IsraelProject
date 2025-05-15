@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Typography } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 import {
   AdditionalProjectsCards,
   AdditionalProjectsContainer,
@@ -51,13 +51,7 @@ export const AdditionalProjects: React.FC<AdditionalProjectsProps> = ({
               <AdditionalProjectsHeader>
                 <Typography sx={{ color: "#000" }}>{section.title}</Typography>
                 <Link href="/projects">
-                  <Button
-                    sx={{
-                      backgroundColor: "#15b0a1",
-                      fontSize: "14px",
-                      fontWeight: 300,
-                    }}
-                  >
+                  <Button variant="forward" color="green">
                     {section.button}
                   </Button>
                 </Link>

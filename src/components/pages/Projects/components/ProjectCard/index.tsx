@@ -1,6 +1,5 @@
 import React from "react"
-import { Typography, Box } from "@mui/material"
-import Link from "next/link"
+import { Box } from "@mui/material"
 import { CardsProps } from "../../constants"
 import Image from "next/image"
 import {

@@ -2,11 +2,9 @@ import {
   ThemeOptions,
   PaletteOptions,
   TypographyVariantsOptions,
-  alpha,
-  lighten,
 } from "@mui/material/styles"
 import customComponents from "@/theme/components/index"
-// import { AdaptiveTypography } from "@/utils/AdaptiveTypography"
+import { AdaptiveTypography } from "@/utils/AdaptiveTypography"
 
 function makePalette(): PaletteOptions {
   const primaryColor = "#f5f5f5"
@@ -21,36 +19,20 @@ function makePalette(): PaletteOptions {
     primary: {
       main: primaryColor,
       light: accentColor,
-      contrastText: "#FFFFFF",
     },
     secondary: {
       main: secondaryColor,
-      contrastText: primaryColor,
     },
-    background: {
-      paper: `linear-gradient(180deg, ${primaryColor} 0%, #2c4062 100%)`,
-    },
+
     grey: {
       A100: "#7B879B",
     },
     custom: {
       purple: "#a83b96",
+      green: "#15b0a1",
       gradients: {
         primaryGradient: `linear-gradient(315deg, #1c0c35 1%, #643a99 18%, #9b90d4 39%, #9fc2de 52%, #0342c6 83%, #00156b 100%)`,
         secondaryGradient: `linear-gradient(180deg, #2c4062 0%, ${primaryColor} 100%)`,
-      },
-      blurElements: {
-        first: "#669CF5",
-        second: alpha("#1135C9", 0.2),
-      },
-      inputs: {
-        borderColor: "#4FD4E0",
-        backgroundColor: alpha("#99A5B9", 0.2),
-        backgroundColorHover: alpha("#99A5B9", 0.3),
-      },
-      textarea: {
-        backgroundColor: "#99a5b9",
-        backgroundColorHover: lighten("#99a5b9", 0.1),
       },
     },
   }
@@ -61,7 +43,7 @@ function makeTypography(): TypographyVariantsOptions {
     fontFamily: "'Satoshi Variable', sans-serif",
     fontSize: 18,
     h1: {
-      fontSize: 42,
+      fontSize: AdaptiveTypography(28, 42),
       lineHeight: 1.6,
       fontWeight: 700,
       textTransform: "uppercase",
@@ -96,7 +78,6 @@ function makeTypography(): TypographyVariantsOptions {
       color: "#7b879b",
     },
     body1: {
-      //   fontSize: AdaptiveTypography(16, 18),
       lineHeight: 1.4,
       fontWeight: 400,
     },
@@ -144,22 +125,10 @@ export default getTheme
 declare module "@mui/material/styles" {
   interface CustomPalette {
     purple: string
+    green: string
     gradients: {
       primaryGradient: string
       secondaryGradient: string
-    }
-    blurElements: {
-      first: string
-      second: string
-    }
-    inputs: {
-      borderColor: string
-      backgroundColor: string
-      backgroundColorHover: string
-    }
-    textarea: {
-      backgroundColor: string
-      backgroundColorHover: string
     }
   }
 

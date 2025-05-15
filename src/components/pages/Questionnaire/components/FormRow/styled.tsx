@@ -19,13 +19,13 @@ export const ItemWrapper = styled(Box)(({ theme }) => ({
     textAlign: "center",
   },
 }))
-export const ExpandedRows = styled(Box)(({ theme }) => ({
+export const ExpandedRows = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   gap: "10px",
   padding: "10px",
 }))
-export const StyledAccordionRoot = styled(Accordion)(({ theme }) => ({
+export const StyledAccordionRoot = styled(Accordion)(() => ({
   boxShadow: "none",
   border: "none",
   margin: 0,
@@ -42,7 +42,7 @@ export const StyledAccordionRoot = styled(Accordion)(({ theme }) => ({
     borderRadius: 0,
   },
 }))
-export const StyledAccordion = styled(AccordionDetails)(({ theme }) => ({
+export const StyledAccordion = styled(AccordionDetails)(() => ({
   backgroundColor: "#fff",
   boxShadow: "none",
   borderBottom: "none",
@@ -50,7 +50,7 @@ export const StyledAccordion = styled(AccordionDetails)(({ theme }) => ({
     display: "none",
   },
 }))
-export const StyledSummary = styled(AccordionSummary)(({ theme }) => ({
+export const StyledSummary = styled(AccordionSummary)(() => ({
   backgroundColor: "#fff",
   boxShadow: "none",
   borderBottom: "none",
@@ -63,7 +63,7 @@ export const RowNumber = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   fontSize: "14px",
 }))
-export const RowDescription = styled(Typography)(({ theme }) => ({
+export const RowDescription = styled(Typography)(() => ({
   color: "#6e7170",
   fontSize: "14px",
 }))

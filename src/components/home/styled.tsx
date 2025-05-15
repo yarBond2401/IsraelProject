@@ -9,13 +9,17 @@ export const PageContainer = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   minHeight: "100vh",
-}))
-export const HomePageWrapper = styled(Box)(() => ({
-  paddingBlockStart: "200px",
   position: "relative",
-  width: "100%",
-  minHeight: "100vh",
   overflow: "hidden",
+}))
+export const HomePageWrapper = styled(Box)(({ theme }) => ({
+  paddingBlockStart: "200px",
+  inlineSize: "100%",
+  overflow: "hidden",
+  flexGrow: 1,
+  [theme.breakpoints.down("lg")]: {
+    paddingBlockStart: "100px",
+  },
 }))
 export const HomePageContainer = styled(Box)(({ theme }) => ({
   maxInlineSize: theme.breakpoints.values.xl,
@@ -23,36 +27,64 @@ export const HomePageContainer = styled(Box)(({ theme }) => ({
   paddingInline: "20px",
   display: "flex",
   flexDirection: "column",
-  overflow: "hidden",
+  flexGrow: 1,
+  overflow: "visible",
+  justifyContent: "space-between",
+  blockSize: "100%",
 }))
 export const HomePageBody = styled(Box)(({ theme }) => ({
-  flex: "1 0 auto",
+  flex: "1 1 auto",
   display: "flex",
   alignItems: "stretch",
   justifyContent: "flex-start",
-  marginBlockEnd: "230px",
+  marginBlockEnd: "200px",
+  [theme.breakpoints.down(850)]: {
+    marginBlockEnd: "20px",
+  },
 }))
 export const HomePageInfoSection = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: "35px",
+  paddingInlineStart: "50px",
+  [theme.breakpoints.down("lg")]: {
+    alignItems: "center",
+    paddingInlineStart: "0",
+  },
 }))
 export const HomePageTitle = styled(Typography)(({ theme }) => ({
   maxInlineSize: "600px",
+  [theme.breakpoints.down("lg")]: {
+    maxInlineSize: "none",
+    textAlign: "center",
+  },
+}))
+export const ButtonWrapper = styled(Link)(({ theme }) => ({
+  maxInlineSize: "450px",
+  [theme.breakpoints.down("lg")]: {
+    maxInlineSize: "none",
+    inlineSize: "100%",
+  },
 }))
 export const HomePageButton = styled(Button)(({ theme }) => ({
-  maxInlineSize: "450px",
+  [theme.breakpoints.down("lg")]: {
+    inlineSize: "100%",
+    textAlign: "center",
+  },
 }))
 export const HomePageSidebar = styled(Box)(({ theme }) => ({
   position: "absolute",
-  left: -20,
-  top: 0,
-  width: "280px",
-  paddingTop: "200px",
-  height: "100%",
+  insetInlineEnd: -20,
+  insetBlockStart: 0,
+  inlineSize: "280px",
+  paddingBlockStart: "200px",
+  blockSize: "100%",
+  [theme.breakpoints.down("lg")]: {
+    display: "none",
+  },
 }))
 
-export const ItemWrapper = styled(Box)(({ theme }) => ({
+export const ItemWrapper = styled(Box)(() => ({
   padding: "15px",
   borderRadius: "20px",
   transition: "opacity 0.3s ease",
@@ -61,15 +93,22 @@ export const ItemWrapper = styled(Box)(({ theme }) => ({
   },
 }))
 export const HomePageFooter = styled(Box)(({ theme }) => ({
-  justifySelf: "flex-start",
+  justifySelf: "flex-end",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-end",
+  inlineSize: "100%",
+  gap: "15px",
+  [theme.breakpoints.down(850)]: {
+    flexDirection: "column-reverse",
+    alignItems: "center",
+    paddingBlockEnd: "20px",
+  },
 }))
-export const HomePageContact = styled(Box)(({ theme }) => ({
+export const HomePageContact = styled(Box)(() => ({
   display: "flex",
   justifyContent: "space-between",
-  gap: "10px",
+  gap: "25px",
 }))
 export const LinkWrapper = styled(Box)(({ theme }) => ({
   "& a": {
@@ -85,15 +124,25 @@ export const LinkWrapper = styled(Box)(({ theme }) => ({
 }))
 
 export const HomePageSlider = styled(Box)(({ theme }) => ({
-  position: "absolute",
-  left: -20,
-  bottom: -10,
+  maxInlineSize: "100%",
+  [theme.breakpoints.up(850)]: {
+    position: "absolute",
+    left: -20,
+    bottom: -10,
+  },
 }))
-export const BackgroundImage = styled(Image)(() => ({
-  position: "absolute",
-  inset: 0,
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
+export const BackgroundContainer = styled(Box)(() => ({
+  position: "fixed",
+  top: 0,
+  left: 0,
+  inlineSize: "100%",
+  blockSize: "100%",
   zIndex: -1,
+}))
+
+export const BackgroundImage = styled(Image)(() => ({
+  inlineSize: "100%",
+  blockSize: "100%",
+  objectFit: "cover",
+  pointerEvents: "none",
 }))

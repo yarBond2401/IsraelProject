@@ -1,5 +1,5 @@
 "use client"
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { Box, Button } from "@mui/material"
 import Link from "next/link"
 import Image from "next/image"
@@ -18,12 +18,23 @@ import BurgerMenu from "./components/MenuBurger"
 import { HeaderProps } from "@/interfaces/header"
 const Header: React.FC<HeaderProps> = ({ isOnMainPage = true }) => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 60
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled)
+      }
+    }
 
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [scrolled])
   const toggleMenu = useCallback(() => {
     setMenuOpen((prev) => !prev)
   }, [])
   return (
-    <HeaderWrapper isMainPage={isOnMainPage}>
+    <HeaderWrapper isMainPage={isOnMainPage} scrolled={scrolled}>
       <HeaderContainer>
         <LogosContainer>
           {LOGOS.map((logo, index) => (

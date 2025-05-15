@@ -8,6 +8,7 @@ export const InputWrapper = styled(Box)(() => ({
   inlineSize: "100%",
 }))
 export const ParticipantsTextField = styled(TextField)(() => ({
+  width: "100%",
   "& .MuiOutlinedInput-root": {
     borderRadius: "8px",
     transition: "background-color 0.2s ease-in-out",
@@ -39,7 +40,7 @@ export const ParticipantsTextField = styled(TextField)(() => ({
     },
     "& input:-webkit-autofill": {
       WebkitBoxShadow: "0 0 0 100px #fff inset !important",
-      WebkitTextFillColor: "#898c8b !important",
+      WebkitTextFillColor: "#000 !important",
       caretColor: "#000 !important",
       fontSize: "16px",
       transition: "background-color 5000s ease-in-out 0s",

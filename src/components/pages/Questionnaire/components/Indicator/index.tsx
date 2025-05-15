@@ -1,7 +1,7 @@
 "use client"
 
 import { useFormikContext } from "formik"
-import { Box, Typography } from "@mui/material"
+import { Box } from "@mui/material"
 import { FC, useMemo } from "react"
 import {
   BackgroundCircle,
@@ -51,7 +51,7 @@ const Indicator: FC = () => {
       <TextContainer>
         <Box textAlign="center">
           <IndicatorValue variant="h6">{`${percentage}%`}</IndicatorValue>
-          <IndicatorTitle>סה"כ התקדמות</IndicatorTitle>
+          <IndicatorTitle>סה כ התקדמות</IndicatorTitle>
         </Box>
       </TextContainer>
     </CircleWrapper>

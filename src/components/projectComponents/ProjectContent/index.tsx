@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Typography } from "@mui/material"
+import { Box, Divider, Typography } from "@mui/material"
 import { ProjectsDetails } from "@/interfaces/projects"
 import Link from "next/link"
 import Image from "next/image"
@@ -13,10 +13,10 @@ import {
   ProjectButton,
   ProjectContentTitle,
   ProjectContentWrapper,
-  ProjectHeaderLink,
+  ProjectHeaderTag,
   ProviderBlock,
 } from "./styled"
-import { LABELS, LABELS_BLOCK } from "../constants"
+import { PROJECT_STATUS, PROJECT_TAGS } from "../constants"
 
 interface Props {
   data: ProjectsDetails
@@ -27,8 +27,8 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
     <ProjectContentWrapper>
       <ProjectContentTitle>{data.headerTitle}</ProjectContentTitle>
       <Box sx={{ display: "flex", flexWrap: "wrap", marginBlockEnd: "20px" }}>
-        {LABELS.map((label, index) => {
-          const link = data.headerLinks[index]
+        {PROJECT_TAGS.map((label, index) => {
+          const tag = data.tags[index]
           return (
             <Box
               key={index}
@@ -46,11 +46,9 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
               >
                 {label.label}
               </Typography>
-              <ProjectHeaderLink href={link?.redirectTo || "#"}>
-                {link?.title || "-"}
-              </ProjectHeaderLink>
+              <ProjectHeaderTag>{tag?.title}</ProjectHeaderTag>
 
-              {index < LABELS.length - 1 && (
+              {index < PROJECT_TAGS.length - 1 && (
                 <Divider
                   orientation="vertical"
                   flexItem
@@ -67,8 +65,8 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
         })}
       </Box>
       <DataBlock>
-        {LABELS_BLOCK.map((label, index) => {
-          const info = data.linksBlock[index]
+        {PROJECT_STATUS.map((label, index) => {
+          const info = data.statuses[index]
           return (
             <Box
               key={index}

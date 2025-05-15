@@ -1,10 +1,8 @@
 "use client"
 import React from "react"
 import Header from "@/components/Header"
-import { Box, TextField, Typography } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import {
-  BackButton,
-  FurtherButton,
   ParticipantButtons,
   ParticipantsContainer,
   ParticipantsContent,
@@ -19,21 +17,24 @@ import {
 import Link from "next/link"
 import { PARTICIPANTS_INPUTS } from "./constants"
 import { initialValues, ParticipantsSchema } from "./contents"
-import { Formik, Form, FormikHelpers, FieldArray } from "formik"
-import { Participant, ParticipantsFormValues } from "@/interfaces/participants"
+import { Formik, Form, FieldArray } from "formik"
+import { ParticipantsFormValues } from "@/interfaces/participants"
 import ParticipantsInput from "./components/ParticipantsInput"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 const Participants = () => {
   const router = useRouter()
-  const handleSubmit = async (
-    values: ParticipantsFormValues,
-    actions: FormikHelpers<ParticipantsFormValues>
-  ) => {
-    console.log(values)
+
+  const handleSubmit = async (values: ParticipantsFormValues) => {
+    const minimalParticipants = values.participants.map((p) => ({
+      firstName: p.firstName,
+      lastName: p.lastName,
+    }))
+    localStorage.setItem("participants", JSON.stringify(minimalParticipants))
     router.push("/vizualization")
   }
+
   return (
     <ParticipantsWrapper>
       <Header isOnMainPage={false} />
@@ -46,7 +47,7 @@ const Participants = () => {
               על-מנת שתתקבל תמונת מצב כמה שיותר מדויקת. הכלי אפקטיבי יותר ככל
               שימלאו על-ידו מספר רב יותר של בעלי תפקידים המייצגים נקודות
               שונות/דעות שונות בתחומי העיסוק של הרשות המקומית. מומלץ בחום,
-              ביניהם: ראש/מנכ"ל, סגנים, מנהלי אגפים, מנהלי מחלקות, ועובדים
+              ביניהם: ראש/מנכ&quot;ל, סגנים, מנהלי אגפים, מנהלי מחלקות, ועובדים
               בכירים נוספים.
             </ParticipantsDescription>
           </ParticipantsHeader>
@@ -63,16 +64,7 @@ const Participants = () => {
                       <>
                         <ParticipantsFormBody>
                           {values.participants.map((_, index) => (
-                            <Box
-                              key={index}
-                              sx={{
-                                position: "relative",
-                                paddingInlineEnd: "40px",
-                                borderBottom: "1px solid #eee",
-                                marginBottom: "20px",
-                                paddingBottom: "20px",
-                              }}
-                            >
+                            <Box key={index}>
                               <Typography
                                 sx={{
                                   color: "#000",
@@ -87,6 +79,7 @@ const Participants = () => {
                                 sx={{
                                   display: "flex",
                                   alignItems: "center",
+                                  justifyContent: "space-between",
                                   gap: "15px",
                                 }}
                               >
@@ -101,7 +94,7 @@ const Participants = () => {
                                     />
                                   ))}
                                 </ParticipantsInputs>
-                                {values.participants.length > 2 && (
+                                {values.participants.length > 3 && (
                                   <Box
                                     sx={{
                                       cursor: "pointer",
@@ -142,11 +135,16 @@ const Participants = () => {
                   </FieldArray>
                   <ParticipantButtons>
                     <Link href="/questionnaire">
-                      <BackButton>חזור</BackButton>
+                      <Button variant="back">חזור</Button>
                     </Link>
-                    <FurtherButton disabled={isSubmitting} type="submit">
+                    <Button
+                      variant="forward"
+                      color="purple"
+                      disabled={isSubmitting}
+                      type="submit"
+                    >
                       {isSubmitting ? "...המשך" : "המשך"}
-                    </FurtherButton>
+                    </Button>
                   </ParticipantButtons>
                 </Form>
               )}

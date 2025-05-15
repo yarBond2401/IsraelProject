@@ -32,7 +32,7 @@ export const FooterBody = styled(Box)(({ theme }) => ({
     flexDirection: "column",
   },
 }))
-export const Navigation = styled("nav")(({ theme }) => ({}))
+export const Navigation = styled("nav")(() => ({}))
 export const FooterLinks = styled("ul")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -41,7 +41,7 @@ export const FooterLinks = styled("ul")(({ theme }) => ({
     gap: "10px",
   },
 }))
-export const FooterLinkWrapper = styled("li")(({ theme }) => ({}))
+export const FooterLinkWrapper = styled("li")(() => ({}))
 export const FooterLink = styled(Link)(({ theme }) => ({
   color: "#6e6e6e",
   transition: "color 0.3s ease",

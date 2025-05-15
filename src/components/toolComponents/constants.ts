@@ -5,10 +5,7 @@ export const TOOLS_DATA: Record<string, ToolsDetails> = {
     id: "hackathon",
     name: "Hackathon",
     headerTitle: "האקתון",
-    headerLinks: [
-      { title: "האקתון", redirectTo: "/", isFirst: true },
-      { title: "האקתון רשתי", redirectTo: "/" },
-    ],
+    solutions: [{ title: "האקתון", isFirst: true }, { title: "האקתון רשתי" }],
     mainArticles: [
       {
         title: " תיאור הפעילות:",
@@ -60,11 +57,8 @@ export const TOOLS_DATA: Record<string, ToolsDetails> = {
       ],
     },
     slider: [
-      { imageSrc: "/images/webp/projects/slider/hackathon/slide-1.png" },
-      { imageSrc: "/images/webp/projects/slider/hackathon/slide-1.png" },
-      { imageSrc: "/images/webp/projects/slider/hackathon/slide-1.png" },
-      { imageSrc: "/images/webp/projects/slider/hackathon/slide-1.png" },
-      { imageSrc: "/images/webp/projects/slider/hackathon/slide-1.png" },
+      { imageSrc: "/images/webp/tools/slider/hackathon/slide-1.png" },
+      { imageSrc: "/images/webp/tools/slider/hackathon/slide-1.png" },
     ],
   },
 }

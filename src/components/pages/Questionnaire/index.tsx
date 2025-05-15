@@ -1,10 +1,8 @@
 "use client"
 import React, { useState } from "react"
 import Header from "@/components/Header"
-import { Box, Typography } from "@mui/material"
+import { Button } from "@mui/material"
 import {
-  BackButton,
-  FurtherButton,
   QuestionnaireButtons,
   QuestionnaireContainer,
   QuestionnaireContent,
@@ -21,21 +19,16 @@ import { FORM_ROWS } from "./constants"
 import Link from "next/link"
 import Indicator from "./components/Indicator"
 import InfoPanel from "./components/InfoPanel"
-const initialValues = {
-  row1_select1: "",
-  row1_select2: "",
-  row2_select1: "",
-  row2_select2: "",
-  row3_select1: "",
-  row3_select2: "",
-  row4_select1: "",
-  row4_select2: "",
-  row5_select1: "",
-  row5_select2: "",
-  row6_select1: "",
-  row6_select2: "",
-  row7_select1: "",
-  row7_select2: "",
+import { useRouter } from "next/navigation"
+const generateInitialValues = () => {
+  const values: Record<string, string> = {}
+  FORM_ROWS.forEach((row, rowIndex) => {
+    row.expanded.forEach((_, itemIndex) => {
+      values[`row${rowIndex + 1}_select1_item${itemIndex + 1}`] = ""
+      values[`row${rowIndex + 1}_select2_item${itemIndex + 1}`] = ""
+    })
+  })
+  return values
 }
 
 const Questionnaire = () => {
@@ -45,6 +38,32 @@ const Questionnaire = () => {
     title: string
     description: string
   } | null>(null)
+
+  const router = useRouter()
+
+  const handleSubmit = (values: Record<string, string>) => {
+    const surveyData = FORM_ROWS.map((row, rowIndex) => {
+      const currentValues: number[] = []
+      const desiredValues: number[] = []
+      row.expanded.forEach((_, itemIndex) => {
+        const c = Number(
+          values[`row${rowIndex + 1}_select1_item${itemIndex + 1}`]
+        )
+        const d = Number(
+          values[`row${rowIndex + 1}_select2_item${itemIndex + 1}`]
+        )
+        if (!isNaN(c)) currentValues.push(c)
+        if (!isNaN(d)) desiredValues.push(d)
+      })
+      return {
+        sectionId: row.title,
+        currentValues,
+        desiredValues,
+      }
+    })
+    localStorage.setItem("surveyData", JSON.stringify(surveyData))
+    router.push("/participants")
+  }
 
   return (
     <QuestionnaireWrapper>
@@ -64,11 +83,11 @@ const Questionnaire = () => {
           </QuestionnaireHeader>
           <QuestionnaireForm>
             <Formik
-              initialValues={initialValues}
-              onSubmit={(values) => console.log(values)}
+              initialValues={generateInitialValues()}
+              onSubmit={handleSubmit}
             >
-              {({ values }) => (
-                <>
+              {({ handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
                   <Indicator />
                   <QuestionnaireFormBody>
                     {FORM_ROWS.map((row, index) => (
@@ -93,13 +112,13 @@ const Questionnaire = () => {
                   </QuestionnaireFormBody>
                   <QuestionnaireButtons>
                     <Link href="/categories">
-                      <BackButton>חזור</BackButton>
+                      <Button variant="back">חזור</Button>
                     </Link>
-                    <Link href="/participants">
-                      <FurtherButton type="submit">המשך</FurtherButton>
-                    </Link>
+                    <Button variant="forward" color="purple" type="submit">
+                      המשך
+                    </Button>
                   </QuestionnaireButtons>
-                </>
+                </form>
               )}
             </Formik>
           </QuestionnaireForm>

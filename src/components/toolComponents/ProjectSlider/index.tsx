@@ -1,6 +1,5 @@
 "use client"
-import { Box, Button, Divider, Typography } from "@mui/material"
-import Link from "next/link"
+
 import Image from "next/image"
 import { SlideData } from "@/interfaces/tools"
 import {
@@ -23,20 +22,6 @@ interface Props {
 export const ToolSlider: React.FC<Props> = ({ slides }) => {
   return (
     <ProjectSliderWrapper>
-      <Box sx={{ display: "flex", gap: "20px", paddingInlineStart: "100px" }}>
-        <Link style={{ color: "#000", fontSize: "14px" }} href="/">
-          ראשי
-        </Link>
-        <Link style={{ color: "#000", fontSize: "14px" }} href="/projects">
-          כלים
-        </Link>
-        <Link
-          style={{ color: "#000", fontSize: "14px" }}
-          href="/project/hackathon"
-        >
-          האקתון
-        </Link>
-      </Box>
       <SliderContainer>
         <SwiperWrapper>
           <Swiper

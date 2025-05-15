@@ -1,7 +1,7 @@
 "use client"
 
 import { getIn, useField, useFormikContext } from "formik"
-import { TextField, Typography } from "@mui/material"
+import { Typography } from "@mui/material"
 import { InputWrapper, ParticipantsTextField } from "./styled"
 import {
   ParticipantsFormValues,
@@ -12,7 +12,6 @@ const ParticipantsInput = ({
   name,
   placeholder,
   type = "email",
-  required,
   ...props
 }: ParticipantsInputProps) => {
   const [field] = useField(name)
@@ -40,6 +39,9 @@ const ParticipantsInput = ({
             : "on"
         }
         error={!!error}
+        spellCheck={false}
+        autoCorrect="off"
+        autoCapitalize="none"
       />
       {error && (
         <Typography color="error" sx={{ fontSize: "14px", fontWeight: "300" }}>

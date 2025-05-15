@@ -4,10 +4,11 @@ import Box from "@mui/material/Box"
 import Image from "next/image"
 import { Button, Typography } from "@mui/material"
 import Link from "next/link"
-export const CategoriesWrapper = styled(Box)(({ theme }) => ({
+export const CategoriesWrapper = styled(Box)(() => ({
   position: "relative",
   minHeight: "100vh",
 }))
+export const CategoriesInnerWrapper = styled(Box)(() => ({}))
 export const CategoriesContainer = styled(Box)(({ theme }) => ({
   maxInlineSize: theme.breakpoints.values.xl,
   marginInline: "auto",
@@ -17,7 +18,7 @@ export const CategoriesContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
 }))
 
-export const CategoriesContent = styled(Box)(({ theme }) => ({
+export const CategoriesContent = styled(Box)(() => ({
   paddingBlockStart: "150px",
   paddingBlockEnd: "30px",
 }))
@@ -27,7 +28,7 @@ export const CategoriesBody = styled(Box)(({ theme }) => ({
   color: theme.palette.common.white,
   marginBlockEnd: "100px",
 }))
-export const CategoriesTitle = styled(Typography)(({ theme }) => ({
+export const CategoriesTitle = styled(Typography)(() => ({
   fontSize: "24px",
   fontWeight: 700,
   marginBlockEnd: "30px",
@@ -56,26 +57,20 @@ export const CategoriesGrid = styled(Box)(({ theme }) => ({
   },
 }))
 
-export const CategoryText = styled(Typography)(({ theme }) => ({
+export const CategoryText = styled(Typography)(() => ({
   fontSize: "14px",
   fontWeight: 700,
 }))
-export const CategoryLink = styled(Link)(({ theme }) => ({
+export const CategoryLink = styled(Link)(() => ({
   fontSize: "12px",
   fontWeight: 300,
 }))
-export const CategoriesNav = styled(Box)(({ theme }) => ({
+export const CategoriesNav = styled(Box)(() => ({
   display: "flex",
   justifyContent: "space-between",
 }))
-export const BackButton = styled(Button)(({ theme }) => ({
-  fontSize: "12px",
+export const BackButton = styled(Button)(() => ({
   backgroundColor: "transparent",
-  border: "1px solid #fff",
-  transition: "opacity 0.3s ease",
-  "&:hover": {
-    opacity: 0.8,
-  },
 }))
 export const ForwardButton = styled(Button)(({ theme }) => ({
   fontSize: "14px",
@@ -88,12 +83,17 @@ export const ForwardButton = styled(Button)(({ theme }) => ({
   },
 }))
 
-export const CategoriesBackground = styled(Image)(({ theme }) => ({
-  position: "absolute",
+export const BackgroundContainer = styled(Box)(() => ({
+  position: "fixed",
+  top: 0,
+  left: 0,
   inlineSize: "100%",
   blockSize: "100%",
-  insetBlockStart: 0,
-  insetInlineStart: 0,
-  objectFit: "cover",
   zIndex: -1,
+}))
+export const CategoriesBackground = styled(Image)(() => ({
+  inlineSize: "100%",
+  blockSize: "100%",
+  objectFit: "cover",
+  pointerEvents: "none",
 }))

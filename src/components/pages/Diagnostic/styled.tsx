@@ -2,7 +2,7 @@
 import { styled } from "@mui/material/styles"
 import Box from "@mui/material/Box"
 import Image from "next/image"
-import { Button, Typography } from "@mui/material"
+import { Typography } from "@mui/material"
 
 interface DiagnosticCardProps {
   isMainItem?: boolean
@@ -24,17 +24,20 @@ export const DiagnosticContent = styled(Box)(({ theme }) => ({
 }))
 export const DiagnosticBody = styled(Box)(({ theme }) => ({
   flex: 1,
-  padding: "6.25rem 1rem",
+  padding: "100px 16px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+  [theme.breakpoints.down("lg")]: {
+    paddingBlockEnd: "30px",
+  },
 }))
 export const DiagnosticCards = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   marginBlockEnd: "50px",
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down(550)]: {
     flexDirection: "column",
     alignItems: "center",
   },
@@ -53,7 +56,7 @@ export const DiagnosticCard = styled("article", {
     ? "0 4px 20px rgba(0, 0, 0, 0.1)"
     : "5px 2px 10px rgba(0, 0, 0, 0.1)",
   inlineSize: isMainItem ? "300px" : "200px",
-  blockSize: isMainItem ? "150px" : "100px",
+  blockSize: isMainItem ? "150px" : "120px",
   transition: "all 0.3s ease",
   textAlign: "center",
   zIndex: isMainItem ? 2 : 1,
@@ -68,25 +71,13 @@ export const DiagnosticCard = styled("article", {
     marginBlockEnd: isMainItem ? "5px" : 0,
   },
 }))
-export const DiagnosticCardTitle = styled(Typography)(({ theme }) => ({}))
+export const DiagnosticCardTitle = styled(Typography)(() => ({}))
 export const DiagnosticTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.custom.purple,
   fontWeight: 700,
   marginBlockEnd: "10px",
 }))
-export const BackButton = styled(Typography)(({ theme }) => ({
-  backgroundColor: theme.palette.common.white,
-  border: "1px solid #cbcbcb",
-  borderRadius: "20px",
-  fontSize: "12px",
-  padding: "5px 10px",
-  color: "#cbcbcb",
-  transition: "opacity 0.3s ease",
-  "&:hover": {
-    opacity: 0.5,
-  },
-}))
-export const DiagnosticImageSection = styled(Box)(({ theme }) => ({
+export const DiagnosticImageSection = styled(Box)(() => ({
   flexBasis: "40%",
   height: "100%",
   position: "relative",
@@ -109,7 +100,7 @@ export const DiagnosticImageSectionBody = styled(Box)(({ theme }) => ({
     padding: "20px",
   },
 }))
-export const DiagnosticImage = styled(Image)(({ theme }) => ({
+export const DiagnosticImage = styled(Image)(() => ({
   position: "absolute",
   inlineSize: "100%",
   blockSize: "100%",

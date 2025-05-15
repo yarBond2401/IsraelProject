@@ -13,10 +13,8 @@ export const ParticipantsSchema = Yup.object().shape({
         .min(2, "השם קצר מדי!")
         .max(50, "השם ארוך מדי!")
         .required("נדרש שם"),
-      position: Yup.string()
-        .min(2, "קצר מדי!")
-        .max(50, "ארוך מדי!")
-        .required("התפקיד נדרש"),
+      position: Yup.string().min(2, "קצר מדי!").max(50, "ארוך מדי!"),
+      // .required("התפקיד נדרש"),
       email: Yup.string()
         .email("פורמט אימייל לא חוקי")
         .required("יש צורך באימייל"),

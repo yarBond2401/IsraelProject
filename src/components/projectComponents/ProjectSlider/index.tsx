@@ -1,6 +1,4 @@
 "use client"
-import { Box, Button, Divider, Typography } from "@mui/material"
-import Link from "next/link"
 import Image from "next/image"
 import { SlideData } from "@/interfaces/tools"
 

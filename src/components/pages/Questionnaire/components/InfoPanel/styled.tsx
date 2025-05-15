@@ -19,7 +19,8 @@ export const InfoPanelWrapper = styled(Box, {
   transform: open ? "translateY(0)" : "translateY(-10px)",
   transition: "opacity 0.3s ease, transform 0.3s ease",
   boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-  [theme.breakpoints.down(400)]: {
+  [theme.breakpoints.down("sm")]: {
+    insetBlockStart: "200px",
     insetInlineStart: "0px",
   },
 }))

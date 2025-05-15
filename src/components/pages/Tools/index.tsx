@@ -1,14 +1,10 @@
 "use client"
 import React, { useState } from "react"
 import Header from "@/components/Header"
-import { Box, Button, Typography } from "@mui/material"
-
-import Image from "next/image"
+import { Box, Button } from "@mui/material"
 import {
-  BackButton,
   DeepFilterButton,
   FilterButton,
-  FurtherButton,
   ProjectsButtons,
   ProjectsContainer,
   ProjectsDescription,
@@ -73,7 +69,9 @@ const Tools = () => {
               )
             })}
           </Box>
-          <DeepFilterButton>פתיחת פרויקט</DeepFilterButton>
+          <DeepFilterButton variant="forward" color="purple">
+            פתיחת פרויקט
+          </DeepFilterButton>
         </ProjectsUpperButtons>
         <ProjectsItems>
           {CARDS.map((card, index) => (
@@ -89,10 +87,12 @@ const Tools = () => {
         </ProjectsItems>
         <ProjectsButtons>
           <Link href="/vizualization">
-            <BackButton>חזור</BackButton>
+            <Button variant="back">חזור</Button>
           </Link>
           <Link href="/vizualization">
-            <FurtherButton type="submit">המשך</FurtherButton>
+            <Button variant="forward" color="purple" type="submit">
+              המשך
+            </Button>
           </Link>
         </ProjectsButtons>
       </ProjectsContainer>

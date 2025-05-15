@@ -1,16 +1,6 @@
 "use client"
-import React, { useState } from "react"
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Box,
-  Typography,
-  MenuItem,
-  Select,
-  Divider,
-} from "@mui/material"
-import { useFormikContext, Field } from "formik"
+import React from "react"
+import { Box, Typography, Divider } from "@mui/material"
 import Image from "next/image"
 import {
   ExpandedRows,
@@ -22,10 +12,8 @@ import {
   StyledAccordionRoot,
   StyledSummary,
 } from "./styled"
-import { FORM_ROWS } from "../../constants"
 import FormSelect from "../FormSelect"
 import { ExpandedItem } from "@/interfaces/questionnaire"
-import InfoPanel from "../InfoPanel"
 import Link from "next/link"
 
 interface FormRowProps {
@@ -40,7 +28,7 @@ interface FormRowProps {
 }
 
 const options = [
-  { value: 1, label: "1- גבוה" },
+  { value: 1, label: "1- נמוך" },
   { value: 2, label: "2" },
   { value: 3, label: "3" },
   { value: 4, label: "4" },
@@ -56,8 +44,6 @@ const FormRow: React.FC<FormRowProps> = ({
   expandedItems,
   onInfoClick,
 }) => {
-  const [infoOpen, setInfoOpen] = useState(false)
-
   return (
     <StyledAccordionRoot
       expanded={expanded}

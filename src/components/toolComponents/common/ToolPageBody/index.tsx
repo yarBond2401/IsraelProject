@@ -1,6 +1,4 @@
-import Box from "@mui/material/Box"
 import React from "react"
-import { Typography } from "@mui/material"
 import { ToolsDetails } from "@/interfaces/tools"
 import { ToolWrapper } from "./styled"
 import { ToolContent } from "../../ToolContent"

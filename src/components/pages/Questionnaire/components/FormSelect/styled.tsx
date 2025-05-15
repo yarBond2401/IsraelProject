@@ -7,14 +7,14 @@ import Box from "@mui/material/Box"
 import { MenuItem } from "@mui/material"
 
 export const SelectWrapper = styled(Box)(() => ({
-  width: "100px", // consistent size
+  width: "100px",
   position: "relative",
 }))
 
 export const StyledIconWrapper = styled("span")<{ open?: boolean }>(
   ({ open }) => ({
     position: "absolute",
-    left: "8px", // icon on the left
+    left: "8px",
     top: "50%",
     transform: `translateY(-50%) rotate(${open ? 180 : 0}deg)`,
     transition: "transform 0.2s ease-in-out",
@@ -61,7 +61,7 @@ export const StyledSelect = styled(Select)(({ theme }) => ({
   width: "100%",
 
   "& .MuiSelect-select": {
-    padding: "5px 10px 5px 30px", // space for icon on the left
+    padding: "5px 10px 5px 30px",
     color: "#000",
     fontSize: "12px",
     display: "flex",
@@ -75,7 +75,7 @@ export const StyledSelect = styled(Select)(({ theme }) => ({
   },
 
   "&:hover": {
-    backgroundColor: theme.palette.custom.inputs.backgroundColorHover,
+    backgroundColor: "#fff",
     "& .MuiOutlinedInput-notchedOutline": {
       borderColor: theme.palette.primary.main,
     },

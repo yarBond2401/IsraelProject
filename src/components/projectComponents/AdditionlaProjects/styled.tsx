@@ -1,11 +1,8 @@
 "use client"
 import { styled } from "@mui/material/styles"
 import Box from "@mui/material/Box"
-import { Button, Typography } from "@mui/material"
-import Link from "next/link"
-import { ContactButton } from "@/interfaces/tools"
 
-export const AdditionalProjectsWrapper = styled(Box)(({ theme }) => ({
+export const AdditionalProjectsWrapper = styled(Box)(() => ({
   zIndex: 10,
   display: "flex",
   flexDirection: "column",
@@ -25,7 +22,7 @@ export const AdditionalProjectsSection = styled(Box, {
   },
 }))
 
-export const AdditionalProjectsContainer = styled(Box)(({ theme }) => ({
+export const AdditionalProjectsContainer = styled(Box)(() => ({
   maxInlineSize: "1900px",
   marginInline: "auto",
 }))

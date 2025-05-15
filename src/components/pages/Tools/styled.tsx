@@ -1,19 +1,18 @@
 "use client"
 import { styled } from "@mui/material/styles"
 import Box from "@mui/material/Box"
-import Image from "next/image"
 import { Button, Typography } from "@mui/material"
 export const ProjectsWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
 }))
-export const ProjectsContainer = styled(Box)(({ theme }) => ({
+export const ProjectsContainer = styled(Box)(() => ({
   paddingBlockStart: "200px",
   maxInlineSize: "1300px",
   marginInline: "auto",
   paddingInline: "20px",
   paddingBlockEnd: "30px",
 }))
-export const ProjectsHeader = styled(Box)(({ theme }) => ({
+export const ProjectsHeader = styled(Box)(() => ({
   textAlign: "center",
   display: "flex",
   flexDirection: "column",
@@ -26,7 +25,7 @@ export const ProjectsTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   marginBlockEnd: "20px",
 }))
-export const ProjectsDescription = styled(Typography)(({ theme }) => ({
+export const ProjectsDescription = styled(Typography)(() => ({
   fontSize: "16px",
   color: "#898c8b",
   maxInlineSize: "800px",
@@ -45,10 +44,6 @@ export const ProjectsUpperButtons = styled(Box)(({ theme }) => ({
   },
 }))
 export const DeepFilterButton = styled(Button)(({ theme }) => ({
-  backgroundColor: "#a83b96",
-  padding: "5px 20px",
-  fontSize: "14px",
-  minInlineSize: "200px",
   [theme.breakpoints.down("sm")]: {
     inlineSize: "100%",
   },
@@ -67,7 +62,7 @@ export const ProjectsItems = styled(Box)(({ theme }) => ({
     gridTemplateColumns: "1fr",
   },
 }))
-export const ProjectsButtons = styled(Box)(({ theme }) => ({
+export const ProjectsButtons = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -87,25 +82,5 @@ export const FilterButton = styled(Button, {
   transition: "all 0.3s ease",
   "&:hover": {
     opacity: 0.9,
-  },
-}))
-export const FurtherButton = styled(Button)(({ theme }) => ({
-  padding: "5px",
-  backgroundColor: theme.palette.custom.purple,
-  color: theme.palette.common.white,
-  borderRadius: "40px",
-  minInlineSize: "200px",
-  fontSize: "14px",
-}))
-export const BackButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.common.white,
-  border: "1px solid #cbcbcb",
-  borderRadius: "20px",
-  padding: "5px 10px",
-  color: "#cbcbcb",
-  fontSize: "14px",
-  transition: "opacity 0.3s ease",
-  "&:hover": {
-    opacity: 0.5,
   },
 }))

@@ -1,7 +1,6 @@
 "use client"
 import { styled } from "@mui/material/styles"
 import Box from "@mui/material/Box"
-import { relative } from "path"
 import Image from "next/image"
 
 export const ProjectSliderWrapper = styled(Box)(({ theme }) => ({
@@ -34,7 +33,7 @@ export const SliderContainer = styled(Box)(({ theme }) => ({
   },
 }))
 
-export const SliderArrows = styled(Box)(({ theme }) => ({
+export const SliderArrows = styled(Box)(() => ({
   position: "absolute",
   insetInlineEnd: 30,
   insetBlockEnd: 20,
@@ -57,15 +56,6 @@ export const SliderArrow = styled(Box)(({ theme }) => ({
   borderRadius: "50%",
 }))
 
-// export const ImageWrapper = styled(Box)(({ theme }) => ({
-//   position: "relative",
-//   transform: "translate(40px,-50px)",
-//   textAlign: "end",
-//   "& img": {
-//     aspectRatio: "430 / 430",
-//     maxInlineSize: "100%",
-//   },
-// }))
 export const ImageWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
   aspectRatio: "1 / 1",
@@ -105,7 +95,7 @@ export const SwiperWrapper = styled(Box)(({ theme }) => ({
     padding: "10px",
   },
 }))
-export const CallIcon = styled(Image)(({ theme }) => ({
+export const CallIcon = styled(Image)(() => ({
   position: "absolute",
   insetBlockEnd: 20,
   insetInlineStart: 30,

@@ -1,54 +1,145 @@
+// "use client"
+// import { styled } from "@mui/material/styles"
+// import Box from "@mui/material/Box"
+// import Image from "next/image"
+// import { Button, Typography } from "@mui/material"
+
+// export const EntrySectionWrapper = styled("section")<{ backgroundSrc: string }>(
+//   ({ theme, backgroundSrc }) => ({
+//     minHeight: "calc(100vh - 108px)",
+//     position: "relative",
+//     display: "flex",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     textAlign: "center",
+//     flexBasis: "50%",
+//     padding: "9% 20px 20px",
+//     overflow: "hidden",
+//     backgroundImage: `url(${backgroundSrc})`,
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//     backgroundAttachment: "fixed", // key for parallax
+//     zIndex: 0,
+
+//     [theme.breakpoints.down("md")]: {
+//       backgroundAttachment: "scroll", // mobile fallback
+//       minHeight: "auto",
+//       paddingBlock: "30px",
+//       flexBasis: "100%",
+//     },
+//   })
+// )
+
+// export const EntrySectionContent = styled(Box)(() => ({
+//   position: "relative",
+//   zIndex: 2,
+// }))
+// export const EntrySectionImageWrapper = styled(Box)(({ theme }) => ({
+//   marginBlockEnd: "15px",
+//   [theme.breakpoints.down("md")]: {
+//     marginBlockEnd: "5px",
+//   },
+// }))
+// export const EntrySectionTitle = styled(Typography)(({ theme }) => ({
+//   fontWeight: 700,
+//   fontSize: "30px",
+//   marginBlockEnd: "20px",
+//   [theme.breakpoints.down("md")]: {
+//     marginBlockEnd: "10px",
+//   },
+// }))
+// export const EntrySectionDescription = styled(Typography)(({ theme }) => ({
+//   fontWeight: 700,
+//   fontSize: "18px",
+//   marginBlockEnd: "60px",
+//   [theme.breakpoints.down("lg")]: {
+//     marginBlockEnd: "30px",
+//     fontSize: "16px",
+//   },
+// }))
+// export const BackgroundContainer = styled(Box)(() => ({
+//   position: "absolute",
+//   top: 0,
+//   left: 0,
+//   inlineSize: "100%",
+//   blockSize: "100%",
+//   zIndex: -1,
+// }))
+// export const EntrySectionBackground = styled(Image)(() => ({
+//   inlineSize: "100%",
+//   blockSize: "100%",
+//   objectFit: "cover",
+//   pointerEvents: "none",
+// }))
 "use client"
 import { styled } from "@mui/material/styles"
 import Box from "@mui/material/Box"
 import Image from "next/image"
-import { Button, Typography } from "@mui/material"
-export const EntrySectionWrapper = styled("section")(({ theme }) => ({
-  minHeight: "100vh",
-  position: "relative",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  textAlign: "center",
-  flexBasis: "50%",
-  padding: "80px 20px",
-  [theme.breakpoints.down("md")]: {
-    minHeight: "auto",
-    paddingBlock: "80px",
-    flexBasis: "100%",
-  },
-}))
-export const EntrySectionContent = styled(Box)(({ theme }) => ({
+import { Typography } from "@mui/material"
+
+export const EntrySectionWrapper = styled("section")<{ backgroundSrc: string }>(
+  ({ theme, backgroundSrc }) => ({
+    minHeight: "calc(100vh - 108px)",
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+    flexBasis: "50%",
+    paddingInline: "20px",
+    paddingBlockStart: "9%",
+    paddingBlockEnd: "20px",
+    overflow: "hidden",
+    backgroundImage: `url(${backgroundSrc})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+
+    [theme.breakpoints.down("md")]: {
+      minHeight: "auto",
+      paddingBlock: "30px",
+      flexBasis: "100%",
+      backgroundAttachment: "fixed",
+    },
+  })
+)
+export const EntrySectionContent = styled(Box)(() => ({
   position: "relative",
   zIndex: 2,
 }))
 export const EntrySectionImageWrapper = styled(Box)(({ theme }) => ({
   marginBlockEnd: "15px",
+  [theme.breakpoints.down("md")]: {
+    marginBlockEnd: "5px",
+  },
 }))
 export const EntrySectionTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   fontSize: "30px",
   marginBlockEnd: "20px",
+  [theme.breakpoints.down("md")]: {
+    marginBlockEnd: "10px",
+  },
 }))
 export const EntrySectionDescription = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   fontSize: "18px",
   marginBlockEnd: "60px",
-}))
-export const EntrySectionButton = styled(Button)(({ theme }) => ({
-  padding: "10px 20px",
-  color: theme.palette.common.white,
-  borderRadius: "40px",
-  transition: "opacity 0.3s ease",
-  "&:hover": {
-    opacity: 0.9,
+  [theme.breakpoints.down("lg")]: {
+    marginBlockEnd: "30px",
+    fontSize: "16px",
   },
 }))
-export const EntrySectionBackground = styled(Image)(({ theme }) => ({
+export const BackgroundContainer = styled(Box)(() => ({
   position: "absolute",
+  top: 0,
+  left: 0,
   inlineSize: "100%",
   blockSize: "100%",
-  insetBlockStart: 0,
-  insetInlineStart: 0,
+  zIndex: -1,
+}))
+export const EntrySectionBackground = styled(Image)(() => ({
+  inlineSize: "100%",
+  blockSize: "100%",
   objectFit: "cover",
+  pointerEvents: "none",
 }))

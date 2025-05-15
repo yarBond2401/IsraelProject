@@ -1,14 +1,13 @@
 "use client"
 import { styled } from "@mui/material/styles"
 import Box from "@mui/material/Box"
-import { relative } from "path"
 
-export const SliderContainer = styled(Box)(({ theme }) => ({
+export const SliderContainer = styled(Box)(() => ({
   width: "100%",
   maxWidth: "500px",
 }))
 
-export const SliderArrow = styled(Box)(({ theme }) => ({
+export const SliderArrow = styled(Box)(() => ({
   cursor: "pointer",
   zIndex: 10,
   "&.swiper-button-disabled": {
@@ -21,19 +20,26 @@ export const SliderArrow = styled(Box)(({ theme }) => ({
 }))
 
 export const SlideContent = styled(Box)(({ theme }) => ({
+  padding: "10px",
   display: "flex",
   justifyContent: "space-between",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column-reverse",
+    alignItems: "center",
+  },
 }))
 export const SlideBody = styled(Box)(({ theme }) => ({
   maxInlineSize: "270px",
-  transform: "translate(30px,0)",
+  [theme.breakpoints.up("md")]: {
+    transform: "translate(30px,0)",
+  },
 }))
-export const ImageWrapper = styled(Box)(({ theme }) => ({
+export const ImageWrapper = styled(Box)(() => ({
   transform: "translate(10px,-35px)",
 }))
-export const SlideWrapper = styled(Box)(({ theme }) => ({}))
+export const SlideWrapper = styled(Box)(() => ({}))
 
-export const SwiperWrapper = styled(Box)(({ theme }) => ({
+export const SwiperWrapper = styled(Box)(() => ({
   position: "relative",
   overflow: "visible",
   borderRadius: "10px",

@@ -6,7 +6,7 @@ import { notFound } from "next/navigation"
 import { ProjectPageBody } from "@/components/projectComponents/common/ProjectPageBody"
 
 interface ProjectsPageProps {
-  params: { projectId: string }
+  params: Promise<{ projectId: string }>
 }
 
 export async function generateStaticParams() {
@@ -15,8 +15,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export default function ProjectPage({ params }: ProjectsPageProps) {
-  const { projectId } = params
+export default async function ProjectPage({ params }: ProjectsPageProps) {
+  const { projectId } = await params
   const projectData = PROJECTS_DATA[projectId]
 
   if (!projectData) notFound()

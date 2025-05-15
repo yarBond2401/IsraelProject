@@ -1,6 +1,5 @@
-interface HeaderLink {
+interface HeaderTag {
   title: string
-  redirectTo: string
 }
 interface MainArticle {
   description: string
@@ -30,8 +29,8 @@ export interface ProjectsDetails {
   filterKey: string
   name: string
   headerTitle: string
-  headerLinks: HeaderLink[]
-  linksBlock: Label[]
+  tags: HeaderTag[]
+  statuses: Label[]
   mainArticles: MainArticle[]
   suitable: string
   recommendations: string

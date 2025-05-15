@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { Modal, Box, Typography, Button, Divider } from "@mui/material"
+import { Modal, Box, Typography, Divider } from "@mui/material"
 import Link from "next/link"
 import {
   CloseIconButton,

@@ -1,14 +1,11 @@
 "use client"
 import React, { useState } from "react"
 import Header from "@/components/Header"
-import { Box, Button, Typography } from "@mui/material"
+import { Box, Button } from "@mui/material"
 
-import Image from "next/image"
 import {
-  BackButton,
   DeepFilterButton,
   FilterButton,
-  FurtherButton,
   ProjectsButtons,
   ProjectsContainer,
   ProjectsHeader,
@@ -18,7 +15,7 @@ import {
   ProjectsWrapper,
 } from "./styled"
 import Link from "next/link"
-import { CARDS, CardsProps, FILTER_BUTTONS } from "./constants"
+import { CARDS, FILTER_BUTTONS } from "./constants"
 import ProjectCard from "./components/ProjectCard"
 import Footer from "@/components/Footer"
 
@@ -56,7 +53,9 @@ const Projects = () => {
               </FilterButton>
             ))}
           </Box>
-          <DeepFilterButton>פתיחת פרויקט</DeepFilterButton>
+          <DeepFilterButton variant="forward" color="green">
+            פתיחת פרויקט
+          </DeepFilterButton>
         </ProjectsUpperButtons>
 
         <ProjectsItems>
@@ -65,7 +64,11 @@ const Projects = () => {
               key={card.id}
               href={`/project/${card.id}`}
               passHref
-              style={{ display: "block", width: "100%", height: "100%" }}
+              style={{
+                display: "block",
+                inlineSize: "100%",
+                blockSize: "100%",
+              }}
             >
               <ProjectCard {...card} />
             </Link>
@@ -74,10 +77,12 @@ const Projects = () => {
 
         <ProjectsButtons>
           <Link href="/vizualization">
-            <BackButton>חזור</BackButton>
+            <Button variant="back">חזור</Button>
           </Link>
           <Link href="/vizualization">
-            <FurtherButton type="submit">המשך</FurtherButton>
+            <Button variant="forward" color="green" type="submit">
+              המשך
+            </Button>
           </Link>
         </ProjectsButtons>
       </ProjectsContainer>

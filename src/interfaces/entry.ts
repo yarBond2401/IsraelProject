@@ -3,7 +3,8 @@ export interface EntrySectionData {
   title: string
   text: string
   button: string
-  buttonBackground: string
+  buttonColor: "purple" | "green" | undefined
+  buttonVariant: "forward"
   pathTo: string
   backgroundSrc: string
 }

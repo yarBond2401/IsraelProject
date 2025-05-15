@@ -1,6 +1,6 @@
 import React from "react"
 import Header from "@/components/Header"
-import { Box, Typography } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import Image from "next/image"
 import { DIAGNOSTIC_CARDS } from "./constants"
 import Link from "next/link"
@@ -10,7 +10,6 @@ import {
   DiagnosticBody,
   DiagnosticCards,
   DiagnosticCard,
-  BackButton,
   DiagnosticImageSection,
   DiagnosticImageSectionBody,
   DiagnosticImage,
@@ -72,7 +71,7 @@ const Diagnostic = () => {
               ))}
             </DiagnosticCards>
             <Link href="/entry" style={{ textDecoration: "none" }}>
-              <BackButton>חזור</BackButton>
+              <Button variant="back">חזור</Button>
             </Link>
           </DiagnosticBody>
           <DiagnosticImageSection>

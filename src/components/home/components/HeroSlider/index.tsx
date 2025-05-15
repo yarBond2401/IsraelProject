@@ -10,12 +10,12 @@ import {
   SlideContent,
   SwiperWrapper,
   SlideBody,
-  SlideWrapper,
   ImageWrapper,
 } from "./styled"
-
+import { MAIN_SLIDES } from "../../constants"
 import "swiper/css"
 import "swiper/css/navigation"
+import Link from "next/link"
 
 const SliderComponent = () => {
   return (
@@ -73,8 +73,8 @@ const SliderComponent = () => {
             }}
             watchOverflow={true}
           >
-            {[1, 2, 3].map((slide) => (
-              <SwiperSlide key={slide}>
+            {MAIN_SLIDES.map((slide, index) => (
+              <SwiperSlide key={index}>
                 <SlideContent>
                   <SlideBody>
                     <Typography
@@ -85,19 +85,22 @@ const SliderComponent = () => {
                         marginBlockEnd: "20px",
                       }}
                     >
-                      מערכת לקיום הליכי שיתוף ציבור בכלל שלבי עיצוב המועצה
+                      {slide.title}
                     </Typography>
-                    <Button variant="primary">גלו עוד</Button>
+                    <Link href={slide.redirectTo}>
+                      <Button variant="primary">גלו עוד</Button>
+                    </Link>
                   </SlideBody>
-                  <ImageWrapper>
-                    <Image
-                      // src={`/images/svg/slider/slide-${slide}.png`}
-                      src={`/images/svg/slider/slide-1.png`}
-                      width={200}
-                      height={150}
-                      alt={`slide-${slide}`}
-                    />
-                  </ImageWrapper>
+                  <Link href={slide.redirectTo} passHref>
+                    <ImageWrapper>
+                      <Image
+                        src={slide.imageSrc}
+                        alt={`slide-${slide.id}`}
+                        width={200}
+                        height={150}
+                      />
+                    </ImageWrapper>
+                  </Link>
                 </SlideContent>
               </SwiperSlide>
             ))}

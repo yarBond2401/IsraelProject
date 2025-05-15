@@ -1,7 +1,7 @@
 import React from "react"
 import Header from "@/components/Header"
 import { SECTIONS } from "./constants"
-import { EntryContainer, EntryContent, EntryWrapper } from "./styled"
+import { EntryContent, EntryWrapper } from "./styled"
 import { Box } from "@mui/material"
 import EntrySection from "./components/EntrySection"
 const Entry = () => {
@@ -10,9 +10,10 @@ const Entry = () => {
       <Header isOnMainPage={false} />
       <Box
         sx={{
-          display: "grid",
-          gridTemplateColumns:
-            "0.9375rem 1fr minmax(auto, 120rem) 1fr 0.9375rem",
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          position: "relative",
+          zIndex: 0,
         }}
       >
         <EntryContent>

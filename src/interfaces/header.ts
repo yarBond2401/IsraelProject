@@ -1,5 +1,6 @@
 export interface HeaderProps {
   isOnMainPage?: boolean
+  scrolled?: boolean
 }
 export interface SearchInputProps {
   isMainPage?: boolean

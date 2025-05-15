@@ -1,6 +1,5 @@
-interface HeaderLink {
+interface HeaderLabel {
   title: string
-  redirectTo: string
   isFirst?: boolean
 }
 interface MainArticle {
@@ -20,7 +19,7 @@ export interface ToolsDetails {
   id: string
   name: string
   headerTitle: string
-  headerLinks: HeaderLink[]
+  solutions: HeaderLabel[]
   mainArticles: MainArticle[]
   providerBlock: {
     title: string

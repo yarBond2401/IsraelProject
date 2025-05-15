@@ -21,7 +21,7 @@ export const ProjectCardWrapper = styled("article")(({ theme }) => ({
   },
 }))
 
-export const ProjectCardContent = styled(Box)(({ theme }) => ({
+export const ProjectCardContent = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
@@ -29,7 +29,7 @@ export const ProjectCardContent = styled(Box)(({ theme }) => ({
   padding: "20px",
   zIndex: 3,
 }))
-export const ProjectCardButtons = styled(Box)(({ theme }) => ({
+export const ProjectCardButtons = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   gap: "10px",
@@ -50,7 +50,7 @@ export const ProjectCardTitle = styled(Typography)(({ theme }) => ({
     fontSize: "18px",
   },
 }))
-export const ProjectCardBackground = styled(Typography)(({ theme }) => ({
+export const ProjectCardBackground = styled(Typography)(() => ({
   position: "absolute",
   inlineSize: "100%",
   blockSize: "100%",

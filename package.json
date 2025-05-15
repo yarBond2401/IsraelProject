@@ -13,10 +13,12 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.0.2",
+    "firebase": "^11.7.3",
     "formik": "^2.4.6",
     "next": "15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "recharts": "^2.15.3",
     "swiper": "^11.2.6",
     "yup": "^1.6.1"
   },

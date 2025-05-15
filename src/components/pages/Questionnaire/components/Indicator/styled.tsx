@@ -16,7 +16,7 @@ export const CircleWrapper = styled(Box)(({ theme }) => ({
   },
 }))
 
-export const StyledCircularProgress = styled(CircularProgress)(({ theme }) => ({
+export const StyledCircularProgress = styled(CircularProgress)(() => ({
   position: "relative",
   color: "transparent",
   zIndex: 1,

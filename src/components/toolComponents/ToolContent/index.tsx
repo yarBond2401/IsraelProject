@@ -1,20 +1,21 @@
-import { Box, Button, Divider, Typography } from "@mui/material"
-import { ProjectsDetails } from "@/interfaces/tools"
-import Link from "next/link"
+import { Box, Divider, Typography } from "@mui/material"
+import { ToolsDetails } from "@/interfaces/tools"
 import Image from "next/image"
 import {
   ContactBlock,
   ContactButtons,
   ContactLink,
+  HeaderNav,
   ProjectArticle,
   ProjectButton,
   ProjectContentTitle,
   ProjectContentWrapper,
-  ProjectHeaderLink,
+  ProjectHeaderLabel,
 } from "./styled"
+import Link from "next/link"
 
 interface Props {
-  data: ProjectsDetails
+  data: ToolsDetails
 }
 
 export const ToolContent: React.FC<Props> = ({ data }) => {
@@ -22,34 +23,30 @@ export const ToolContent: React.FC<Props> = ({ data }) => {
     <ProjectContentWrapper>
       <ProjectContentTitle>{data.headerTitle}</ProjectContentTitle>
       <Box sx={{ display: "flex", gap: "15px" }}>
-        {data.headerLinks.map((link, index) => (
-          <>
-            <Box
-              key={index}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                marginBlockEnd: { xs: "20px", lg: "100px" },
-              }}
-            >
-              <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                {link.isFirst ? " פתרון גרעיני:" : "פתרון:"}
-              </Typography>
-              <ProjectHeaderLink href={link.redirectTo}>
-                {link.title}
-              </ProjectHeaderLink>
-              {link.isFirst && (
-                <Divider
-                  orientation="vertical"
-                  sx={{
-                    borderColor: "##cfcfcf",
-                    marginInlineStart: "10px",
-                    maxBlockSize: "16px",
-                  }}
-                />
-              )}
-            </Box>
-          </>
+        {data.solutions.map((label, index) => (
+          <Box
+            key={index}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginBlockEnd: { xs: "20px", lg: "100px" },
+            }}
+          >
+            <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+              {label.isFirst ? " פתרון גרעיני:" : "פתרון:"}
+            </Typography>
+            <ProjectHeaderLabel>{label.title}</ProjectHeaderLabel>
+            {label.isFirst && (
+              <Divider
+                orientation="vertical"
+                sx={{
+                  borderColor: "##cfcfcf",
+                  marginInlineStart: "10px",
+                  maxBlockSize: "16px",
+                }}
+              />
+            )}
+          </Box>
         ))}
       </Box>
       {data.mainArticles.map((article, index) => (
@@ -149,6 +146,15 @@ export const ToolContent: React.FC<Props> = ({ data }) => {
           </ContactButtons>
         </ContactBlock>
       </Box>
+      <HeaderNav>
+        <Link style={{ fontSize: "12px" }} href="/">
+          ראשי
+        </Link>
+        <Link style={{ fontSize: "12px" }} href="/projects">
+          פרויקטים
+        </Link>
+        <Typography sx={{ fontSize: "12px" }}>{data.headerTitle}</Typography>
+      </HeaderNav>
     </ProjectContentWrapper>
   )
 }

@@ -1,4 +1,3 @@
-import { BackgroundImage } from "@/components/home/styled"
 import { Components, Theme } from "@mui/material"
 
 declare module "@mui/material/Button" {
@@ -6,78 +5,18 @@ declare module "@mui/material/Button" {
     primary: true
     secondary: true
     gradient: true
+    forward: true
+    back: true
   }
 
   interface ButtonPropsSizeOverrides {
     big: true
   }
+  interface ButtonPropsColorOverrides {
+    purple: true
+    green: true
+  }
 }
-
-const commonStyles = {
-  borderRadius: "40px",
-  fontWeight: 400,
-}
-
-const createSecondaryGradientHover = (theme: Theme) => ({
-  position: "relative",
-  zIndex: 1,
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    backgroundImage: theme.palette.custom.gradients.primaryGradient,
-    opacity: 0,
-    transition: "opacity 0.3s ease",
-    zIndex: -1,
-    borderRadius: "40px",
-    transform: "scale(1.01)",
-  },
-
-  "&:hover": {
-    color: theme.palette.secondary.main,
-    "&::before": {
-      opacity: 1,
-    },
-  },
-})
-
-const createPrimaryGradientHover = (theme: Theme) => ({
-  position: "relative",
-  zIndex: 1,
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    backgroundImage: theme.palette.custom.gradients.primaryGradient,
-    opacity: 0,
-    transition: "opacity 0.3s ease",
-    zIndex: -1,
-    borderRadius: "39px",
-  },
-
-  "&:hover": {
-    color: theme.palette.secondary.main,
-    border: `1px solid ${theme.palette.secondary.main}`,
-    "&::before": {
-      opacity: 1,
-    },
-  },
-})
-
-const secondaryBaseStyles = (theme: Theme) => ({
-  ...commonStyles,
-  padding: "10px 40px",
-  background: theme.palette.primary.light,
-  color: theme.palette.primary.main,
-  ...createSecondaryGradientHover(theme),
-  fontWeight: 700,
-})
 
 export default <Components<Theme>>{
   MuiButton: {
@@ -100,26 +39,19 @@ export default <Components<Theme>>{
     variants: [
       {
         props: { variant: "primary" },
-        style: () => ({
-          // ...commonStyles,
-          padding: "5px 10px",
-          backgroundColor: "#fff",
-          color: "#b351a4",
-          fontSize: 12,
-          textTransform: "uppercase",
-          borderRadius: "40px",
-          fontWeight: 400,
-          textAlign: "center",
-          lineHeight: 1.3,
-          transition: "backgroundColor 0.3 ease",
+        style: ({ theme }) => ({
+          fontSize: "12px",
+          color: theme.palette.custom.purple,
+          backgroundColor: theme.palette.common.white,
+          fontWeight: 300,
           "&:hover": {
-            backgroundColor: "#d2caca",
+            backgroundColor: "#ccc7c7",
           },
         }),
       },
       {
         props: { variant: "secondary" },
-        style: ({ theme }) => ({
+        style: () => ({
           padding: "8px 20px",
           fontWeight: 300,
           fontSize: 14,
@@ -132,7 +64,7 @@ export default <Components<Theme>>{
       },
       {
         props: { variant: "gradient", size: "big" },
-        style: ({ theme }) => ({
+        style: () => ({
           padding: "15px 30px",
           transition: "backgroundImage 0.3s ease",
           backgroundImage:
@@ -164,14 +96,79 @@ export default <Components<Theme>>{
       },
       {
         props: {
-          variant: "secondary",
-          size: "big",
+          variant: "back",
         },
         style: ({ theme }) => ({
-          ...secondaryBaseStyles(theme),
-          padding: "12px 32px",
-          maxHeight: "48px",
-          fontWeight: 700,
+          backgroundColor: theme.palette.common.white,
+          border: "1px solid #cbcbcb",
+          borderRadius: "20px",
+          padding: "5px 10px",
+          color: "#cbcbcb",
+          fontSize: "14px",
+          transition: "opacity 0.3s ease",
+          "&:hover": {
+            opacity: 0.7,
+          },
+        }),
+      },
+      {
+        props: { variant: "forward" },
+        style: ({ theme }) => ({
+          padding: "5px",
+          color: theme.palette.common.white,
+          borderRadius: "40px",
+          minInlineSize: "200px",
+          fontSize: "14px",
+          transition: "0.3s ease background-color",
+        }),
+      },
+      {
+        props: { variant: "forward", color: "purple" },
+        style: ({ theme }) => ({
+          padding: "5px",
+          backgroundColor: theme.palette.custom.purple,
+          color: theme.palette.common.white,
+          borderRadius: "40px",
+          minInlineSize: "200px",
+          fontSize: "14px",
+          transition: "0.3s ease background-color",
+          "&:hover": {
+            backgroundColor: "#c74db2",
+          },
+        }),
+      },
+      {
+        props: { variant: "forward", color: "green" },
+        style: ({ theme }) => ({
+          padding: "5px",
+          backgroundColor: theme.palette.custom.green,
+          color: theme.palette.common.white,
+          borderRadius: "40px",
+          minInlineSize: "200px",
+          fontSize: "14px",
+          "&:hover": {
+            backgroundColor: "#3dd0c1",
+          },
+        }),
+      },
+      {
+        props: { variant: "forward", size: "big", color: "purple" },
+        style: ({ theme }) => ({
+          padding: "10px 20px",
+          color: theme.palette.common.white,
+          fontSize: "18px",
+          borderRadius: "40px",
+          backgroundColor: theme.palette.custom.purple,
+        }),
+      },
+      {
+        props: { variant: "forward", size: "big", color: "green" },
+        style: ({ theme }) => ({
+          padding: "10px 20px",
+          fontSize: "18px",
+          color: theme.palette.common.white,
+          borderRadius: "40px",
+          backgroundColor: theme.palette.custom.green,
         }),
       },
     ],

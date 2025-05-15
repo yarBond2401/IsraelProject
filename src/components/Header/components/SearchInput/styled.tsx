@@ -2,10 +2,12 @@ import { styled } from "@mui/material/styles"
 import Autocomplete from "@mui/material/Autocomplete"
 import TextField from "@mui/material/TextField"
 import { Popper } from "@mui/material"
+import { shouldForwardProp as muiShouldForwardProp } from "@mui/system"
 
-export const StyledAutocomplete = styled(Autocomplete)<{
-  isMainPage?: boolean
-}>(({ isMainPage }) => ({
+export const StyledAutocomplete = styled(Autocomplete, {
+  shouldForwardProp: (prop) =>
+    prop !== "isMainPage" && muiShouldForwardProp(prop),
+})<{ isMainPage?: boolean }>(({ isMainPage }) => ({
   width: "300px",
   border: `1px solid ${isMainPage ? "#fff" : "#000"}`,
   borderRadius: "40px",
@@ -35,24 +37,25 @@ export const StyledAutocomplete = styled(Autocomplete)<{
   },
 }))
 
-export const StyledTextField = styled(TextField)<{ isMainPage?: boolean }>(
-  ({ isMainPage }) => ({
-    "& .MuiOutlinedInput-root": {
-      borderRadius: "20px",
-      paddingLeft: "8px",
-      color: isMainPage ? "#fff" : "#000",
-      fontSize: "14px",
-      padding: "5px 0px",
-      "& fieldset": {
-        border: "none",
-      },
-      "& input": {
-        padding: "5px",
-        textAlign: "end",
-      },
+export const StyledTextField = styled(TextField, {
+  shouldForwardProp: (prop) =>
+    prop !== "isMainPage" && muiShouldForwardProp(prop),
+})<{ isMainPage?: boolean }>(({ isMainPage }) => ({
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "20px",
+    paddingLeft: "8px",
+    color: isMainPage ? "#fff" : "#000",
+    fontSize: "14px",
+    padding: "5px 0px",
+    "& fieldset": {
+      border: "none",
     },
-  })
-)
+    "& input": {
+      padding: "5px",
+      textAlign: "end",
+    },
+  },
+}))
 
 export const StyledPopper = styled(Popper)(() => ({
   zIndex: 1300,
