@@ -14,7 +14,7 @@ export const ItemWrapper = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   gap: "10px",
   padding: "10px",
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("md")]: {
     flexDirection: "column",
     textAlign: "center",
   },

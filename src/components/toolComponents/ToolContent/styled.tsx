@@ -5,17 +5,17 @@ import { Button, Typography } from "@mui/material"
 import Link from "next/link"
 import { ContactButton } from "@/interfaces/tools"
 
-export const ProjectContentWrapper = styled(Box)(() => ({
+export const ProjectContentWrapper = styled(Box)(({ theme }) => ({
   paddingBlockStart: "150px",
   color: "#000",
   flex: "1 1 56%",
   paddingBlockEnd: "30px",
   position: "relative",
+  [theme.breakpoints.down("sm")]: {
+    paddingBlockStart: "120px",
+  },
 }))
 export const ProjectContentTitle = styled(Typography)(({ theme }) => ({
-  fontSize: "40px",
-  color: theme.palette.common.black,
-  fontWeight: 700,
   marginBlockEnd: "15px",
 }))
 export const ProjectHeaderLabel = styled(Typography)(({ theme }) => ({
@@ -61,8 +61,9 @@ export const ProjectButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== "isGradient",
 })<ContactButton>(({ theme, isGradient }) => ({
   color: isGradient ? theme.palette.common.white : theme.palette.custom.purple,
-  fontSize: "16px",
-  fontWeight: 300,
+  display: "flex",
+  alignItems: "center",
+  gap: "10px",
   backgroundImage: isGradient
     ? "linear-gradient(90deg, #A020F0 10%,#B277CC 30%, #867AB3 50%, #5A7D9A 70%, #30B4B4 90%)"
     : "none",

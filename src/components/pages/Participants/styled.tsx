@@ -4,6 +4,7 @@ import Box from "@mui/material/Box"
 import { Typography } from "@mui/material"
 export const ParticipantsWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
+  minHeight: "100vh",
 }))
 export const ParticipantsContainer = styled(Box)(({ theme }) => ({
   maxInlineSize: theme.breakpoints.values.xl,
@@ -15,6 +16,9 @@ export const ParticipantsContent = styled(Box)(({ theme }) => ({
   marginInline: "auto",
   backgroundColor: theme.palette.primary.main,
   paddingBlockEnd: "50px",
+  [theme.breakpoints.down("md")]: {
+    paddingBlockStart: "130px",
+  },
 }))
 export const ParticipantsHeader = styled(Box)(() => ({
   textAlign: "center",

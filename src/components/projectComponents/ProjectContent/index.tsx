@@ -16,7 +16,7 @@ import {
   ProjectHeaderTag,
   ProviderBlock,
 } from "./styled"
-import { PROJECT_STATUS, PROJECT_TAGS } from "../constants"
+import { CONTACT_BUTTONS, PROJECT_STATUS, PROJECT_TAGS } from "../constants"
 
 interface Props {
   data: ProjectsDetails
@@ -25,7 +25,7 @@ interface Props {
 export const ProjectContent: React.FC<Props> = ({ data }) => {
   return (
     <ProjectContentWrapper>
-      <ProjectContentTitle>{data.headerTitle}</ProjectContentTitle>
+      <ProjectContentTitle variant="h2">{data.headerTitle}</ProjectContentTitle>
       <Box sx={{ display: "flex", flexWrap: "wrap", marginBlockEnd: "20px" }}>
         {PROJECT_TAGS.map((label, index) => {
           const tag = data.tags[index]
@@ -245,9 +245,19 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
             {data.constactBlock.title}
           </Typography>
           <ContactButtons>
-            {data.constactBlock.contactButtons.map((button, index) => (
+            {CONTACT_BUTTONS.map((button, index) => (
               <ProjectButton key={index} isGradient={button.isGradient}>
-                {button.title}
+                <Typography sx={{ fontSize: "14px", fontWeight: 300 }}>
+                  {button.title}
+                </Typography>
+                {button.isGradient && (
+                  <Image
+                    src="/images/svg/white-left-arrow.svg"
+                    alt="arrow-left"
+                    height={20}
+                    width={20}
+                  />
+                )}
               </ProjectButton>
             ))}
           </ContactButtons>

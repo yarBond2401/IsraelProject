@@ -12,21 +12,25 @@ import {
   VisualizationWrapper,
 } from "./styled"
 import VizualizationSelect from "./components/VizualizationSelect"
+import { db } from "@/firebase/firebase"
+import { collection, getDocs, getDoc, doc } from "firebase/firestore"
+
 interface SectionData {
   name: string
   currentAvg: number
   desiredAvg: number
 }
 interface Participant {
+  id: string
   firstName: string
   lastName: string
+  answers?: SectionData[]
 }
 
 const SECTORS = 7
 const LEVELS = 6
 const BASE_RADIUS = 180
 const BASE_SIZE = 500
-const GAP_ANGLE = 0.03
 const FULL_ANGLE = 2 * Math.PI
 const ANGLE_PER_SECTOR = FULL_ANGLE / SECTORS
 
@@ -44,6 +48,35 @@ const polarToCartesian = (
   }
 }
 
+// const drawSector = (
+//   sectorIndex: number,
+//   level: number,
+//   totalLevels: number,
+//   radius: number,
+//   cx: number,
+//   cy: number
+// ) => {
+//   const angleStart = ANGLE_PER_SECTOR * sectorIndex - Math.PI / 2 + GAP_ANGLE
+//   const angleEnd =
+//     ANGLE_PER_SECTOR * (sectorIndex + 1) - Math.PI / 2 - GAP_ANGLE
+//   const r0 = ((level - 1) / totalLevels) * radius
+//   const r1 = (level / totalLevels) * radius
+
+//   const p1 = polarToCartesian(r0, angleStart, cx, cy)
+//   const p2 = polarToCartesian(r0, angleEnd, cx, cy)
+//   const p3 = polarToCartesian(r1, angleEnd, cx, cy)
+//   const p4 = polarToCartesian(r1, angleStart, cx, cy)
+
+//   const largeArcFlag = angleEnd - angleStart > Math.PI ? 1 : 0
+
+//   return `
+//     M ${p1.x},${p1.y}
+//     A ${r0} ${r0} 0 ${largeArcFlag} 1 ${p2.x},${p2.y}
+//     L ${p3.x},${p3.y}
+//     A ${r1} ${r1} 0 ${largeArcFlag} 0 ${p4.x},${p4.y}
+//     Z
+//   `
+// }
 const drawSector = (
   sectorIndex: number,
   level: number,
@@ -52,11 +85,13 @@ const drawSector = (
   cx: number,
   cy: number
 ) => {
-  const angleStart = ANGLE_PER_SECTOR * sectorIndex - Math.PI / 2 + GAP_ANGLE
-  const angleEnd =
-    ANGLE_PER_SECTOR * (sectorIndex + 1) - Math.PI / 2 - GAP_ANGLE
-  const r0 = ((level - 1) / totalLevels) * radius
-  const r1 = (level / totalLevels) * radius
+  const visualTotal = totalLevels + 1
+
+  const angleStart = ANGLE_PER_SECTOR * sectorIndex - Math.PI / 2
+  const angleEnd = ANGLE_PER_SECTOR * (sectorIndex + 1) - Math.PI / 2
+
+  const r0 = (level / visualTotal) * radius
+  const r1 = ((level + 1) / visualTotal) * radius
 
   const p1 = polarToCartesian(r0, angleStart, cx, cy)
   const p2 = polarToCartesian(r0, angleEnd, cx, cy)
@@ -74,6 +109,30 @@ const drawSector = (
   `
 }
 
+const drawSectorDividers = (
+  cx: number,
+  cy: number,
+  radius: number,
+  sectors: number
+) => {
+  const lines = []
+  for (let i = 0; i < sectors; i++) {
+    const angle = ANGLE_PER_SECTOR * i - Math.PI / 2
+    const end = polarToCartesian(radius, angle, cx, cy)
+    lines.push(
+      <line
+        key={`divider-${i}`}
+        x1={cx}
+        y1={cy}
+        x2={end.x}
+        y2={end.y}
+        stroke="#fff"
+        strokeWidth={5}
+      />
+    )
+  }
+  return lines
+}
 const drawRings = (cx: number, cy: number, radius: number, count: number) => {
   const rings = []
   for (let i = 1; i <= count; i++) {
@@ -101,7 +160,7 @@ const drawLabels = (
 ) => {
   return data.map((section, i) => {
     const percent = i / SECTORS
-    const angle = percent * FULL_ANGLE - Math.PI / 2
+    const angle = percent * FULL_ANGLE - Math.PI / 2.8
     const x = cx + (radius + 8) * Math.cos(angle)
     const y = cy + (radius + 8) * Math.sin(angle)
     const rotate = (angle * 180) / Math.PI + 90
@@ -126,6 +185,8 @@ const Visualization = () => {
   const [participants, setParticipants] = useState<Participant[]>([])
   const [selectedParticipant, setSelectedParticipant] = useState("")
   const [overlay, setOverlay] = useState(false)
+  const [animateDesired, setAnimateDesired] = useState(false)
+  const [animateCurrent, setAnimateCurrent] = useState(false)
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth)
@@ -139,45 +200,145 @@ const Visualization = () => {
   const size = isMobile ? 300 : BASE_SIZE
   const RADIUS = isMobile ? 110 : BASE_RADIUS
   const CENTER = size / 2
+  // =======================
+  // useEffect(() => {
+  //   const saved = localStorage.getItem("surveyData")
+  //   if (!saved) return
+
+  //   const parsed = JSON.parse(saved)
+  //   const processed: SectionData[] = parsed.map((section: any) => {
+  //     const currentNonZero = section.currentValues.filter((v: number) => v > 0)
+  //     const desiredNonZero = section.desiredValues.filter((v: number) => v > 0)
+
+  //     const currentAvg =
+  //       currentNonZero.length > 0
+  //         ? Math.round(
+  //             currentNonZero.reduce((sum: number, v: number) => sum + v, 0) /
+  //               currentNonZero.length
+  //           )
+  //         : 0
+
+  //     const desiredAvg =
+  //       desiredNonZero.length > 0
+  //         ? Math.round(
+  //             desiredNonZero.reduce((sum: number, v: number) => sum + v, 0) /
+  //               desiredNonZero.length
+  //           )
+  //         : 0
+  //     return {
+  //       name: section.sectionId,
+  //       currentAvg,
+  //       desiredAvg,
+  //     }
+  //   })
+
+  //   setData(processed)
+  // }, [])
   useEffect(() => {
-    const saved = localStorage.getItem("surveyData")
-    if (!saved) return
+    const fetchSurveyData = async () => {
+      const questionnaireId = localStorage.getItem("questionnaireId")
+      if (!questionnaireId) return
 
-    const parsed = JSON.parse(saved)
-    const processed: SectionData[] = parsed.map((section: any) => {
-      const currentNonZero = section.currentValues.filter((v: number) => v > 0)
-      const desiredNonZero = section.desiredValues.filter((v: number) => v > 0)
+      try {
+        const docRef = doc(db, "questionnaires", questionnaireId)
+        const snapshot = await getDoc(docRef)
+        const firestoreData = snapshot.data()
 
-      const currentAvg =
-        currentNonZero.length > 0
-          ? Math.round(
-              currentNonZero.reduce((sum: number, v: number) => sum + v, 0) /
-                currentNonZero.length
+        if (!firestoreData || !firestoreData.surveyData) return
+
+        const processed: SectionData[] = firestoreData.surveyData.map(
+          (section: any) => {
+            const currentNonZero = section.currentValues.filter(
+              (v: number) => v > 0
             )
-          : 0
-
-      const desiredAvg =
-        desiredNonZero.length > 0
-          ? Math.round(
-              desiredNonZero.reduce((sum: number, v: number) => sum + v, 0) /
-                desiredNonZero.length
+            const desiredNonZero = section.desiredValues.filter(
+              (v: number) => v > 0
             )
-          : 0
-      return {
-        name: section.sectionId,
-        currentAvg,
-        desiredAvg,
+
+            const currentAvg =
+              currentNonZero.length > 0
+                ? Math.round(
+                    currentNonZero.reduce(
+                      (sum: number, v: number) => sum + v,
+                      0
+                    ) / currentNonZero.length
+                  )
+                : 0
+
+            const desiredAvg =
+              desiredNonZero.length > 0
+                ? Math.round(
+                    desiredNonZero.reduce(
+                      (sum: number, v: number) => sum + v,
+                      0
+                    ) / desiredNonZero.length
+                  )
+                : 0
+
+            return {
+              name: section.sectionId,
+              currentAvg,
+              desiredAvg,
+            }
+          }
+        )
+
+        setData(processed)
+      } catch (error) {
+        console.error("Error loading survey data from Firestore:", error)
       }
-    })
-
-    setData(processed)
-  }, [])
-  useEffect(() => {
-    const storedParticipants = localStorage.getItem("participants")
-    if (storedParticipants) {
-      setParticipants(JSON.parse(storedParticipants))
     }
+
+    fetchSurveyData()
   }, [])
+
+  // ==================
+  // useEffect(() => {
+  //   const storedParticipants = localStorage.getItem("participants")
+  //   if (storedParticipants) {
+  //     setParticipants(JSON.parse(storedParticipants))
+  //   }
+  // }, [])
+  useEffect(() => {
+    const fetchParticipants = async () => {
+      const questionnaireId = localStorage.getItem("questionnaireId")
+      if (!questionnaireId) return
+
+      try {
+        const snapshot = await getDocs(
+          collection(db, "questionnaires", questionnaireId, "participants")
+        )
+        const fetched = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Participant[]
+
+        setParticipants(fetched)
+      } catch (error) {
+        console.error("Error fetching participants:", error)
+      }
+    }
+
+    fetchParticipants()
+  }, [])
+  // ===================
+  const handleOverlayToggle = () => {
+    if (!overlay) {
+      // Switching TO overlay
+      setAnimateDesired(false)
+      setAnimateCurrent(false)
+      setOverlay(true)
+
+      // Animate desired first, then current
+      setTimeout(() => setAnimateDesired(true), 100) // slight delay
+      setTimeout(() => setAnimateCurrent(true), 800) // after desired fills
+    } else {
+      // Reset everything
+      setOverlay(false)
+      setAnimateDesired(false)
+      setAnimateCurrent(false)
+    }
+  }
 
   return (
     <VisualizationWrapper>
@@ -212,7 +373,7 @@ const Visualization = () => {
             options={[
               { value: "", label: "בחר משתתף" },
               ...participants.map((p) => ({
-                value: `${p.firstName} ${p.lastName}`.trim(),
+                value: p.id,
                 label: `${p.firstName} ${p.lastName}`.trim(),
               })),
             ]}
@@ -240,9 +401,16 @@ const Visualization = () => {
                         )}
                         fill="#15b0a1"
                         fillOpacity={1}
+                        style={{
+                          transformOrigin: `${CENTER}px ${CENTER}px`,
+                          transform: "scale(0)",
+                          animation: "sectorGrow 0.8s ease-out forwards",
+                        }}
                       />
                     ))
                   })}
+                  {drawSectorDividers(CENTER, CENTER, RADIUS, SECTORS)}
+
                   {drawRings(CENTER, CENTER, RADIUS, LEVELS + 1)}
 
                   {drawLabels(data, CENTER, CENTER, RADIUS)}
@@ -255,6 +423,7 @@ const Visualization = () => {
                     const desiredFill = roundedLevels(d.desiredAvg)
                     return [...Array(desiredFill)].map((_, levelIndex) => (
                       <path
+                        stroke="none"
                         key={`desired-${sectorIndex}-${levelIndex}`}
                         d={drawSector(
                           sectorIndex,
@@ -266,9 +435,16 @@ const Visualization = () => {
                         )}
                         fill="#9c27b0"
                         fillOpacity={1}
+                        style={{
+                          transformOrigin: `${CENTER}px ${CENTER}px`,
+                          transform: "scale(0)",
+                          animation: "sectorGrow 0.8s ease-out forwards",
+                        }}
                       />
                     ))
                   })}
+                  {drawSectorDividers(CENTER, CENTER, RADIUS, SECTORS)}
+
                   {drawRings(CENTER, CENTER, RADIUS, LEVELS + 1)}
 
                   {drawLabels(data, CENTER, CENTER, RADIUS)}
@@ -297,6 +473,10 @@ const Visualization = () => {
                       )}
                       fill="#9c27b0"
                       fillOpacity={0.5}
+                      style={{
+                        opacity: animateDesired ? 0.5 : 0,
+                        transition: "opacity 0.6s ease-in-out",
+                      }}
                     />
                   ))
                 })}
@@ -316,6 +496,12 @@ const Visualization = () => {
                         )}
                         fill="#15b0a1"
                         fillOpacity={1}
+                        style={{
+                          opacity: animateCurrent ? 1 : 0,
+                          transform: animateCurrent ? "scale(1)" : "scale(0.6)",
+                          transition: "all 0.6s ease-in-out",
+                          transformOrigin: `${CENTER}px ${CENTER}px`,
+                        }}
                       />
                     ))
                   })}
@@ -326,6 +512,8 @@ const Visualization = () => {
                     transition: "transform 0.8s ease-in-out",
                   }}
                 ></g>
+                {drawSectorDividers(CENTER, CENTER, RADIUS, SECTORS)}
+
                 {drawRings(CENTER, CENTER, RADIUS, LEVELS + 1)}
 
                 {drawLabels(data, CENTER, CENTER, RADIUS)}
@@ -344,11 +532,7 @@ const Visualization = () => {
             flexDirection: { xs: "column", sm: "row" },
           }}
         >
-          <Button
-            variant="forward"
-            color="green"
-            onClick={() => setOverlay((prev) => !prev)}
-          >
+          <Button variant="forward" color="green" onClick={handleOverlayToggle}>
             {overlay ? "הצג גרפים בנפרד" : "השווה בין מצבים"}
           </Button>
           {overlay && (

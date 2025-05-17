@@ -26,7 +26,7 @@ export const VisualizationHeader = styled(Box)(({ theme }) => ({
     flexDirection: "column",
   },
 }))
-export const VisualizationCharts = styled(Box)(() => ({
+export const VisualizationCharts = styled(Box)(({ theme }) => ({
   paddingBlockStart: "20px",
   display: "flex",
   justifyContent: "center",
@@ -34,6 +34,9 @@ export const VisualizationCharts = styled(Box)(() => ({
   gap: "50px",
   flexWrap: "wrap",
   backgroundColor: "#fff",
+  [theme.breakpoints.down("lg")]: {
+    gap: "5px",
+  },
 }))
 export const ChartTitle = styled(Typography)(({ theme }) => ({
   fontSize: "30px",

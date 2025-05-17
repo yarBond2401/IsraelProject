@@ -48,7 +48,7 @@ export const IndicatorValue = styled(Typography)(({ theme }) => ({
 export const IndicatorTitle = styled(Typography)(({ theme }) => ({
   color: "#909090",
   fontSize: "12px",
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("md")]: {
     fontSize: "8px",
   },
 }))

@@ -1,9 +1,14 @@
+export interface SolutionLabel {
+  title: string
+}
 interface HeaderLabel {
   title: string
   isFirst?: boolean
 }
-interface MainArticle {
+export interface MainArticleTitle {
   title: string
+}
+interface MainArticle {
   description: string
 }
 export interface ContactButton {
@@ -28,12 +33,11 @@ export interface ToolsDetails {
     iconSrc: string
     description: string
     adress: string
-    adressAdd: string
+    phone: string
     email: string
   }
-  constactBlock: {
+  contactBlock: {
     title: string
-    contactButtons: ContactButton[]
   }
   slider: SlideData[]
 }

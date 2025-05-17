@@ -42,7 +42,6 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
           {!isMainPage && (
             <BlackHeaderLink href="/">כלי אבחוני</BlackHeaderLink>
           )}
-          <SearchInput isMainPage={false} />
         </BurgerMenuContent>
       </BurgerMenuWrapper>
     </>

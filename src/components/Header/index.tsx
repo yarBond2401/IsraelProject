@@ -56,8 +56,8 @@ const Header: React.FC<HeaderProps> = ({ isOnMainPage = true }) => {
               alignItems: "center",
             }}
           >
-            {isOnMainPage && <Button variant="secondary">הרשמה</Button>}
             {isOnMainPage && <HeaderLink href="/">כניסה</HeaderLink>}
+            {isOnMainPage && <Button variant="secondary">הרשמה</Button>}
             {!isOnMainPage && (
               <PurpleHeaderLink href="/">אזור אישי</PurpleHeaderLink>
             )}
@@ -65,7 +65,6 @@ const Header: React.FC<HeaderProps> = ({ isOnMainPage = true }) => {
               <BlackHeaderLink href="/">כלי אבחוני</BlackHeaderLink>
             )}
           </Box>
-          <SearchInput isMainPage={isOnMainPage} />
         </HeaderContent>
         <BurgerMenu
           isOpen={menuOpen}

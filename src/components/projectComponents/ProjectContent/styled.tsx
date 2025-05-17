@@ -13,6 +13,7 @@ export const ProjectContentWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
   paddingInlineEnd: "30px",
   [theme.breakpoints.down("sm")]: {
+    paddingBlockStart: "120px",
     paddingInlineEnd: "5px",
   },
 }))
@@ -22,9 +23,10 @@ export const HeaderNav = styled(Box)(({ theme }) => ({
   insetInlineStart: "-65%",
   display: "flex",
   alignItems: "center",
-  columnGap: "15px",
+  columnGap: "10px",
   rowGap: "5px",
   color: "#545756",
+  zIndex: 3,
   [theme.breakpoints.down("lg")]: {
     insetInlineStart: "0",
     flexWrap: "wrap",
@@ -33,10 +35,7 @@ export const HeaderNav = styled(Box)(({ theme }) => ({
     display: "none",
   },
 }))
-export const ProjectContentTitle = styled(Typography)(({ theme }) => ({
-  fontSize: "34px",
-  color: theme.palette.common.black,
-  fontWeight: 700,
+export const ProjectContentTitle = styled(Typography)(() => ({
   marginBlockEnd: "15px",
 }))
 export const ProjectHeaderTag = styled(Typography)(({ theme }) => ({
@@ -115,6 +114,9 @@ export const ProjectButton = styled(Button, {
   color: isGradient ? theme.palette.common.white : theme.palette.custom.purple,
   fontSize: "16px",
   fontWeight: 300,
+  display: "flex",
+  alignItems: "center",
+  gap: "10px",
   backgroundImage: isGradient
     ? "linear-gradient(90deg, #A020F0 10%,#B277CC 30%, #867AB3 50%, #5A7D9A 70%, #30B4B4 90%)"
     : "none",

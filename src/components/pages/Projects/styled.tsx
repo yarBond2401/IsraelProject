@@ -38,13 +38,11 @@ export const ProjectsUpperButtons = styled(Box)(({ theme }) => ({
   gap: "90px",
   [theme.breakpoints.down("md")]: {
     gap: "20px",
-  },
-  [theme.breakpoints.down("sm")]: {
     flexDirection: "column-reverse",
   },
 }))
 export const DeepFilterButton = styled(Button)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("md")]: {
     inlineSize: "100%",
   },
 }))

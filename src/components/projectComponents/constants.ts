@@ -1,4 +1,5 @@
 import { Label, ProjectsDetails } from "@/interfaces/projects"
+import { ContactButton } from "@/interfaces/tools"
 export const PROJECT_TAGS: Label[] = [
   { label: "פתרון גג:" },
   { label: "פתרון:" },
@@ -9,6 +10,15 @@ export const PROJECT_STATUS: Label[] = [
   { label: "סטטוס:" },
   { label: "משך הפרויקט:" },
   { label: "שנת פרויקט:" },
+]
+export const CONTACT_BUTTONS: ContactButton[] = [
+  { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
+  {
+    title: "עבור לרשימת הכלים ",
+    variant: "gradient",
+    redirectTo: "/",
+    isGradient: true,
+  },
 ]
 export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
   "public-engagement": {
@@ -71,15 +81,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/public-eng-1.png" },
@@ -149,15 +150,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/contr-tracking-1.png" },
@@ -228,15 +220,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/task-budg-manag-1.png" },
@@ -308,15 +291,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/meeting-task-1.png" },
@@ -384,15 +358,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/workplan-task-1.png" },
@@ -460,15 +425,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/bi-system-1.png" },
@@ -536,15 +492,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/decision-1.png" },
@@ -612,15 +559,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/regional-center-1.png" },
@@ -687,15 +625,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/community-1.png" },
@@ -761,15 +690,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/smart-1.png" },
@@ -835,15 +755,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [{ imageSrc: "/images/webp/projects/slider/bi-support.png" }],
   },
@@ -906,15 +817,6 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
     },
     constactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
-      contactButtons: [
-        { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
-        {
-          title: "עבור לרשימת הכלים ⬅",
-          variant: "gradient",
-          redirectTo: "/",
-          isGradient: true,
-        },
-      ],
     },
     slider: [
       { imageSrc: "/images/webp/projects/slider/ecocall-1.png" },

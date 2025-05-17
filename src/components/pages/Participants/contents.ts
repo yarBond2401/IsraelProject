@@ -14,7 +14,6 @@ export const ParticipantsSchema = Yup.object().shape({
         .max(50, "השם ארוך מדי!")
         .required("נדרש שם"),
       position: Yup.string().min(2, "קצר מדי!").max(50, "ארוך מדי!"),
-      // .required("התפקיד נדרש"),
       email: Yup.string()
         .email("פורמט אימייל לא חוקי")
         .required("יש צורך באימייל"),
@@ -23,7 +22,7 @@ export const ParticipantsSchema = Yup.object().shape({
 })
 
 export const initialValues: ParticipantsFormValues = {
-  participants: Array(5).fill({
+  participants: Array(1).fill({
     firstName: "",
     lastName: "",
     position: "",

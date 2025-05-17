@@ -48,7 +48,6 @@ export interface ProjectsDetails {
   }
   constactBlock: {
     title: string
-    contactButtons: ContactButton[]
   }
   slider: SlideData[]
 }

@@ -34,11 +34,17 @@ export const ProjectCardButton = styled(Button)(({ theme }) => ({
   color: theme.palette.custom.purple,
   fontWeight: "300",
   fontSize: "12px",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "10px",
+  },
 }))
 export const ProjectCardTitle = styled(Typography)(({ theme }) => ({
   justifySelf: "flex-end",
   fontSize: "24px",
   color: theme.palette.common.white,
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "18px",
+  },
 }))
 export const ProjectCardBackground = styled(Typography)(() => ({
   position: "absolute",

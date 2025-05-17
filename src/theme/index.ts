@@ -50,19 +50,9 @@ function makeTypography(): TypographyVariantsOptions {
       position: "relative",
     },
     h2: {
-      //   fontSize: AdaptiveTypography(28, 40),
-      lineHeight: 1.3,
+      fontSize: AdaptiveTypography(28, 34),
+      color: "#000",
       fontWeight: 700,
-      textTransform: "uppercase",
-      zIndex: 2,
-      position: "relative",
-      "&::before": {
-        content: '""',
-        position: "absolute",
-        height: "24px",
-        backgroundColor: "#AB90D4",
-        zIndex: -1,
-      },
     },
     h3: {
       //   fontSize: AdaptiveTypography(24, 32),

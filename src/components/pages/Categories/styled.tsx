@@ -27,11 +27,17 @@ export const CategoriesBody = styled(Box)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.common.white,
   marginBlockEnd: "100px",
+  [theme.breakpoints.down("lg")]: {
+    marginBlockEnd: "30px",
+  },
 }))
-export const CategoriesTitle = styled(Typography)(() => ({
+export const CategoriesTitle = styled(Typography)(({ theme }) => ({
   fontSize: "24px",
   fontWeight: 700,
   marginBlockEnd: "30px",
+  [theme.breakpoints.down("lg")]: {
+    marginBlockEnd: "10px",
+  },
 }))
 export const CategoriesGrid = styled(Box)(({ theme }) => ({
   marginBlockEnd: "100px",
@@ -46,6 +52,9 @@ export const CategoriesGrid = styled(Box)(({ theme }) => ({
   "& > :nth-of-type(5)": { gridColumn: "2 / span 2" },
   "& > :nth-of-type(6)": { gridColumn: "4 / span 2" },
   "& > :nth-of-type(7)": { gridColumn: "6 / span 2" },
+  [theme.breakpoints.down("lg")]: {
+    marginBlockEnd: "30px",
+  },
   [theme.breakpoints.down("md")]: {
     gridTemplateColumns: "repeat(3, 1fr)",
     "& > *": {

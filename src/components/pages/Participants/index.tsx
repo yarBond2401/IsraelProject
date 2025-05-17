@@ -22,17 +22,52 @@ import { ParticipantsFormValues } from "@/interfaces/participants"
 import ParticipantsInput from "./components/ParticipantsInput"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-
+import { db } from "@/firebase/firebase"
+import { collection, addDoc } from "firebase/firestore"
 const Participants = () => {
   const router = useRouter()
 
+  // const handleSubmit = async (values: ParticipantsFormValues) => {
+  //   const minimalParticipants = values.participants.map((p) => ({
+  //     firstName: p.firstName,
+  //     lastName: p.lastName,
+  //   }))
+  //   localStorage.setItem("participants", JSON.stringify(minimalParticipants))
+  //   router.push("/vizualization")
+  // }
   const handleSubmit = async (values: ParticipantsFormValues) => {
-    const minimalParticipants = values.participants.map((p) => ({
-      firstName: p.firstName,
-      lastName: p.lastName,
-    }))
-    localStorage.setItem("participants", JSON.stringify(minimalParticipants))
-    router.push("/vizualization")
+    const questionnaireId = localStorage.getItem("questionnaireId")
+    if (!questionnaireId) {
+      alert("שאלון לא נמצא. חזור לשלב הקודם ונסה שוב.")
+      return
+    }
+
+    try {
+      const participantsRef = collection(
+        db,
+        "questionnaires",
+        questionnaireId,
+        "participants"
+      )
+
+      for (const p of values.participants) {
+        const data = {
+          firstName: p.firstName,
+          lastName: p.lastName,
+          role: p.position || "",
+          email: p.email,
+          createdAt: new Date().toISOString(),
+        }
+        console.log("Saving participant:", data)
+
+        await addDoc(participantsRef, data)
+      }
+
+      router.push("/vizualization")
+    } catch (error) {
+      console.error("Error saving participants:", error)
+      alert("אירעה שגיאה בשמירת המשתתפים. נסה שוב.")
+    }
   }
 
   return (
@@ -94,7 +129,7 @@ const Participants = () => {
                                     />
                                   ))}
                                 </ParticipantsInputs>
-                                {values.participants.length > 3 && (
+                                {values.participants.length > 1 && (
                                   <Box
                                     sx={{
                                       cursor: "pointer",

@@ -5,12 +5,15 @@ import { Button, Typography } from "@mui/material"
 export const ProjectsWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
 }))
-export const ProjectsContainer = styled(Box)(() => ({
+export const ProjectsContainer = styled(Box)(({ theme }) => ({
   paddingBlockStart: "200px",
   maxInlineSize: "1300px",
   marginInline: "auto",
   paddingInline: "20px",
   paddingBlockEnd: "30px",
+  [theme.breakpoints.down("lg")]: {
+    paddingBlockStart: "150px",
+  },
 }))
 export const ProjectsHeader = styled(Box)(() => ({
   textAlign: "center",
@@ -23,7 +26,6 @@ export const ProjectsTitle = styled(Typography)(({ theme }) => ({
   fontSize: "24px",
   color: theme.palette.custom.purple,
   fontWeight: 700,
-  marginBlockEnd: "20px",
 }))
 export const ProjectsDescription = styled(Typography)(() => ({
   fontSize: "16px",
@@ -38,13 +40,11 @@ export const ProjectsUpperButtons = styled(Box)(({ theme }) => ({
   gap: "90px",
   [theme.breakpoints.down("md")]: {
     gap: "20px",
-  },
-  [theme.breakpoints.down("sm")]: {
     flexDirection: "column-reverse",
   },
 }))
 export const DeepFilterButton = styled(Button)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("md")]: {
     inlineSize: "100%",
   },
 }))

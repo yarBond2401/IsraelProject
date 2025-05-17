@@ -61,7 +61,7 @@ export const HomePageTitle = styled(Typography)(({ theme }) => ({
 }))
 export const ButtonWrapper = styled(Link)(({ theme }) => ({
   maxInlineSize: "450px",
-  [theme.breakpoints.down("lg")]: {
+  [theme.breakpoints.down("md")]: {
     maxInlineSize: "none",
     inlineSize: "100%",
   },

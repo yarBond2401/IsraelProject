@@ -34,10 +34,6 @@ const Tools = () => {
       <ProjectsContainer>
         <ProjectsHeader>
           <ProjectsTitle>הכלים שמתאימים לרשות שלך</ProjectsTitle>
-          <ProjectsDescription>
-            אנא בחר/י סוג אחד או מספר סוגים כדי להתחיל ולבחור כלים ופתרונות
-            לצרכים ולשיפורים לרשות.
-          </ProjectsDescription>
         </ProjectsHeader>
         <ProjectsUpperButtons>
           <Box

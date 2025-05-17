@@ -61,7 +61,7 @@ export const ImageWrapper = styled(Box)(({ theme }) => ({
   width: "100%",
   maxWidth: "410px",
   margin: "0 auto",
-  transform: "translate(-15%,-50px)",
+  transform: "translate(-10%,-50px)",
   [theme.breakpoints.down("md")]: {
     transform: "translate(0, 0)",
   },

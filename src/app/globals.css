@@ -41,3 +41,12 @@ a {
     color-scheme: dark;
   }
 }
+
+@keyframes sectorGrow {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

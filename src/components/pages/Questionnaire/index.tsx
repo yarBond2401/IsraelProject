@@ -20,12 +20,15 @@ import Link from "next/link"
 import Indicator from "./components/Indicator"
 import InfoPanel from "./components/InfoPanel"
 import { useRouter } from "next/navigation"
+import { db } from "@/firebase/firebase"
+import { collection, addDoc } from "firebase/firestore"
+
 const generateInitialValues = () => {
   const values: Record<string, string> = {}
   FORM_ROWS.forEach((row, rowIndex) => {
     row.expanded.forEach((_, itemIndex) => {
-      values[`row${rowIndex + 1}_select1_item${itemIndex + 1}`] = ""
-      values[`row${rowIndex + 1}_select2_item${itemIndex + 1}`] = ""
+      values[`row${rowIndex + 1}_select1_item${itemIndex + 1}`] = "3"
+      values[`row${rowIndex + 1}_select2_item${itemIndex + 1}`] = "6"
     })
   })
   return values
@@ -41,7 +44,7 @@ const Questionnaire = () => {
 
   const router = useRouter()
 
-  const handleSubmit = (values: Record<string, string>) => {
+  const handleSubmit = async (values: Record<string, string>) => {
     const surveyData = FORM_ROWS.map((row, rowIndex) => {
       const currentValues: number[] = []
       const desiredValues: number[] = []
@@ -61,8 +64,19 @@ const Questionnaire = () => {
         desiredValues,
       }
     })
-    localStorage.setItem("surveyData", JSON.stringify(surveyData))
-    router.push("/participants")
+
+    try {
+      const docRef = await addDoc(collection(db, "questionnaires"), {
+        surveyData,
+        createdAt: new Date().toISOString(),
+      })
+
+      localStorage.setItem("questionnaireId", docRef.id)
+      router.push("/participants")
+    } catch (error) {
+      console.error("Error saving questionnaire:", error)
+      alert("אירעה שגיאה בשמירת הנתונים. נסה שוב.")
+    }
   }
 
   return (

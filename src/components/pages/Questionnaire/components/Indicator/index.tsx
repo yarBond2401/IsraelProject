@@ -22,7 +22,7 @@ const Indicator: FC = () => {
     return total === 0 ? 0 : Math.round((filled / total) * 100)
   }, [values])
   const theme = useTheme()
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"))
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"))
   const size = isSmallScreen ? 80 : 120
   const thickness = isSmallScreen ? 2 : 3
 
