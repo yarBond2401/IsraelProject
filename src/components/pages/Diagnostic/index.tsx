@@ -1,21 +1,23 @@
+"use client"
 import React from "react"
 import Header from "@/components/Header"
 import { Box, Button, Typography } from "@mui/material"
 import Image from "next/image"
-import { DIAGNOSTIC_CARDS } from "./constants"
 import Link from "next/link"
+
+import "swiper/css"
+import "swiper/css/navigation"
+
 import {
   DiagnosticWrapper,
   DiagnosticContent,
-  DiagnosticBody,
-  DiagnosticCards,
-  DiagnosticCard,
   DiagnosticImageSection,
   DiagnosticImageSectionBody,
   DiagnosticImage,
-  DiagnosticCardTitle,
   DiagnosticTitle,
 } from "./styled"
+
+import DiagnosticSwiper from "./components/DiagnosticSlider"
 const Diagnostic = () => {
   return (
     <DiagnosticWrapper>
@@ -28,8 +30,17 @@ const Diagnostic = () => {
         }}
       >
         <DiagnosticContent>
-          <DiagnosticBody>
-            <Box sx={{ textAlign: "center", marginBlockEnd: "30px" }}>
+          <Box
+            sx={{
+              flex: 1,
+              padding: "60px 16px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Box sx={{ textAlign: "center", mb: 4 }}>
               <Image
                 src="/images/svg/diagnostic/main-icon.png"
                 alt="diagnostic-icon"
@@ -38,51 +49,21 @@ const Diagnostic = () => {
               />
               <DiagnosticTitle>כלי אבחוני עיר חכמה</DiagnosticTitle>
               <Typography
-                sx={{
-                  color: "#1e2120",
-                  fontSize: "14px",
-                  maxInlineSize: "450px",
-                }}
+                sx={{ color: "#1e2120", fontSize: "14px", maxWidth: "450px" }}
               >
                 הכלי האבחוני מותרתו התמקדויות בפרויקטים ללוונטיים לרשות המקומית
                 בהתאם לאסטרטגיה, תחומי העניין, אתגרים והמטרות אותם הגדירה.
               </Typography>
             </Box>
-            <DiagnosticCards>
-              {DIAGNOSTIC_CARDS.map((card, index) => (
-                <DiagnosticCard key={index} isMainItem={card.isMainItem}>
-                  <DiagnosticCardTitle>{card.title}</DiagnosticCardTitle>
-                  {card.isMainItem && (
-                    <Link href="/projects">
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <Typography sx={{ color: "#939393", fontSize: "12px" }}>
-                          להמשך
-                        </Typography>
-                        <Image
-                          src="/images/svg/diagnostic/arrow-icon.png"
-                          width={10}
-                          height={10}
-                          alt="arrow-icon"
-                        />
-                      </Box>
-                    </Link>
-                  )}
-                </DiagnosticCard>
-              ))}
-            </DiagnosticCards>
+            <DiagnosticSwiper />
             <Link href="/entry" style={{ textDecoration: "none" }}>
               <Button variant="back">חזור</Button>
             </Link>
-          </DiagnosticBody>
+          </Box>
+
           <DiagnosticImageSection>
             <DiagnosticImageSectionBody>
-              <Typography
-                sx={{
-                  fontWeight: 700,
-                  marginBlockEnd: "20px",
-                  fontSize: "24px",
-                }}
-              >
+              <Typography sx={{ fontWeight: 700, mb: 2, fontSize: "24px" }}>
                 עיר חכמה
               </Typography>
               <Typography sx={{ fontSize: "14px" }}>

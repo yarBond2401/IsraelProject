@@ -43,7 +43,7 @@ export const BurgerMenuWrapper = styled(Box, {
   position: "fixed",
   insetBlockStart: 0,
   insetInlineStart: 0,
-  blockSize: "60vh",
+  blockSize: "45vh",
   inlineSize: "100%",
   backgroundColor: theme.palette.common.white,
   display: "flex",
@@ -69,9 +69,9 @@ export const BurgerMenuContent = styled(Box)(() => ({
   blockSize: "100%",
   inlineSize: "100%",
 }))
+
 export const HeaderLink = styled(Link)(({ theme }) => ({
-  fontSize: "25px",
-  color: "#000",
+  color: "#fff",
   transition: "color 0.3s ease",
   "&:hover": {
     color: theme.palette.primary.light,

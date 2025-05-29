@@ -51,7 +51,7 @@ export const ParticipantsFormBody = styled(Box)(() => ({
 export const ParticipantsInputs = styled(Box)(({ theme }) => ({
   width: "100%",
   display: "grid",
-  gridTemplateColumns: "repeat(4,1fr)",
+  gridTemplateColumns: "repeat(3,1fr)",
   gap: "10px",
   [theme.breakpoints.down("lg")]: {
     gridTemplateColumns: "repeat(2,1fr)",

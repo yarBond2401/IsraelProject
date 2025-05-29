@@ -46,7 +46,7 @@ export interface ProjectsDetails {
     articles: Article[]
     emails: Email[]
   }
-  constactBlock: {
+  contactBlock: {
     title: string
   }
   slider: SlideData[]

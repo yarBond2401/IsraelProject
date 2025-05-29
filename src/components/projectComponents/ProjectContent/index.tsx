@@ -242,7 +242,7 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
         <Divider sx={{ marginBlockEnd: "20px" }} />
         <ContactBlock>
           <Typography sx={{ fontWeight: 700, color: "#000", fontSize: "16px" }}>
-            {data.constactBlock.title}
+            {data.contactBlock.title}
           </Typography>
           <ContactButtons>
             {CONTACT_BUTTONS.map((button, index) => (

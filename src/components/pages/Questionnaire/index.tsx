@@ -1,5 +1,6 @@
 "use client"
-import React, { useState } from "react"
+
+import React, { useState, useEffect } from "react"
 import Header from "@/components/Header"
 import { Button } from "@mui/material"
 import {
@@ -13,28 +14,45 @@ import {
   QuestionnaireTitle,
   QuestionnaireWrapper,
 } from "./styled"
-import { Formik } from "formik"
+import { Formik, Form, useFormikContext } from "formik"
 import FormRow from "./components/FormRow"
 import { FORM_ROWS } from "./constants"
 import Link from "next/link"
 import Indicator from "./components/Indicator"
 import InfoPanel from "./components/InfoPanel"
 import { useRouter } from "next/navigation"
-import { db } from "@/firebase/firebase"
-import { collection, addDoc } from "firebase/firestore"
+import { useAuth } from "@/contexts/AuthContext"
+import {
+  getAnswers,
+  saveAnswers,
+  AnswersMap,
+} from "@/utils/questionnaireManage"
+import LoadingScreen from "@/components/LoadingScreen"
 
-const generateInitialValues = () => {
-  const values: Record<string, string> = {}
+const generateInitialValues = (): AnswersMap => {
+  const values: AnswersMap = {}
   FORM_ROWS.forEach((row, rowIndex) => {
     row.expanded.forEach((_, itemIndex) => {
-      values[`row${rowIndex + 1}_select1_item${itemIndex + 1}`] = "3"
-      values[`row${rowIndex + 1}_select2_item${itemIndex + 1}`] = "6"
+      values[`row${rowIndex + 1}_select1_item${itemIndex + 1}`] = ""
+      values[`row${rowIndex + 1}_select2_item${itemIndex + 1}`] = ""
     })
   })
   return values
 }
 
-const Questionnaire = () => {
+function AutoSave({ municipality }: { municipality: string }) {
+  const { values } = useFormikContext<AnswersMap>()
+  useEffect(() => {
+    saveAnswers(municipality, values)
+  }, [values, municipality])
+  return null
+}
+
+export default function Questionnaire() {
+  const { user: municipality } = useAuth()
+  const router = useRouter()
+
+  const [initialValues, setInitialValues] = useState<AnswersMap | null>(null)
   const [expandedRow, setExpandedRow] = useState<number>(0)
   const [infoPanelOpen, setInfoPanelOpen] = useState(false)
   const [panelData, setPanelData] = useState<{
@@ -42,41 +60,20 @@ const Questionnaire = () => {
     description: string
   } | null>(null)
 
-  const router = useRouter()
-
-  const handleSubmit = async (values: Record<string, string>) => {
-    const surveyData = FORM_ROWS.map((row, rowIndex) => {
-      const currentValues: number[] = []
-      const desiredValues: number[] = []
-      row.expanded.forEach((_, itemIndex) => {
-        const c = Number(
-          values[`row${rowIndex + 1}_select1_item${itemIndex + 1}`]
-        )
-        const d = Number(
-          values[`row${rowIndex + 1}_select2_item${itemIndex + 1}`]
-        )
-        if (!isNaN(c)) currentValues.push(c)
-        if (!isNaN(d)) desiredValues.push(d)
-      })
-      return {
-        sectionId: row.title,
-        currentValues,
-        desiredValues,
-      }
+  useEffect(() => {
+    if (!municipality) return
+    getAnswers(municipality).then((saved) => {
+      const defaults = generateInitialValues()
+      setInitialValues({ ...defaults, ...saved })
     })
+  }, [municipality])
 
-    try {
-      const docRef = await addDoc(collection(db, "questionnaires"), {
-        surveyData,
-        createdAt: new Date().toISOString(),
-      })
+  if (!initialValues) {
+    return <LoadingScreen />
+  }
 
-      localStorage.setItem("questionnaireId", docRef.id)
-      router.push("/participants")
-    } catch (error) {
-      console.error("Error saving questionnaire:", error)
-      alert("אירעה שגיאה בשמירת הנתונים. נסה שוב.")
-    }
+  const handleSubmit = () => {
+    router.push("/participants")
   }
 
   return (
@@ -95,13 +92,17 @@ const Questionnaire = () => {
               על-מנת לקבל את תוצאותינו.
             </QuestionnaireDescription>
           </QuestionnaireHeader>
+
           <QuestionnaireForm>
             <Formik
-              initialValues={generateInitialValues()}
+              initialValues={initialValues}
+              enableReinitialize
               onSubmit={handleSubmit}
             >
               {({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}>
+                  {/* Persist every change */}
+                  <AutoSave municipality={municipality!} />
                   <Indicator />
                   <QuestionnaireFormBody>
                     {FORM_ROWS.map((row, index) => (
@@ -117,8 +118,7 @@ const Questionnaire = () => {
                         }
                         isFirstRow={index === 0}
                         onInfoClick={() => {
-                          const panel = row.panel
-                          setPanelData(panel)
+                          setPanelData(row.panel)
                           setInfoPanelOpen(true)
                         }}
                       />
@@ -132,12 +132,13 @@ const Questionnaire = () => {
                       המשך
                     </Button>
                   </QuestionnaireButtons>
-                </form>
+                </Form>
               )}
             </Formik>
           </QuestionnaireForm>
         </QuestionnaireContent>
       </QuestionnaireContainer>
+
       {panelData && (
         <InfoPanel
           open={infoPanelOpen}
@@ -149,5 +150,3 @@ const Questionnaire = () => {
     </QuestionnaireWrapper>
   )
 }
-
-export default Questionnaire

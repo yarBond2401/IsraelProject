@@ -79,7 +79,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [
@@ -148,7 +148,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [
@@ -218,7 +218,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [
@@ -289,7 +289,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [
@@ -356,7 +356,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [
@@ -423,7 +423,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [
@@ -490,7 +490,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [
@@ -557,7 +557,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [
@@ -623,7 +623,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [
@@ -688,7 +688,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [
@@ -753,7 +753,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [{ imageSrc: "/images/webp/projects/slider/bi-support.png" }],
@@ -815,7 +815,7 @@ export const PROJECTS_DATA: Record<string, ProjectsDetails> = {
       ],
       emails: [{ title: "eran@raizit.com" }, { title: "www.raizit.com" }],
     },
-    constactBlock: {
+    contactBlock: {
       title: "מעוניין לבצע את הפרויקט הזה באזורך?",
     },
     slider: [

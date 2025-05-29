@@ -11,7 +11,7 @@ import {
 const ParticipantsInput = ({
   name,
   placeholder,
-  type = "email",
+  type = "text",
   ...props
 }: ParticipantsInputProps) => {
   const [field] = useField(name)
@@ -28,9 +28,7 @@ const ParticipantsInput = ({
         placeholder={placeholder}
         type={type}
         autoComplete={
-          name.includes("email")
-            ? "email"
-            : name.includes("firstName")
+          name.includes("firstName")
             ? "given-name"
             : name.includes("lastName")
             ? "family-name"

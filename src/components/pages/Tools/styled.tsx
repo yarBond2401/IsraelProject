@@ -4,6 +4,7 @@ import Box from "@mui/material/Box"
 import { Button, Typography } from "@mui/material"
 export const ProjectsWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
+  minHeight: "100vh",
 }))
 export const ProjectsContainer = styled(Box)(({ theme }) => ({
   paddingBlockStart: "200px",

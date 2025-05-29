@@ -5,8 +5,7 @@ export interface ParticipantsFormValues {
 export interface Participant {
   firstName: string
   lastName: string
-  position: string
-  email: string
+  position?: string
 }
 export interface ParticipantsInputProps {
   name: string

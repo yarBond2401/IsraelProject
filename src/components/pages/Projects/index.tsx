@@ -76,7 +76,7 @@ const Projects = () => {
         </ProjectsItems>
 
         <ProjectsButtons>
-          <Link href="/vizualization">
+          <Link href="/diagnostic">
             <Button variant="back">חזור</Button>
           </Link>
           <Link href="/vizualization">

@@ -14,9 +14,6 @@ export const ParticipantsSchema = Yup.object().shape({
         .max(50, "השם ארוך מדי!")
         .required("נדרש שם"),
       position: Yup.string().min(2, "קצר מדי!").max(50, "ארוך מדי!"),
-      email: Yup.string()
-        .email("פורמט אימייל לא חוקי")
-        .required("יש צורך באימייל"),
     })
   ),
 })
@@ -26,6 +23,5 @@ export const initialValues: ParticipantsFormValues = {
     firstName: "",
     lastName: "",
     position: "",
-    email: "",
   }),
 }

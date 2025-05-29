@@ -1,23 +1,18 @@
 "use client"
 import React, { memo } from "react"
-import { Button } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 
 import { BurgerMenuProps } from "@/interfaces/header"
-import {
-  BlackHeaderLink,
-  BurgerIcon,
-  BurgerMenuContent,
-  BurgerMenuWrapper,
-  HeaderLink,
-  PurpleHeaderLink,
-} from "./styled"
-import SearchInput from "../SearchInput"
+import { BurgerIcon, BurgerMenuContent, BurgerMenuWrapper } from "./styled"
+import { useAuth } from "@/contexts/AuthContext"
+import Link from "next/link"
 
 const BurgerMenu: React.FC<BurgerMenuProps> = ({
   isOpen,
   toggleMenu,
   isMainPage = true,
 }) => {
+  const { user: username, logout } = useAuth()
   return (
     <>
       <BurgerIcon
@@ -32,15 +27,29 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
         <span></span>
         <span></span>
       </BurgerIcon>
+
       <BurgerMenuWrapper isOpen={isOpen}>
         <BurgerMenuContent>
-          {isMainPage && <Button variant="secondary">הרשמה</Button>}
-          {isMainPage && <HeaderLink href="/">כניסה</HeaderLink>}
-          {!isMainPage && (
-            <PurpleHeaderLink href="/">אזור אישי</PurpleHeaderLink>
-          )}
-          {!isMainPage && (
-            <BlackHeaderLink href="/">כלי אבחוני</BlackHeaderLink>
+          {!username ? (
+            <Link href="/signIn">
+              <Button variant="secondary">הרשמה</Button>
+            </Link>
+          ) : (
+            <>
+              <Typography
+                sx={{
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  color: "#000",
+                  marginBlockEnd: "10px",
+                }}
+              >
+                שלום, {username}
+              </Typography>
+              <Button variant="secondary" onClick={logout}>
+                התנתק
+              </Button>
+            </>
           )}
         </BurgerMenuContent>
       </BurgerMenuWrapper>

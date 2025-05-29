@@ -26,10 +26,7 @@ const VizualizationSelect = ({
   const selectRef = useRef<HTMLDivElement>(null)
   const lastScrollPosition = useRef(0)
 
-  const handleChange = (
-    event: SelectChangeEvent<string>,
-    _: React.ReactNode
-  ) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     onChange(event.target.value)
   }
 

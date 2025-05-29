@@ -4,10 +4,6 @@ import Box from "@mui/material/Box"
 import Image from "next/image"
 import { Typography } from "@mui/material"
 
-interface DiagnosticCardProps {
-  isMainItem?: boolean
-}
-
 export const DiagnosticWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
 }))
@@ -42,36 +38,36 @@ export const DiagnosticCards = styled(Box)(({ theme }) => ({
     alignItems: "center",
   },
 }))
-export const DiagnosticCard = styled("article", {
-  shouldForwardProp: (prop) => prop !== "isMainItem",
-})<DiagnosticCardProps>(({ theme, isMainItem }) => ({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: isMainItem ? theme.palette.common.white : "#fbfbfb",
-  padding: "30px",
-  borderRadius: "12px",
-  boxShadow: isMainItem
-    ? "0 4px 20px rgba(0, 0, 0, 0.1)"
-    : "5px 2px 10px rgba(0, 0, 0, 0.1)",
-  inlineSize: isMainItem ? "300px" : "200px",
-  blockSize: isMainItem ? "150px" : "120px",
-  transition: "all 0.3s ease",
-  textAlign: "center",
-  zIndex: isMainItem ? 2 : 1,
-  [theme.breakpoints.down("lg")]: {
-    inlineSize: isMainItem ? "200px" : "150px",
-    blockSize: isMainItem ? "100px" : "50px",
-  },
-  "& > p": {
-    color: isMainItem ? theme.palette.custom.purple : "#000",
-    fontSize: "16px",
-    fontWeight: 700,
-    marginBlockEnd: isMainItem ? "5px" : 0,
-  },
-}))
-export const DiagnosticCardTitle = styled(Typography)(() => ({}))
+// export const DiagnosticCard = styled("article", {
+//   shouldForwardProp: (prop) => prop !== "isMainItem",
+// })<DiagnosticCardProps>(({ theme, isMainItem }) => ({
+//   display: "flex",
+//   flexDirection: "column",
+//   alignItems: "center",
+//   justifyContent: "center",
+//   backgroundColor: isMainItem ? theme.palette.common.white : "#fbfbfb",
+//   padding: "30px",
+//   borderRadius: "12px",
+//   boxShadow: isMainItem
+//     ? "0 4px 20px rgba(0, 0, 0, 0.1)"
+//     : "5px 2px 10px rgba(0, 0, 0, 0.1)",
+//   inlineSize: isMainItem ? "300px" : "200px",
+//   blockSize: isMainItem ? "150px" : "120px",
+//   transition: "all 0.3s ease",
+//   textAlign: "center",
+//   zIndex: isMainItem ? 2 : 1,
+//   [theme.breakpoints.down("lg")]: {
+//     inlineSize: isMainItem ? "200px" : "150px",
+//     blockSize: isMainItem ? "100px" : "50px",
+//   },
+//   "& > p": {
+//     color: isMainItem ? theme.palette.custom.purple : "#000",
+//     fontSize: "16px",
+//     fontWeight: 700,
+//     marginBlockEnd: isMainItem ? "5px" : 0,
+//   },
+// }))
+
 export const DiagnosticTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.custom.purple,
   fontWeight: 700,

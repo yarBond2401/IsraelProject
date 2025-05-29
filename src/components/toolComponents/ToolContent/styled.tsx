@@ -15,7 +15,7 @@ export const ProjectContentWrapper = styled(Box)(({ theme }) => ({
     paddingBlockStart: "120px",
   },
 }))
-export const ProjectContentTitle = styled(Typography)(({ theme }) => ({
+export const ProjectContentTitle = styled(Typography)(() => ({
   marginBlockEnd: "15px",
 }))
 export const ProjectHeaderLabel = styled(Typography)(({ theme }) => ({

@@ -8,24 +8,30 @@ interface ModalProps {
 }
 export interface CardsProps {
   title: string
+  sectionKey: string
+  minScore: number
+  filterMatch: string[]
   buttons: ButtonsProps[]
   imageSrc: string
   modal: ModalProps
 }
 export const FILTER_BUTTONS: ButtonsProps[] = [
   { title: "הכל" },
-  { title: "סינרגיה" },
+  { title: "מיומנות" },
   { title: "משאבים" },
-  { title: "התייעלות" },
-  { title: "חדשנות" },
-  { title: "רגולציה" },
-  { title: "שירותים" },
+  { title: "התנהגויות" },
+  { title: "תקשורת" },
+  { title: "תוצאות" },
+  { title: "משילות" },
   { title: "תהליכים" },
 ]
 
 export const CARDS: CardsProps[] = [
   {
     title: "האקתון",
+    sectionKey: "מיומנויות",
+    minScore: 20,
+    filterMatch: ["מיומנות"],
     buttons: [
       { title: "שיתוף פעולה" },
       { title: "יצירתיות" },
@@ -41,7 +47,10 @@ export const CARDS: CardsProps[] = [
     },
   },
   {
-    title: "עדת היגוי חדשנות",
+    title: "ועדת היגוי חדשנות",
+    sectionKey: "משאבים",
+    minScore: 15,
+    filterMatch: ["משאבים"],
     buttons: [
       { title: "תיעדוף " },
       { title: "הטמעת " },
@@ -53,11 +62,15 @@ export const CARDS: CardsProps[] = [
       title: "עדת היגוי חדשנות",
       description:
         'אירוע יומיים מרתק, בו משלבים כוחות בעלי תפקידים מהרשות המקומית עם מומחים חיצוניים. מטרת ההאקתון היא שימוש ב"חכמת ההמונים" עבור המצאה משותפת של פתרונות, בעבודה מרוכזת ובזמן קצר. האירוע משלב עבודה בקבוצות חשיבה ופיתוח של רעיונות והמצאות פורצות דרך, אל מול אתגר מוגדר של הרשות המקומית.',
-      redirectTo: "/",
+      redirectTo: "/tool/process_management",
     },
   },
   {
-    title: "מפגשי בזק - Sprint",
+    title: "מפגשי בזק - ספרינט פלאן",
+    sectionKey: "התנהגויות",
+    minScore: 12,
+    filterMatch: ["התנהגויות"],
+
     buttons: [
       { title: "התנהגויות" },
       { title: "תקשורת" },
@@ -66,14 +79,18 @@ export const CARDS: CardsProps[] = [
     ],
     imageSrc: "/images/webp/tools/tool-3.png",
     modal: {
-      title: "מפגשי בזק - Sprint",
+      title: "מפגשי בזק - ספרינט פלאן",
       description:
         'אירוע יומיים מרתק, בו משלבים כוחות בעלי תפקידים מהרשות המקומית עם מומחים חיצוניים. מטרת ההאקתון היא שימוש ב"חכמת ההמונים" עבור המצאה משותפת של פתרונות, בעבודה מרוכזת ובזמן קצר. האירוע משלב עבודה בקבוצות חשיבה ופיתוח של רעיונות והמצאות פורצות דרך, אל מול אתגר מוגדר של הרשות המקומית.',
-      redirectTo: "/",
+      redirectTo: "/tool/sprint_plan",
     },
   },
   {
-    title: "מקדמי חדשנות",
+    title: "מקדמי חדשנות ברשות",
+    sectionKey: "תקשורת",
+    minScore: 10,
+    filterMatch: ["תקשורת"],
+
     buttons: [
       { title: "שיתוף " },
       { title: "הטמעת " },
@@ -85,11 +102,14 @@ export const CARDS: CardsProps[] = [
       title: "מקדמי חדשנות",
       description:
         'אירוע יומיים מרתק, בו משלבים כוחות בעלי תפקידים מהרשות המקומית עם מומחים חיצוניים. מטרת ההאקתון היא שימוש ב"חכמת ההמונים" עבור המצאה משותפת של פתרונות, בעבודה מרוכזת ובזמן קצר. האירוע משלב עבודה בקבוצות חשיבה ופיתוח של רעיונות והמצאות פורצות דרך, אל מול אתגר מוגדר של הרשות המקומית.',
-      redirectTo: "/",
+      redirectTo: "/tool/innovation_promoters",
     },
   },
   {
     title: "עידוד יזמות עובדים",
+    sectionKey: "תוצאות",
+    minScore: 9,
+    filterMatch: ["תוצאות"],
     buttons: [
       { title: "הטמעת " },
       { title: "שיתוף " },
@@ -101,11 +121,15 @@ export const CARDS: CardsProps[] = [
       title: "עידוד יזמות עובדים",
       description:
         'אירוע יומיים מרתק, בו משלבים כוחות בעלי תפקידים מהרשות המקומית עם מומחים חיצוניים. מטרת ההאקתון היא שימוש ב"חכמת ההמונים" עבור המצאה משותפת של פתרונות, בעבודה מרוכזת ובזמן קצר. האירוע משלב עבודה בקבוצות חשיבה ופיתוח של רעיונות והמצאות פורצות דרך, אל מול אתגר מוגדר של הרשות המקומית.',
-      redirectTo: "/",
+      redirectTo: "/tool/employee_innovation",
     },
   },
   {
-    title: "קבוצת מיקוד יוצרת - Echo",
+    title: "קבוצת מיקוד יוצרת ECHO",
+    sectionKey: "משימות",
+    minScore: 6,
+    filterMatch: ["משילות"],
+
     buttons: [
       { title: "הטמעת " },
       { title: "שיתוף " },
@@ -117,7 +141,27 @@ export const CARDS: CardsProps[] = [
       title: "קבוצת מיקוד יוצרת - Echo",
       description:
         'אירוע יומיים מרתק, בו משלבים כוחות בעלי תפקידים מהרשות המקומית עם מומחים חיצוניים. מטרת ההאקתון היא שימוש ב"חכמת ההמונים" עבור המצאה משותפת של פתרונות, בעבודה מרוכזת ובזמן קצר. האירוע משלב עבודה בקבוצות חשיבה ופיתוח של רעיונות והמצאות פורצות דרך, אל מול אתגר מוגדר של הרשות המקומית.',
-      redirectTo: "/",
+      redirectTo: "/tool/echo_focus_group",
+    },
+  },
+  {
+    title: "ניהול תהליכים ברשות",
+    sectionKey: "תהליכים",
+    minScore: 4,
+    filterMatch: ["תהליכים"],
+
+    buttons: [
+      { title: "הטמעת " },
+      { title: "שיתוף " },
+      { title: "משאבים" },
+      { title: "תקשורת" },
+    ],
+    imageSrc: "/images/webp/tools/tool-6.png",
+    modal: {
+      title: "קבוצת מיקוד יוצרת - Echo",
+      description:
+        'אירוע יומיים מרתק, בו משלבים כוחות בעלי תפקידים מהרשות המקומית עם מומחים חיצוניים. מטרת ההאקתון היא שימוש ב"חכמת ההמונים" עבור המצאה משותפת של פתרונות, בעבודה מרוכזת ובזמן קצר. האירוע משלב עבודה בקבוצות חשיבה ופיתוח של רעיונות והמצאות פורצות דרך, אל מול אתגר מוגדר של הרשות המקומית.',
+      redirectTo: "/tool/echo_focus_group",
     },
   },
 ]
