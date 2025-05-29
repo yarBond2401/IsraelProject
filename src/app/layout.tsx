@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import "./globals.css"
 import ThemeWrapper from "@/components/ThemeWrapper/ThemeWrapper"
 import { AuthProvider } from "@/contexts/AuthContext"
+import { SnackbarProvider } from 'notistack';
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,6 +20,7 @@ export default function RootLayout({
       <body>
         <ThemeWrapper>
           <AuthProvider>{children}</AuthProvider>
+          <SnackbarProvider />
         </ThemeWrapper>
       </body>
     </html>

@@ -196,19 +196,18 @@ import { FOOTER_LINKS, LINKS } from "./constants"
 import Link from "next/link"
 import Image from "next/image"
 import SliderComponent from "./components/HeroSlider"
+import { enqueueSnackbar } from 'notistack'
 
 function WelcomePage() {
   const { user } = useAuth()
   const router = useRouter()
-  const [showAuthNotice, setShowAuthNotice] = useState(false)
 
   const handleTryTools = () => {
     if (!user) {
-      setShowAuthNotice(true)
-      setTimeout(() => {
-        setShowAuthNotice(false)
-        router.push("/signIn")
-      }, 1000)
+      enqueueSnackbar('עליך להתחבר לפני שתמשיך', {
+        variant: "error",
+      })
+      router.push("/signIn")
     } else {
       router.push("/entry")
     }
