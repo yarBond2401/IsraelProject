@@ -19,7 +19,7 @@ import {
   PageContainer,
 } from "./styled"
 import Header from "../Header"
-import { Alert, Box, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import { LINKS } from "./constants"
 import Image from "next/image"
 import SliderComponent from "./components/HeroSlider"

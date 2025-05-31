@@ -64,7 +64,7 @@ const SignIn: React.FC = () => {
                 enqueueSnackbar("התחברת בהצלחה!", {
                   variant: "success",
                 })
-                router.push("/"), 1500
+                router.push("/")
               }
             }}
           >

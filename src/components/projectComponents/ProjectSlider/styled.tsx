@@ -1,7 +1,6 @@
 "use client"
 import { styled } from "@mui/material/styles"
 import Box from "@mui/material/Box"
-import Image from "next/image"
 
 export const ProjectSliderWrapper = styled(Box)(({ theme }) => ({
   flex: "0 1 44%",
