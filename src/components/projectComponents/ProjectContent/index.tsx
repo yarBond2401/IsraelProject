@@ -246,19 +246,21 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
           </Typography>
           <ContactButtons>
             {CONTACT_BUTTONS.map((button, index) => (
-              <ProjectButton key={index} isGradient={button.isGradient}>
-                <Typography sx={{ fontSize: "14px", fontWeight: 300 }}>
-                  {button.title}
-                </Typography>
-                {button.isGradient && (
-                  <Image
-                    src="/images/svg/white-left-arrow.svg"
-                    alt="arrow-left"
-                    height={20}
-                    width={20}
-                  />
-                )}
-              </ProjectButton>
+              <Link href="/projects" key={index} style={{ cursor: "default" }}>
+                <ProjectButton isGradient={button.isGradient}>
+                  <Typography sx={{ fontSize: "14px", fontWeight: 300 }}>
+                    {button.title}
+                  </Typography>
+                  {button.isGradient && (
+                    <Image
+                      src="/images/svg/white-left-arrow.svg"
+                      alt="arrow-left"
+                      height={15}
+                      width={15}
+                    />
+                  )}
+                </ProjectButton>
+              </Link>
             ))}
           </ContactButtons>
         </ContactBlock>

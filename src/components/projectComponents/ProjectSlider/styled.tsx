@@ -1,7 +1,6 @@
 "use client"
 import { styled } from "@mui/material/styles"
 import Box from "@mui/material/Box"
-import Image from "next/image"
 
 export const ProjectSliderWrapper = styled(Box)(({ theme }) => ({
   flex: "0 1 44%",
@@ -95,10 +94,10 @@ export const SwiperWrapper = styled(Box)(({ theme }) => ({
     padding: "10px",
   },
 }))
-export const CallIcon = styled(Image)(() => ({
-  position: "absolute",
-  insetBlockEnd: 20,
-  insetInlineStart: 30,
-  cursor: "pointer",
-  zIndex: "5",
-}))
+// export const CallIcon = styled(Image)(() => ({
+//   position: "absolute",
+//   insetBlockEnd: 20,
+//   insetInlineStart: 30,
+//   cursor: "pointer",
+//   zIndex: "5",
+// }))

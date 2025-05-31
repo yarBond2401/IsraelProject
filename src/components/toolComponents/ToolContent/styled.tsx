@@ -60,18 +60,39 @@ export const ContactLink = styled(Link)(({ theme }) => ({
 export const ProjectButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== "isGradient",
 })<ContactButton>(({ theme, isGradient }) => ({
+  position: isGradient ? "relative" : "static",
   color: isGradient ? theme.palette.common.white : theme.palette.custom.purple,
+  fontSize: "16px",
+  fontWeight: 300,
   display: "flex",
   alignItems: "center",
-  gap: "10px",
+  gap: "5px",
+  zIndex: 1,
   backgroundImage: isGradient
     ? "linear-gradient(90deg, #A020F0 10%,#B277CC 30%, #867AB3 50%, #5A7D9A 70%, #30B4B4 90%)"
     : "none",
   border: isGradient ? "none" : `1px solid ${theme.palette.custom.purple}`,
-  transition: "all 0.3s ease",
+  transition: isGradient ? "backgroundImage 0.3s ease" : "all 0.3s ease",
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundImage:
+      "linear-gradient(270deg, #A020F0 10%,#B277CC 30%, #867AB3 50%, #5A7D9A 70%, #30B4B4 90%)",
+    opacity: 0,
+    transition: "opacity 0.5s ease",
+    zIndex: -1,
+    borderRadius: "40px",
+  },
   "&:hover": {
     color: theme.palette.common.white,
     backgroundColor: isGradient ? "none" : theme.palette.custom.purple,
+    "&::before": {
+      opacity: 1,
+    },
   },
   [theme.breakpoints.down("sm")]: {
     inlineSize: "100%",

@@ -33,6 +33,7 @@ export const ToolSlider: React.FC<Props> = ({ slides }) => {
               prevEl: ".button-prev",
             }}
             watchOverflow={true}
+            resizeObserver={true}
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>

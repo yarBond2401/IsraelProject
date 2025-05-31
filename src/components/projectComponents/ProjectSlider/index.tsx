@@ -7,7 +7,6 @@ import "swiper/css/navigation"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper/modules"
 import {
-  CallIcon,
   ImageWrapper,
   ProjectSliderWrapper,
   SliderArrow,
@@ -61,12 +60,12 @@ export const ProjectSlider: React.FC<Props> = ({ slides }) => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <CallIcon
+          {/* <CallIcon
             src="/images/svg/call-icon.png"
             alt="call-icon"
             width={57}
             height={55}
-          />
+          /> */}
         </SwiperWrapper>
       </SliderContainer>
     </ProjectSliderWrapper>
