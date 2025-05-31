@@ -1,14 +1,12 @@
 "use client"
 import React, { useState } from "react"
 import Header from "@/components/Header"
-import { Box, Button } from "@mui/material"
+import { Button } from "@mui/material"
 
 import {
-  DeepFilterButton,
   FilterButton,
   ProjectsButtons,
   ProjectsContainer,
-  ProjectsHeader,
   ProjectsItems,
   ProjectsTitle,
   ProjectsUpperButtons,
@@ -31,31 +29,29 @@ const Projects = () => {
     <ProjectsWrapper>
       <Header isOnMainPage={false} />
       <ProjectsContainer>
-        <ProjectsHeader>
-          <ProjectsTitle>מצאנו את כל הפרויקטים שמתאימים לך</ProjectsTitle>
-        </ProjectsHeader>
+        <ProjectsTitle>מצאנו את כל הפרויקטים שמתאימים לך</ProjectsTitle>
         <ProjectsUpperButtons>
-          <Box
+          {/* <Box
             sx={{
               display: "flex",
               justifyContent: "center",
               flexWrap: "wrap",
               gap: "20px",
             }}
-          >
-            {FILTER_BUTTONS.map((button, index) => (
-              <FilterButton
-                key={index}
-                onClick={() => setSelectedFilter(button.filterKey)}
-                selected={selectedFilter === button.filterKey}
-              >
-                {button.title}
-              </FilterButton>
-            ))}
-          </Box>
-          <DeepFilterButton variant="forward" color="green">
+          > */}
+          {FILTER_BUTTONS.map((button, index) => (
+            <FilterButton
+              key={index}
+              onClick={() => setSelectedFilter(button.filterKey)}
+              selected={selectedFilter === button.filterKey}
+            >
+              {button.title}
+            </FilterButton>
+          ))}
+          {/* </Box> */}
+          {/* <DeepFilterButton variant="forward" color="green">
             פתיחת פרויקט
-          </DeepFilterButton>
+          </DeepFilterButton> */}
         </ProjectsUpperButtons>
 
         <ProjectsItems>

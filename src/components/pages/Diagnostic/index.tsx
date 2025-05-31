@@ -18,6 +18,13 @@ import {
 } from "./styled"
 
 import DiagnosticSwiper from "./components/DiagnosticSlider"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "כלי אבחוני - עיר חכמה | תוכנית דיגיטלית לרשויות",
+  description:
+    "הכלי האבחוני מאפשר לרשויות מקומיות להתמקד בפרויקטים רלוונטיים בהתאם לאתגרים, מטרות ותחומי עניין תוך שימוש בגישות של עיר חכמה.",
+}
 const Diagnostic = () => {
   return (
     <DiagnosticWrapper>
@@ -74,7 +81,7 @@ const Diagnostic = () => {
               </Typography>
             </DiagnosticImageSectionBody>
             <DiagnosticImage
-              src="/images/webp/diagnostic-background.png"
+              src="/images/webp/diagnostic-background.jpg"
               fill
               alt="diagnostic-background"
             />

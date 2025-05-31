@@ -2,29 +2,26 @@ import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 
-import { FOOTER_LINKS } from "./constants"
 import {
   FooterBody,
   FooterContainer,
   FooterContent,
-  FooterLink,
-  FooterLinks,
-  FooterLinkWrapper,
   FooterWrapper,
-  Navigation,
 } from "./styled"
 const Footer: React.FC = () => {
   return (
     <FooterWrapper>
       <FooterContainer>
         <FooterBody>
-          <Image
-            src="/images/svg/header/header-logo-2.png"
-            alt="footer-logo"
-            width={150}
-            height={80}
-          />
-          <Navigation>
+          <Link href="/">
+            <Image
+              src="/images/svg/footer/footer-logo.png"
+              alt="footer-logo"
+              width={174}
+              height={70}
+            />
+          </Link>
+          {/* <Navigation>
             <FooterLinks>
               {FOOTER_LINKS.map((link, index) => (
                 <FooterLinkWrapper key={index}>
@@ -32,16 +29,16 @@ const Footer: React.FC = () => {
                 </FooterLinkWrapper>
               ))}
             </FooterLinks>
-          </Navigation>
+          </Navigation> */}
         </FooterBody>
         <FooterContent>
-          <Link style={{ color: "#6e6e6e" }} href="/">
+          {/* <Link style={{ color: "#6e6e6e" }} href="/">
             בינה מלאכותית
-          </Link>
+          </Link> */}
           <Image
-            src="/images/svg/footer/footer-copy.png"
-            width={190}
-            height={20}
+            src="/images/svg/footer/footer-copy.svg"
+            width={80}
+            height={47}
             alt="footer-copy"
           />
         </FooterContent>

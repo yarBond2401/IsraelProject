@@ -9,8 +9,12 @@ export const ProjectCardWrapper = styled("article")(({ theme }) => ({
   borderRadius: "5px",
   display: "flex",
   flexDirection: "column",
+  transition: "all 0.2s ease",
   [theme.breakpoints.down("md")]: {
     aspectRatio: 5 / 3,
+  },
+  "&:hover": {
+    boxShadow: "1px 1px 4px #000",
   },
 }))
 

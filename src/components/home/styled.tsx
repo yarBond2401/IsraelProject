@@ -85,6 +85,7 @@ export const HomePageSidebar = styled(Box)(({ theme }) => ({
 }))
 
 export const ItemWrapper = styled(Box)(() => ({
+  cursor: "pointer",
   padding: "15px",
   borderRadius: "20px",
   transition: "opacity 0.3s ease",

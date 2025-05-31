@@ -18,7 +18,7 @@ export const FooterContainer = styled(Box)(({ theme }) => ({
   maxInlineSize: theme.breakpoints.values.xl,
   paddingInline: "20px",
   marginInline: "auto",
-  gap: "15px",
+  gap: "10px",
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
   },
@@ -26,7 +26,6 @@ export const FooterContainer = styled(Box)(({ theme }) => ({
 export const FooterBody = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  gap: "30px",
   [theme.breakpoints.down("sm")]: {
     gap: "5px",
     flexDirection: "column",
@@ -36,7 +35,6 @@ export const Navigation = styled("nav")(() => ({}))
 export const FooterLinks = styled("ul")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  gap: "20px",
   [theme.breakpoints.down("sm")]: {
     gap: "10px",
   },

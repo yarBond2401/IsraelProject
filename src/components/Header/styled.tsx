@@ -3,7 +3,7 @@
 import { styled } from "@mui/material/styles"
 import Box from "@mui/material/Box"
 import Link from "next/link"
-import { Button } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 
 export const HeaderWrapper = styled("header")<{
   isMainPage?: boolean
@@ -86,8 +86,9 @@ export const BlackHeaderLink = styled(Link)(({ theme }) => ({
     color: theme.palette.primary.light,
   },
 }))
-export const PurpleHeaderLink = styled(Link)(({ theme }) => ({
-  fontSize: "14px",
+export const PurpleHeaderLink = styled(Typography)(({ theme }) => ({
+  cursor: "pointer",
+  fontSize: "16px",
   color: "#a93f99",
   transition: "color 0.3s ease",
   "&:hover": {

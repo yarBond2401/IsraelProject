@@ -9,7 +9,6 @@ import {
   ProjectSliderWrapper,
   SliderArrow,
   SliderArrows,
-  CallIcon,
 } from "./styled"
 import "swiper/css"
 import "swiper/css/navigation"
@@ -61,12 +60,6 @@ export const ToolSlider: React.FC<Props> = ({ slides }) => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <CallIcon
-            src="/images/svg/call-icon.png"
-            alt="call-icon"
-            width={57}
-            height={55}
-          />
         </SwiperWrapper>
       </SliderContainer>
     </ProjectSliderWrapper>
