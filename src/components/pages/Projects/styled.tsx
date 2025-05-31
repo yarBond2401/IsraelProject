@@ -12,34 +12,26 @@ export const ProjectsContainer = styled(Box)(() => ({
   paddingInline: "20px",
   paddingBlockEnd: "30px",
 }))
-export const ProjectsHeader = styled(Box)(() => ({
-  textAlign: "center",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  marginBlockEnd: "20px",
-}))
+
 export const ProjectsTitle = styled(Typography)(({ theme }) => ({
+  textAlign: "center",
   fontSize: "24px",
   color: theme.palette.custom.purple,
   fontWeight: 700,
-  marginBlockEnd: "20px",
+  marginBlockEnd: "15px",
 }))
 export const ProjectsDescription = styled(Typography)(() => ({
   fontSize: "16px",
   color: "#898c8b",
   maxInlineSize: "800px",
 }))
-export const ProjectsUpperButtons = styled(Box)(({ theme }) => ({
+export const ProjectsUpperButtons = styled(Box)(() => ({
   alignItems: "start",
   display: "flex",
-  justifyContent: "flex-end",
+  justifyContent: "center",
   marginBlockEnd: "50px",
-  gap: "90px",
-  [theme.breakpoints.down("md")]: {
-    gap: "20px",
-    flexDirection: "column-reverse",
-  },
+  gap: "10px",
+  flexWrap: "wrap",
 }))
 export const DeepFilterButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {

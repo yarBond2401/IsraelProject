@@ -4,20 +4,18 @@ import { CardsProps } from "../../constants"
 import Image from "next/image"
 import {
   ProjectCardBackground,
-  ProjectCardButton,
-  ProjectCardButtons,
   ProjectCardContent,
   ProjectCardTitle,
   ProjectCardWrapper,
 } from "./styled"
 
-const ProjectCard: React.FC<CardsProps> = ({ title, button, imageSrc }) => (
+const ProjectCard: React.FC<CardsProps> = ({ title, imageSrc }) => (
   <ProjectCardWrapper sx={{ cursor: "pointer" }}>
     <ProjectCardContent>
       <Box sx={{ flex: "1 1 auto", justifySelf: "start" }}>
-        <ProjectCardButtons>
+        {/* <ProjectCardButtons>
           <ProjectCardButton>{button}</ProjectCardButton>
-        </ProjectCardButtons>
+        </ProjectCardButtons> */}
       </Box>
       <ProjectCardTitle>{title}</ProjectCardTitle>
     </ProjectCardContent>

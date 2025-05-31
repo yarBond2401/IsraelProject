@@ -85,7 +85,7 @@ const Categories = () => {
       </CategoriesInnerWrapper>
       <BackgroundContainer>
         <CategoriesBackground
-          src="/images/webp/categories-background.png"
+          src="/images/webp/categories-background.jpg"
           fill
           alt="categories-background"
         ></CategoriesBackground>

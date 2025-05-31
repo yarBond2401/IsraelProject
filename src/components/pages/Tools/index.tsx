@@ -2,9 +2,8 @@
 
 import React, { useEffect, useState } from "react"
 import Header from "@/components/Header"
-import { Box, Button } from "@mui/material"
+import { Button } from "@mui/material"
 import {
-  DeepFilterButton,
   FilterButton,
   ProjectsButtons,
   ProjectsContainer,
@@ -87,41 +86,41 @@ export default function Tools() {
         </ProjectsHeader>
 
         <ProjectsUpperButtons>
-          <Box
+          {/* <Box
             sx={{
               display: "flex",
               gap: 2,
               flexWrap: "wrap",
               justifyContent: "center",
             }}
-          >
-            {FILTER_BUTTONS.map((btn, i) => {
-              const isSel = selectedFilters.includes(btn.title)
-              return (
-                <FilterButton
-                  key={i}
-                  selected={isSel}
-                  onClick={() => {
-                    if (btn.title === "הכל") {
-                      setSelectedFilters(["הכל"])
-                    } else {
-                      const base = selectedFilters.filter((t) => t !== "הכל")
-                      const next = isSel
-                        ? base.filter((t) => t !== btn.title)
-                        : [...base, btn.title]
-                      setSelectedFilters(next.length ? next : ["הכל"])
-                    }
-                  }}
-                >
-                  {btn.title}
-                </FilterButton>
-              )
-            })}
-          </Box>
-
+          > */}
+          {FILTER_BUTTONS.map((btn, i) => {
+            const isSel = selectedFilters.includes(btn.title)
+            return (
+              <FilterButton
+                key={i}
+                selected={isSel}
+                onClick={() => {
+                  if (btn.title === "הכל") {
+                    setSelectedFilters(["הכל"])
+                  } else {
+                    const base = selectedFilters.filter((t) => t !== "הכל")
+                    const next = isSel
+                      ? base.filter((t) => t !== btn.title)
+                      : [...base, btn.title]
+                    setSelectedFilters(next.length ? next : ["הכל"])
+                  }
+                }}
+              >
+                {btn.title}
+              </FilterButton>
+            )
+          })}
+          {/* </Box> */}
+          {/* 
           <DeepFilterButton variant="forward" color="purple">
             פתיחת פרויקט
-          </DeepFilterButton>
+          </DeepFilterButton> */}
         </ProjectsUpperButtons>
 
         <ProjectsItems>

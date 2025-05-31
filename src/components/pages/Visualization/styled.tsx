@@ -43,3 +43,8 @@ export const ChartTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.custom.purple,
   fontWeight: 700,
 }))
+export const ChartTitleGreen = styled(Typography)(({ theme }) => ({
+  fontSize: "30px",
+  color: theme.palette.custom.green,
+  fontWeight: 700,
+}))

@@ -4,8 +4,6 @@ import { CardsProps } from "../../constants"
 import Image from "next/image"
 import {
   ProjectCardBackground,
-  ProjectCardButton,
-  ProjectCardButtons,
   ProjectCardContent,
   ProjectCardTitle,
   ProjectCardWrapper,
@@ -13,18 +11,17 @@ import {
 
 const ProjectCard: React.FC<CardsProps & { onClick: () => void }> = ({
   title,
-  buttons,
   imageSrc,
   onClick,
 }) => (
   <ProjectCardWrapper onClick={onClick} sx={{ cursor: "pointer" }}>
     <ProjectCardContent>
       <Box sx={{ flex: "1 1 auto", justifySelf: "start" }}>
-        <ProjectCardButtons>
+        {/* <ProjectCardButtons>
           {buttons.map((button, index) => (
             <ProjectCardButton key={index}>{button.title}</ProjectCardButton>
           ))}
-        </ProjectCardButtons>
+        </ProjectCardButtons> */}
       </Box>
       <ProjectCardTitle>{title}</ProjectCardTitle>
     </ProjectCardContent>

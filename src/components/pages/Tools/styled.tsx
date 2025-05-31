@@ -33,16 +33,13 @@ export const ProjectsDescription = styled(Typography)(() => ({
   color: "#898c8b",
   maxInlineSize: "800px",
 }))
-export const ProjectsUpperButtons = styled(Box)(({ theme }) => ({
+export const ProjectsUpperButtons = styled(Box)(() => ({
   alignItems: "start",
   display: "flex",
-  justifyContent: "flex-end",
+  justifyContent: "center",
   marginBlockEnd: "50px",
-  gap: "90px",
-  [theme.breakpoints.down("md")]: {
-    gap: "20px",
-    flexDirection: "column-reverse",
-  },
+  gap: "10px",
+  flexWrap: "wrap",
 }))
 export const DeepFilterButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {

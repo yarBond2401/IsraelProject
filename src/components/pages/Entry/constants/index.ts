@@ -9,7 +9,7 @@ export const SECTIONS: EntrySectionData[] = [
     buttonColor: "green",
     buttonVariant: "forward",
     pathTo: "/diagnostic",
-    backgroundSrc: "/images/webp/entry-background-1.png",
+    backgroundSrc: "/images/webp/entry-background-1.jpg",
   },
   {
     iconSrc: "/images/svg/entry-icon-2.png",
@@ -19,6 +19,6 @@ export const SECTIONS: EntrySectionData[] = [
     buttonColor: "purple",
     buttonVariant: "forward",
     pathTo: "/categories",
-    backgroundSrc: "/images/webp/entry-background-2.png",
+    backgroundSrc: "/images/webp/entry-background-2.jpg",
   },
 ]
