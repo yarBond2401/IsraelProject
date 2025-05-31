@@ -55,16 +55,32 @@ export const SliderArrow = styled(Box)(({ theme }) => ({
   borderRadius: "50%",
 }))
 
+// export const ImageWrapper = styled(Box)(({ theme }) => ({
+//   position: "relative",
+//   aspectRatio: "1 / 1",
+//   width: "100%",
+//   maxWidth: "410px",
+//   margin: "0 auto",
+//   transform: "translate(-10%,-50px)",
+//   [theme.breakpoints.down("md")]: {
+//     transform: "translate(0, 0)",
+//   },
+//   "& img": {
+//     objectFit: "cover",
+//     borderRadius: "10px",
+//   },
+// }))
 export const ImageWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
   aspectRatio: "1 / 1",
   width: "100%",
   maxWidth: "410px",
-  margin: "0 auto",
-  transform: "translate(-10%,-50px)",
-  [theme.breakpoints.down("md")]: {
-    transform: "translate(0, 0)",
+  marginInline: "auto",
+  transform: "translate(-10%, -50px)",
+  [theme.breakpoints.down("lg")]: {
+    transform: "none",
   },
+
   "& img": {
     objectFit: "cover",
     borderRadius: "10px",
@@ -89,6 +105,12 @@ export const SwiperWrapper = styled(Box)(({ theme }) => ({
   "& .swiper-slide:not(.swiper-slide-active)": {
     pointerEvents: "none",
     opacity: 0,
+  },
+  [theme.breakpoints.up("lg")]: {
+    "& .swiper-slide:not(.swiper-slide-active)": {
+      pointerEvents: "none",
+      opacity: 0,
+    },
   },
   [theme.breakpoints.down("md")]: {
     padding: "10px",

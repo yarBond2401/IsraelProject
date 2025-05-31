@@ -95,10 +95,10 @@ export const SwiperWrapper = styled(Box)(({ theme }) => ({
     padding: "10px",
   },
 }))
-export const CallIcon = styled(Image)(() => ({
-  position: "absolute",
-  insetBlockEnd: 20,
-  insetInlineStart: 30,
-  cursor: "pointer",
-  zIndex: "5",
-}))
+// export const CallIcon = styled(Image)(() => ({
+//   position: "absolute",
+//   insetBlockEnd: 20,
+//   insetInlineStart: 30,
+//   cursor: "pointer",
+//   zIndex: "5",
+// }))

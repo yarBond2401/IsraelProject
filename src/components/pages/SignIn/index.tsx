@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { Box } from "@mui/material"
 import { Formik, Form } from "formik"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
@@ -20,27 +19,17 @@ import Link from "next/link"
 import Image from "next/image"
 import SignInput from "./components/SignInput"
 import SignSelect from "./components/SignSelect"
+import { enqueueSnackbar } from "notistack"
 
 const SignIn: React.FC = () => {
   const router = useRouter()
   const { login } = useAuth()
 
   const [municipalities, setMunicipalities] = useState<string[]>([])
-  const [feedback, setFeedback] = useState<{
-    type: "success" | "error"
-    message: string
-  } | null>(null)
 
   useEffect(() => {
     listMunicipalities().then(setMunicipalities)
   }, [])
-
-  useEffect(() => {
-    if (feedback) {
-      const timeout = setTimeout(() => setFeedback(null), 2000)
-      return () => clearTimeout(timeout)
-    }
-  }, [feedback])
 
   return (
     <SignUpWrapper>
@@ -68,16 +57,14 @@ const SignIn: React.FC = () => {
               setSubmitting(false)
 
               if (!ok) {
-                setFeedback({
-                  type: "error",
-                  message: "הרשות או הסיסמה שגויים",
+                enqueueSnackbar("הרשות או הסיסמה שגויים", {
+                  variant: "error",
                 })
               } else {
-                setFeedback({
-                  type: "success",
-                  message: "התחברת בהצלחה!",
+                enqueueSnackbar("התחברת בהצלחה!", {
+                  variant: "success",
                 })
-                setTimeout(() => router.push("/"), 1500)
+                router.push("/"), 1500
               }
             }}
           >
@@ -112,33 +99,6 @@ const SignIn: React.FC = () => {
           </Formik>
         </SignUpForm>
       </SignUpContainer>
-
-      {feedback && (
-        <Box
-          sx={{
-            position: "fixed",
-            bottom: "30px",
-            left: "50%",
-            transform: feedback
-              ? "translateX(-50%) scale(1)"
-              : "translateX(-50%) scale(0.95)",
-            backgroundColor:
-              feedback.type === "success" ? "#d0f5e8" : "#ffe1e1",
-            color: feedback.type === "success" ? "green" : "red",
-            padding: "12px 20px",
-            borderRadius: "10px",
-            fontWeight: 600,
-            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-            transition: "opacity 0.4s ease, transform 0.4s ease",
-            opacity: feedback ? 1 : 0,
-            zIndex: 9999,
-            pointerEvents: "none",
-            visibility: feedback ? "visible" : "hidden",
-          }}
-        >
-          {feedback.message}
-        </Box>
-      )}
     </SignUpWrapper>
   )
 }

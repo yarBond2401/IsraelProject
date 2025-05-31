@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
 import {
@@ -19,11 +19,11 @@ import {
   PageContainer,
 } from "./styled"
 import Header from "../Header"
-import { Box, Typography } from "@mui/material"
+import { Alert, Box, Typography } from "@mui/material"
 import { LINKS } from "./constants"
 import Image from "next/image"
 import SliderComponent from "./components/HeroSlider"
-import { enqueueSnackbar } from 'notistack'
+import { enqueueSnackbar } from "notistack"
 
 function WelcomePage() {
   const { user } = useAuth()
@@ -31,7 +31,7 @@ function WelcomePage() {
 
   const handleTryTools = () => {
     if (!user) {
-      enqueueSnackbar('עליך להתחבר לפני שתמשיך', {
+      enqueueSnackbar("עליך להתחבר לפני שתמשיך", {
         variant: "error",
       })
       router.push("/signIn")
@@ -86,33 +86,6 @@ function WelcomePage() {
                     </Box>
                   </HomePageButton>
                 </Box>
-
-                {showAuthNotice && (
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: "-50px",
-                      left: "50%",
-                      transform: "translateX(-50%) scale(1)",
-                      backgroundColor: "#fff",
-                      color: "#a83b96",
-                      padding: "10px 16px",
-                      borderRadius: "8px",
-                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      whiteSpace: "nowrap",
-                      pointerEvents: "none",
-                      opacity: 1,
-                      visibility: "visible",
-                      transition:
-                        "opacity 0.4s ease, transform 0.4s ease, visibility 0.4s",
-                      zIndex: 20,
-                    }}
-                  >
-                    עליך להתחבר לפני שתמשיך
-                  </Box>
-                )}
               </Box>
             </HomePageInfoSection>
             <HomePageSidebar>

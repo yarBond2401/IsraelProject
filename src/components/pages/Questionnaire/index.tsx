@@ -28,6 +28,7 @@ import {
   AnswersMap,
 } from "@/utils/questionnaireManage"
 import LoadingScreen from "@/components/LoadingScreen"
+import { enqueueSnackbar } from "notistack"
 
 const generateInitialValues = (): AnswersMap => {
   const values: AnswersMap = {}
@@ -72,9 +73,31 @@ export default function Questionnaire() {
     return <LoadingScreen />
   }
 
-  const handleSubmit = () => {
-    router.push("/participants")
-  }
+  // const handleSubmit = (values) => {
+  //   let fullyFilledCount = 0
+  //   FORM_ROWS.forEach((row, i) => {
+  //     const allItemsAnswered = row.expanded.every((_, j) => {
+  //       return (
+  //         values[`row${i + 1}_select1_item${j + 1}`] !== "" &&
+  //         values[`row${i + 1}_select2_item${j + 1}`] !== ""
+  //       )
+  //     })
+  //     if (allItemsAnswered) {
+  //       fullyFilledCount += 1
+  //     }
+  //   })
+
+  //   if (fullyFilledCount < 3) {
+  //     enqueueSnackbar("נא למלא באופן מלא לפחות 3 מדורים", {
+  //       variant: "error",
+  //     })
+  //     return
+  //   }
+
+  //   router.push("/participants")
+
+  //   router.push("/participants")
+  // }
 
   return (
     <QuestionnaireWrapper>
@@ -97,7 +120,30 @@ export default function Questionnaire() {
             <Formik
               initialValues={initialValues}
               enableReinitialize
-              onSubmit={handleSubmit}
+              // onSubmit={}
+              onSubmit={(values) => {
+                let fullyFilledCount = 0
+                FORM_ROWS.forEach((row, i) => {
+                  const allItemsAnswered = row.expanded.every((_, j) => {
+                    return (
+                      values[`row${i + 1}_select1_item${j + 1}`] !== "" &&
+                      values[`row${i + 1}_select2_item${j + 1}`] !== ""
+                    )
+                  })
+                  if (allItemsAnswered) {
+                    fullyFilledCount += 1
+                  }
+                })
+
+                if (fullyFilledCount < 3) {
+                  enqueueSnackbar("נא למלא באופן מלא לפחות 3 מדורים", {
+                    variant: "error",
+                  })
+                  return
+                }
+
+                router.push("/participants")
+              }}
             >
               {({ handleSubmit }) => (
                 <Form onSubmit={handleSubmit}>
