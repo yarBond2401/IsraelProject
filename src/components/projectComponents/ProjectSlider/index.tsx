@@ -37,7 +37,11 @@ export const ProjectSlider: React.FC<Props> = ({ slides }) => {
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
                 <ImageWrapper>
-                  <Image src={slide.imageSrc} fill alt={`slide-${index}`} />
+                  <Image
+                    src="/images/webp/projects/slider/contr-tracking-1.png"
+                    fill
+                    alt={`slide-${index}`}
+                  />
                   <SliderArrows>
                     <SliderArrow className="button-prev">
                       <Image

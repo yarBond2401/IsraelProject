@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react"
 import Header from "@/components/Header"
 import { Button } from "@mui/material"
+import { enqueueSnackbar } from "notistack"
 import {
   QuestionnaireButtons,
   QuestionnaireContainer,
@@ -28,7 +29,9 @@ import {
   AnswersMap,
 } from "@/utils/questionnaireManage"
 import LoadingScreen from "@/components/LoadingScreen"
-import { enqueueSnackbar } from "notistack"
+
+import { doc, getDoc } from "firebase/firestore"
+import { db } from "@/firebase/firebase"
 
 const generateInitialValues = (): AnswersMap => {
   const values: AnswersMap = {}
@@ -61,6 +64,10 @@ export default function Questionnaire() {
     description: string
   } | null>(null)
 
+  const [relaxedValidationFlag, setRelaxedValidationFlag] = useState<
+    boolean | null
+  >(null)
+
   useEffect(() => {
     if (!municipality) return
     getAnswers(municipality).then((saved) => {
@@ -69,35 +76,90 @@ export default function Questionnaire() {
     })
   }, [municipality])
 
-  if (!initialValues) {
+  useEffect(() => {
+    if (!municipality) return
+
+    const userDocRef = doc(db, "users", municipality)
+    getDoc(userDocRef)
+      .then((snap) => {
+        if (snap.exists()) {
+          const data = snap.data() as { relaxedValidation?: boolean }
+          setRelaxedValidationFlag(data.relaxedValidation ?? true)
+        } else {
+          setRelaxedValidationFlag(true)
+        }
+      })
+      .catch((err) => {
+        console.error("Error reading feature flag:", err)
+        setRelaxedValidationFlag(true)
+      })
+  }, [municipality])
+
+  if (!initialValues || relaxedValidationFlag === null) {
     return <LoadingScreen />
   }
 
-  // const handleSubmit = (values) => {
-  //   let fullyFilledCount = 0
-  //   FORM_ROWS.forEach((row, i) => {
-  //     const allItemsAnswered = row.expanded.every((_, j) => {
-  //       return (
-  //         values[`row${i + 1}_select1_item${j + 1}`] !== "" &&
-  //         values[`row${i + 1}_select2_item${j + 1}`] !== ""
-  //       )
-  //     })
-  //     if (allItemsAnswered) {
-  //       fullyFilledCount += 1
-  //     }
-  //   })
+  function countAnsweredInSection(values: AnswersMap): number[] {
+    const answeredCountPerSection: number[] = FORM_ROWS.map(() => 0)
 
-  //   if (fullyFilledCount < 3) {
-  //     enqueueSnackbar("נא למלא באופן מלא לפחות 3 מדורים", {
-  //       variant: "error",
-  //     })
-  //     return
-  //   }
+    FORM_ROWS.forEach((row, sectionIdx) => {
+      row.expanded.forEach((_, itemIdx) => {
+        const keyCur = `row${sectionIdx + 1}_select1_item${itemIdx + 1}`
+        const keyDes = `row${sectionIdx + 1}_select2_item${itemIdx + 1}`
+        const c = values[keyCur]
+        const d = values[keyDes]
+        if (c && Number(c) > 0) answeredCountPerSection[sectionIdx]++
+        if (d && Number(d) > 0) answeredCountPerSection[sectionIdx]++
+      })
+    })
+    return answeredCountPerSection
+  }
 
-  //   router.push("/participants")
+  function handleSubmitWithValidation(values: AnswersMap) {
+    const answeredCounts = countAnsweredInSection(values)
 
-  //   router.push("/participants")
-  // }
+    const sectionsWithAtLeastTwo = answeredCounts.filter(
+      (cnt) => cnt >= 2
+    ).length
+
+    if (relaxedValidationFlag) {
+      if (sectionsWithAtLeastTwo < 3) {
+        enqueueSnackbar("עליך למלא לפחות שני שאלות ב־3 מימדים לפחות", {
+          variant: "error",
+        })
+        return
+      }
+    } else {
+      let fullyAnsweredSectionCount = 0
+      FORM_ROWS.forEach((row, sectionIdx) => {
+        const totalQuestions = row.expanded.length
+        let answeredQuestions = 0
+
+        row.expanded.forEach((_, itemIdx) => {
+          const keyCur = `row${sectionIdx + 1}_select1_item${itemIdx + 1}`
+          const keyDes = `row${sectionIdx + 1}_select2_item${itemIdx + 1}`
+          const c = values[keyCur]
+          const d = values[keyDes]
+          if (c && Number(c) > 0 && d && Number(d) > 0) {
+            answeredQuestions++
+          }
+        })
+
+        if (answeredQuestions === totalQuestions) {
+          fullyAnsweredSectionCount++
+        }
+      })
+
+      if (fullyAnsweredSectionCount < 3) {
+        enqueueSnackbar("עליך למלא באופן מלא לפחות 3 מימדים", {
+          variant: "error",
+        })
+        return
+      }
+    }
+
+    router.push("/participants")
+  }
 
   return (
     <QuestionnaireWrapper>
@@ -106,48 +168,17 @@ export default function Questionnaire() {
         <QuestionnaireContent>
           <QuestionnaireHeader>
             <QuestionnaireTitle>חדשנות מוניציפאלית</QuestionnaireTitle>
-            <QuestionnaireDescription>
-              אנא בחר את 3 השאלות הרלוונטיות ביותר עבור הרשות שלך, בכל אחד משבעת
-              המימדים, על-ידי לחיצה על אחד משני כפתורי הדירוג המופיעים משמאל לכל
-              שאלה. המענה על שאלות הוא בדירוג של 6-1, כאשר 1 הוא שביעות הרצון
-              הנמוכה ביותר ו-6 הוא שביעות הרצון הגבוהה ביותר. לאחר שתסיים לבחור
-              את השאלות ולענות עליהן, לחץ על כפתור השפניה השמאלית התחתונה,
-              על-מנת לקבל את תוצאותינו.
-            </QuestionnaireDescription>
+            <QuestionnaireDescription></QuestionnaireDescription>
           </QuestionnaireHeader>
 
           <QuestionnaireForm>
             <Formik
               initialValues={initialValues}
               enableReinitialize
-              // onSubmit={}
-              onSubmit={(values) => {
-                let fullyFilledCount = 0
-                FORM_ROWS.forEach((row, i) => {
-                  const allItemsAnswered = row.expanded.every((_, j) => {
-                    return (
-                      values[`row${i + 1}_select1_item${j + 1}`] !== "" &&
-                      values[`row${i + 1}_select2_item${j + 1}`] !== ""
-                    )
-                  })
-                  if (allItemsAnswered) {
-                    fullyFilledCount += 1
-                  }
-                })
-
-                if (fullyFilledCount < 3) {
-                  enqueueSnackbar("נא למלא באופן מלא לפחות 3 מדורים", {
-                    variant: "error",
-                  })
-                  return
-                }
-
-                router.push("/participants")
-              }}
+              onSubmit={handleSubmitWithValidation}
             >
               {({ handleSubmit }) => (
                 <Form onSubmit={handleSubmit}>
-                  {/* Persist every change */}
                   <AutoSave municipality={municipality!} />
                   <Indicator />
                   <QuestionnaireFormBody>

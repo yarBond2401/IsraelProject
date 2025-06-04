@@ -15,9 +15,23 @@ import {
 import { MAIN_SLIDES } from "../../constants"
 import "swiper/css"
 import "swiper/css/navigation"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useAuth } from "@/contexts/AuthContext"
+import { enqueueSnackbar } from "notistack"
 
-const SliderComponent = () => {
+const SliderComponent: React.FC = () => {
+  const router = useRouter()
+  const { user } = useAuth()
+
+  function handleSlideClick(redirectTo: string) {
+    if (!user) {
+      enqueueSnackbar("עליך להתחבר לפני שתמשיך", { variant: "error" })
+      router.push("/signIn")
+    } else {
+      router.push(redirectTo)
+    }
+  }
+
   return (
     <SliderContainer>
       <Box
@@ -87,11 +101,17 @@ const SliderComponent = () => {
                     >
                       {slide.title}
                     </Typography>
-                    <Link href={slide.redirectTo}>
-                      <Button variant="primary">גלו עוד</Button>
-                    </Link>
+                    <Button
+                      variant="primary"
+                      onClick={() => handleSlideClick(slide.redirectTo)}
+                    >
+                      גלו עוד
+                    </Button>
                   </SlideBody>
-                  <Link href={slide.redirectTo} passHref>
+                  <Box
+                    onClick={() => handleSlideClick(slide.redirectTo)}
+                    sx={{ cursor: "pointer" }}
+                  >
                     <ImageWrapper>
                       <Image
                         src={slide.imageSrc}
@@ -100,7 +120,7 @@ const SliderComponent = () => {
                         height={150}
                       />
                     </ImageWrapper>
-                  </Link>
+                  </Box>
                 </SlideContent>
               </SwiperSlide>
             ))}

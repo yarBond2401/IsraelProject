@@ -1,14 +1,15 @@
 import React from "react"
-import { ProjectsDetails } from "@/interfaces/projects"
+import { Box } from "@mui/material"
 import { ProjectMainSection } from "./styled"
+import { ProjectsDetails } from "@/interfaces/projects"
 import { ProjectContent } from "../../ProjectContent"
 import { ProjectSlider } from "../../ProjectSlider"
 import { AdditionalProjects } from "../../AdditionlaProjects"
-import { Box } from "@mui/material"
 
 interface ProjectPageBodyProps {
   projectData: ProjectsDetails
 }
+
 export const ProjectPageBody: React.FC<ProjectPageBodyProps> = ({
   projectData,
 }) => {
@@ -20,7 +21,8 @@ export const ProjectPageBody: React.FC<ProjectPageBodyProps> = ({
       </ProjectMainSection>
       <AdditionalProjects
         currentProjectId={projectData.id}
-        currentFilterKey={projectData.filterKey}
+        currentSectionKey={projectData.sectionKey}
+        currentFilterKeys={projectData.filterKeys}
       />
     </Box>
   )

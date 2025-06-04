@@ -67,7 +67,6 @@ const Diagnostic = () => {
               <Button variant="back">חזור</Button>
             </Link>
           </Box>
-
           <DiagnosticImageSection>
             <DiagnosticImageSectionBody>
               <Typography sx={{ fontWeight: 700, mb: 2, fontSize: "24px" }}>

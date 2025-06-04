@@ -109,7 +109,7 @@ export const ToolContent: React.FC<Props> = ({ data }) => {
           }}
         >
           <Image
-            src={data.providerBlock.iconSrc}
+            src="/images/webp/projects/provider/raizit.png"
             alt="icon"
             width={70}
             height={40}
