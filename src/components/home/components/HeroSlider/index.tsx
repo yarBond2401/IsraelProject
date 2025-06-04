@@ -1,5 +1,5 @@
 "use client"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper/modules"
 import Image from "next/image"
@@ -12,24 +12,55 @@ import {
   SlideBody,
   ImageWrapper,
 } from "./styled"
-import { MAIN_SLIDES } from "../../constants"
-import "swiper/css"
-import "swiper/css/navigation"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
 import { enqueueSnackbar } from "notistack"
 
-const SliderComponent: React.FC = () => {
+import {
+  fetchRawProjectsFromSheet,
+  normalizeRawRows,
+  ProjectRecord,
+} from "@/utils/projectsManage"
+
+import "swiper/css"
+import "swiper/css/navigation"
+
+export default function SliderComponent() {
   const router = useRouter()
   const { user } = useAuth()
 
-  function handleSlideClick(redirectTo: string) {
+  const [projects, setProjects] = useState<ProjectRecord[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    fetchRawProjectsFromSheet()
+      .then(normalizeRawRows)
+      .then((records) => {
+        setProjects(records)
+      })
+      .catch((err) => {
+        console.error("Failed to load slider projects:", err)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }, [])
+
+  function handleSlideClick(projectId: string) {
     if (!user) {
       enqueueSnackbar("עליך להתחבר לפני שתמשיך", { variant: "error" })
       router.push("/signIn")
     } else {
-      router.push(redirectTo)
+      router.push(`/project/${projectId}`)
     }
+  }
+
+  if (isLoading) {
+    return null
+  }
+
+  if (projects.length === 0) {
+    return null
   }
 
   return (
@@ -87,48 +118,53 @@ const SliderComponent: React.FC = () => {
             }}
             watchOverflow={true}
           >
-            {MAIN_SLIDES.map((slide, index) => (
-              <SwiperSlide key={index}>
-                <SlideContent>
-                  <SlideBody>
-                    <Typography
-                      sx={{
-                        fontSize: "20px",
-                        fontWeight: 700,
-                        display: "block",
-                        marginBlockEnd: "20px",
-                      }}
+            {projects.slice(0, 5).map((proj) => {
+              const title = proj.jsonData.headerTitle
+              const id = proj.id
+
+              return (
+                <SwiperSlide key={id}>
+                  <SlideContent>
+                    <SlideBody>
+                      <Typography
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: 700,
+                          display: "block",
+                          marginBlockEnd: "20px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleSlideClick(id)}
+                      >
+                        {title}
+                      </Typography>
+                      <Button
+                        variant="primary"
+                        onClick={() => handleSlideClick(id)}
+                      >
+                        גלו עוד
+                      </Button>
+                    </SlideBody>
+                    <Box
+                      onClick={() => handleSlideClick(id)}
+                      sx={{ cursor: "pointer" }}
                     >
-                      {slide.title}
-                    </Typography>
-                    <Button
-                      variant="primary"
-                      onClick={() => handleSlideClick(slide.redirectTo)}
-                    >
-                      גלו עוד
-                    </Button>
-                  </SlideBody>
-                  <Box
-                    onClick={() => handleSlideClick(slide.redirectTo)}
-                    sx={{ cursor: "pointer" }}
-                  >
-                    <ImageWrapper>
-                      <Image
-                        src={slide.imageSrc}
-                        alt={`slide-${slide.id}`}
-                        width={200}
-                        height={150}
-                      />
-                    </ImageWrapper>
-                  </Box>
-                </SlideContent>
-              </SwiperSlide>
-            ))}
+                      <ImageWrapper>
+                        <Image
+                          src="/images/webp/projects/slider/public-eng-1.png"
+                          alt={`slide-${id}`}
+                          width={200}
+                          height={150}
+                        />
+                      </ImageWrapper>
+                    </Box>
+                  </SlideContent>
+                </SwiperSlide>
+              )
+            })}
           </Swiper>
         </SwiperWrapper>
       </Box>
     </SliderContainer>
   )
 }
-
-export default SliderComponent

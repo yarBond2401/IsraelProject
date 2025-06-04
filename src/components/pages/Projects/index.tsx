@@ -163,7 +163,7 @@ export default function ProjectsPage() {
           <Box
             sx={{
               display: "flex",
-              gap: 2,
+              gap: "10px",
               flexWrap: "wrap",
               justifyContent: "center",
             }}
