@@ -14,7 +14,6 @@ interface MainArticle {
 export interface ContactButton {
   title?: string
   variant?: string
-  redirectTo?: string
   isGradient?: boolean
 }
 export interface SlideData {

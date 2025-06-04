@@ -38,7 +38,11 @@ export const ToolSlider: React.FC<Props> = ({ slides }) => {
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
                 <ImageWrapper>
-                  <Image src={slide.imageSrc} fill alt={`slide-${index}`} />
+                  <Image
+                    src="/images/webp/tools/slider/employee_innovation/slide-1.jpg"
+                    fill
+                    alt={`slide-${index}`}
+                  />
                   <SliderArrows>
                     <SliderArrow className="button-prev">
                       <Image

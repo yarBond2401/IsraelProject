@@ -1,7 +1,7 @@
 interface HeaderTag {
   title: string
 }
-interface MainArticle {
+export interface MainArticle {
   description: string
 }
 export interface ContactButton {
@@ -26,7 +26,8 @@ export interface Email {
 
 export interface ProjectsDetails {
   id: string
-  filterKey: string
+  sectionKey: string
+  filterKeys: string[]
   name: string
   headerTitle: string
   tags: HeaderTag[]

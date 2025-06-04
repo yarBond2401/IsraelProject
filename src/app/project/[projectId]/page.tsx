@@ -1,33 +1,50 @@
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import { Box } from "@mui/material"
-import { PROJECTS_DATA } from "@/components/projectComponents/constants"
 import { notFound } from "next/navigation"
+import type { Metadata } from "next"
 import { ProjectPageBody } from "@/components/projectComponents/common/ProjectPageBody"
-import { Metadata } from "next"
+import {
+  fetchRawProjectsFromSheet,
+  normalizeRawRows,
+} from "@/utils/projectsManage"
 
-interface ProjectPageProps {
-  params: Promise<{ projectId: string }>
+// 1️⃣ generateStaticParams: identical as before (no changes required here)
+export async function generateStaticParams() {
+  const raws = await fetchRawProjectsFromSheet()
+  const records = await normalizeRawRows(raws)
+  return records.map((p) => ({
+    projectId: p.id,
+  }))
 }
 
+// 2️⃣ generateMetadata: change to accept `params` as a Promise
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ projectId: string }>
 }): Promise<Metadata> {
+  // “await” the params promise before destructuring
   const { projectId } = await params
+
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL || "https://israel-project-six.vercel.app"
 
-  const project = PROJECTS_DATA[projectId]
-  const imageUrl = project.slider?.[0]?.imageSrc
-    ? `${baseUrl}${project.slider[0].imageSrc}`
-    : `${baseUrl}/images/default-og.png`
+  // 1) Fetch & normalize all records
+  const raws = await fetchRawProjectsFromSheet()
+  const records = await normalizeRawRows(raws)
+  const project = records.find((r) => r.id === projectId)
   if (!project) notFound()
 
-  const title = `פרויקט - ${project.headerTitle}`
+  // 2) Build OG image URL
+  const slider = project.jsonData.slider || []
+  const imageUrl = slider[0]?.imageSrc
+    ? `${baseUrl}${slider[0].imageSrc}`
+    : `${baseUrl}/images/default-og.png`
+
+  const title = `פרויקט - ${project.jsonData.headerTitle}`
   const description =
-    project.mainArticles?.[0]?.description?.slice(0, 160) ||
+    project.jsonData.mainArticles?.[0]?.description?.slice(0, 160) ||
     "פרויקט מוניציפלי ברשות מקומית במסגרת התוכנית הדיגיטלית."
 
   return {
@@ -36,7 +53,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      url: `${baseUrl}/${projectId}`,
+      url: `${baseUrl}/projects/${projectId}`,
       siteName: "תוכנית דיגיטלית לרשויות",
       locale: "he_IL",
       type: "article",
@@ -45,30 +62,44 @@ export async function generateMetadata({
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: `תמונה עבור פרויקט - ${project.headerTitle}`,
+          alt: `תמונה עבור פרויקט - ${project.jsonData.headerTitle}`,
         },
       ],
     },
   }
 }
 
-export async function generateStaticParams() {
-  return Object.keys(PROJECTS_DATA).map((projectId) => ({
-    projectId,
-  }))
-}
-
-export default async function ProjectPage({ params }: ProjectPageProps) {
+// 3️⃣ Page component: also change `params` to a Promise and `await` it
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ projectId: string }>
+}) {
+  // ① Await the params promise
   const { projectId } = await params
-  const projectData = PROJECTS_DATA[projectId]
 
-  if (!projectData) notFound()
+  // ② Fetch & normalize all records
+  const raws = await fetchRawProjectsFromSheet()
+  const records = await normalizeRawRows(raws)
+
+  // ③ Find the matching record
+  const projectRecord = records.find((r) => r.id === projectId)
+  if (!projectRecord) {
+    notFound()
+  }
+
+  // ④ Merge JSON blob with sectionKey & filterKeys
+  const mergedData = {
+    ...projectRecord.jsonData,
+    sectionKey: projectRecord.sectionKey,
+    filterKeys: projectRecord.filterKeys,
+  }
 
   return (
     <Box>
       <Header isOnMainPage={false} />
       <Box component="main">
-        <ProjectPageBody projectData={projectData} />
+        <ProjectPageBody projectData={mergedData} />
       </Box>
       <Footer />
     </Box>

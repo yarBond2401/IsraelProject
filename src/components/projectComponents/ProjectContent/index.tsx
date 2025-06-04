@@ -1,5 +1,4 @@
 import { Box, Divider, Typography } from "@mui/material"
-import { ProjectsDetails } from "@/interfaces/projects"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -16,7 +15,8 @@ import {
   ProjectHeaderTag,
   ProviderBlock,
 } from "./styled"
-import { CONTACT_BUTTONS, PROJECT_STATUS, PROJECT_TAGS } from "../constants"
+import { PROJECT_TAGS, PROJECT_STATUS, CONTACT_BUTTONS } from "../constants"
+import { ProjectsDetails } from "@/interfaces/projects"
 
 interface Props {
   data: ProjectsDetails
@@ -26,6 +26,7 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
   return (
     <ProjectContentWrapper>
       <ProjectContentTitle variant="h2">{data.headerTitle}</ProjectContentTitle>
+
       <Box sx={{ display: "flex", flexWrap: "wrap", marginBlockEnd: "20px" }}>
         {PROJECT_TAGS.map((label, index) => {
           const tag = data.tags[index]
@@ -47,7 +48,6 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
                 {label.label}
               </Typography>
               <ProjectHeaderTag>{tag?.title}</ProjectHeaderTag>
-
               {index < PROJECT_TAGS.length - 1 && (
                 <Divider
                   orientation="vertical"
@@ -64,6 +64,7 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
           )
         })}
       </Box>
+
       <DataBlock>
         {PROJECT_STATUS.map((label, index) => {
           const info = data.statuses[index]
@@ -98,6 +99,7 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
           )
         })}
       </DataBlock>
+
       <Box>
         <Typography sx={{ marginBlockEnd: "10px", fontWeight: 700 }}>
           תכולת הפרויקט:
@@ -116,6 +118,7 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
           </ProjectArticle>
         ))}
       </Box>
+
       <Box sx={{ marginBlockEnd: "10px" }}>
         <Typography sx={{ marginBlockEnd: "10px", fontWeight: 700 }}>
           לאילו רשויות מקומיות הפרויקט יתאים:
@@ -130,6 +133,7 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
           {data.suitable}
         </Typography>
       </Box>
+
       <Box>
         <Typography sx={{ marginBlockEnd: "10px", fontWeight: 700 }}>
           המלצות:{" "}
@@ -144,6 +148,7 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
           {data.recommendations}
         </Typography>
       </Box>
+
       <Box>
         <Typography sx={{ marginBlockEnd: "10px", fontWeight: 700 }}>
           אנשי קשר:
@@ -176,11 +181,12 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
               {data.contacts.role}
             </Typography>
           </Box>
-          <ContactButtonEmail href="/">
+          <ContactButtonEmail href="#">
             {data.contacts.email}
           </ContactButtonEmail>
         </Box>
       </Box>
+
       <Box sx={{ maxInlineSize: "700px" }}>
         <Typography
           sx={{
@@ -200,7 +206,7 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
             }}
           >
             <Image
-              src={data.providerBlock.iconSrc}
+              src="/images/webp/projects/provider/raizit.png"
               alt="icon"
               width={100}
               height={70}
@@ -222,7 +228,7 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
             ))}
             <Box sx={{ display: "flex", gap: "10px" }}>
               {data.providerBlock.emails.map((email, index) => (
-                <ContactButtonEmail key={index} href="/">
+                <ContactButtonEmail key={index} href="#">
                   {email.title}
                 </ContactButtonEmail>
               ))}
@@ -240,13 +246,14 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
           }}
         ></Box>
         <Divider sx={{ marginBlockEnd: "20px" }} />
+
         <ContactBlock>
           <Typography sx={{ fontWeight: 700, color: "#000", fontSize: "16px" }}>
             {data.contactBlock.title}
           </Typography>
           <ContactButtons>
             {CONTACT_BUTTONS.map((button, index) => (
-              <Link href="/projects" key={index} style={{ cursor: "default" }}>
+              <Link href="/projects" key={index} style={{ cursor: "pointer" }}>
                 <ProjectButton isGradient={button.isGradient}>
                   <Typography sx={{ fontSize: "14px", fontWeight: 300 }}>
                     {button.title}
@@ -265,6 +272,7 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
           </ContactButtons>
         </ContactBlock>
       </Box>
+
       <HeaderNav>
         <Link style={{ fontSize: "12px" }} href="/">
           ראשי

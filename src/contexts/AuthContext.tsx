@@ -13,6 +13,8 @@ import {
   restoreSession,
   clearSession,
 } from "@/utils/sessionManage"
+import { doc, setDoc } from "firebase/firestore"
+import { db } from "@/firebase/firebase"
 
 interface AuthContextType {
   user: string | null
@@ -37,6 +39,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!ok) return false
 
     await createSession(municipality)
+
+    const userDocRef = doc(db, "users", municipality)
+    await setDoc(userDocRef, { relaxedValidation: true }, { merge: true })
+
     setUser(municipality)
     return true
   }

@@ -16,11 +16,10 @@ export const PARAGRAPH_TITLES: MainArticleTitle[] = [
   { title: "שתפים:" },
 ]
 export const CONTACT_BUTTONS: ContactButton[] = [
-  { title: "פתיחת פרויקט", variant: "primary", redirectTo: "/" },
+  { title: "פתיחת פרויקט", variant: "primary" },
   {
     title: "עבור לרשימת הכלים ",
     variant: "gradient",
-    redirectTo: "/",
     isGradient: true,
   },
 ]

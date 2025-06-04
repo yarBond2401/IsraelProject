@@ -37,7 +37,7 @@ const DiagnosticSwiper = () => {
                 <Link href="/projects">
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Typography sx={{ color: "#939393", fontSize: "12px" }}>
-                      להמשך
+                      לצפייה בספקים
                     </Typography>
                     <Image
                       src="/images/svg/diagnostic/arrow-icon.png"
