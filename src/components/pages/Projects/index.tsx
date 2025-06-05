@@ -76,8 +76,10 @@ export default function ProjectsPage() {
         const passing = new Set<string>()
         allProjects.forEach((proj) => {
           const sec = scores[proj.sectionKey.trim()]
+          if (!sec) return
+
           const sectionScore = sec?.score ?? 0
-          if (sectionScore <= proj.threshold) {
+          if (sectionScore >= proj.threshold) {
             passing.add(proj.id)
           }
         })
@@ -113,6 +115,22 @@ export default function ProjectsPage() {
       })
   }, [municipality, allProjects])
 
+  // const handleFilterToggle = useCallback((title: string) => {
+  //   setSelectedFilters((prev) => {
+  //     if (title === "הכל") {
+  //       return ["הכל"]
+  //     }
+
+  //     const baseFilters = prev.filter((t) => t !== "הכל")
+
+  //     if (baseFilters.includes(title)) {
+  //       const newFilters = baseFilters.filter((t) => t !== title)
+  //       return newFilters.length ? newFilters : ["הכל"]
+  //     } else {
+  //       return [...baseFilters, title]
+  //     }
+  //   })
+  // }, [])
   const handleFilterToggle = useCallback((title: string) => {
     setSelectedFilters((prev) => {
       if (title === "הכל") {

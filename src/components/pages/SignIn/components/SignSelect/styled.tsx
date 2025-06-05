@@ -14,7 +14,6 @@ export const SignTextField = styled(TextField)(({ theme }) => ({
     transition: "background-color 0.2s ease-in-out",
     backgroundColor: "#fff",
     width: "100%",
-    borderColor: "#e7e7e7",
 
     "& fieldset": {
       borderWidth: "1px",

@@ -11,6 +11,7 @@ export const PageContainer = styled(Box)(() => ({
   minHeight: "100vh",
   position: "relative",
   overflow: "hidden",
+  // color: "#fff",
 }))
 export const HomePageWrapper = styled(Box)(({ theme }) => ({
   paddingBlockStart: "200px",
@@ -33,6 +34,7 @@ export const HomePageContainer = styled(Box)(({ theme }) => ({
   blockSize: "100%",
 }))
 export const HomePageBody = styled(Box)(({ theme }) => ({
+  color: "#ededed",
   flex: "1 1 auto",
   display: "flex",
   alignItems: "stretch",

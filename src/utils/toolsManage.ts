@@ -18,7 +18,7 @@ export interface ToolRecord {
 }
 
 export async function fetchRawToolsFromSheet(): Promise<string[][]> {
-  const range = encodeURIComponent("template!B2:I")
+  const range = encodeURIComponent("template!B2:F")
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${range}?key=${API_KEY}`
 
   const response = await fetch(url)
@@ -41,17 +41,7 @@ export function normalizeToolRows(rawRows: string[][]): ToolRecord[] {
   rawRows.forEach((r) => {
     if (r.length < 5) return
 
-    const [
-      rawJson,
-      title,
-      sectionKey,
-      filterKey,
-      thresholdStr,
-      ,
-      ,
-      ,
-      slideUrl,
-    ] = r
+    const [rawJson, title, sectionKey, filterKey, thresholdStr] = r
     if (!rawJson || !title || !sectionKey || !filterKey || !thresholdStr) {
       return
     }
@@ -82,12 +72,12 @@ export function normalizeToolRows(rawRows: string[][]): ToolRecord[] {
       return
     }
 
-    if (slideUrl) {
-      if (!data.slider) {
-        data.slider = []
-      }
-      data.slider = [{ imageSrc: slideUrl }, ...data.slider]
-    }
+    // if (slideUrl) {
+    //   if (!data.slider) {
+    //     data.slider = []
+    //   }
+    //   data.slider = [{ imageSrc: slideUrl }, ...data.slider]
+    // }
 
     result.push({
       id: idKey,
