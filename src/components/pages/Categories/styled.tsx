@@ -66,11 +66,13 @@ export const CategoriesGrid = styled(Box)(({ theme }) => ({
   },
 }))
 
-export const CategoryText = styled(Typography)(() => ({
+export const CategoryText = styled(Typography)(({ theme }) => ({
   fontSize: "14px",
   fontWeight: 700,
+  color: theme.palette.common.white,
 }))
-export const CategoryLink = styled(Link)(() => ({
+export const CategoryLink = styled(Link)(({ theme }) => ({
+  color: theme.palette.common.white,
   fontSize: "12px",
   fontWeight: 300,
 }))

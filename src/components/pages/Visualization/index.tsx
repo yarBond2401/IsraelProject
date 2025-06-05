@@ -325,7 +325,7 @@ export default function Visualization() {
           {!overlay && (
             <>
               <Box>
-                <ChartTitleGreen>המצב הקיים</ChartTitleGreen>
+                <ChartTitle>המצב הקיים</ChartTitle>
                 <svg width={size} height={size}>
                   {data.map((d, sec) =>
                     [...Array(roundedLevels(d.currentAvg))].map((_, lvl) => (
@@ -339,7 +339,7 @@ export default function Visualization() {
                           CENTER,
                           CENTER
                         )}
-                        fill="#15b0a1"
+                        fill="#9c27b0"
                         onMouseMove={handleHover(sec, d.currentAvg)}
                         onMouseLeave={() => setTooltip(null)}
                         style={{
@@ -376,7 +376,7 @@ export default function Visualization() {
               </Box>
 
               <Box>
-                <ChartTitle>המצב הרצוי</ChartTitle>
+                <ChartTitleGreen>המצב הרצוי</ChartTitleGreen>
                 <svg width={size} height={size}>
                   {data.map((d, sec) =>
                     [...Array(roundedLevels(d.desiredAvg))].map((_, lvl) => (
@@ -390,7 +390,7 @@ export default function Visualization() {
                           CENTER,
                           CENTER
                         )}
-                        fill="#9c27b0"
+                        fill="#15b0a1"
                         onMouseMove={handleHover(sec, d.desiredAvg)}
                         onMouseLeave={() => setTooltip(null)}
                         style={{

@@ -89,9 +89,9 @@ export default function ToolsPage() {
           const sec = scores[tool.sectionKey.trim()]
           if (!sec) return
 
-          if (sec.current === 0 && sec.desired === 0) return
+          // if (sec.current === 0 && sec.desired === 0) return
 
-          if (sec.score <= tool.threshold) {
+          if (sec.score >= tool.threshold) {
             passing.add(tool.id)
           }
         })
@@ -126,17 +126,33 @@ export default function ToolsPage() {
     }
   }, [selectedFilters, isLoading])
 
+  // const handleFilterToggle = useCallback((title: string) => {
+  //   setSelectedFilters((prev) => {
+  //     if (title === "הכל") {
+  //       return ["הכל"]
+  //     }
+  //     const base = prev.filter((t) => t !== "הכל")
+  //     if (base.includes(title)) {
+  //       const next = base.filter((t) => t !== title)
+  //       return next.length ? next : ["הכל"]
+  //     } else {
+  //       return [...base, title]
+  //     }
+  //   })
+  // }, [])
   const handleFilterToggle = useCallback((title: string) => {
     setSelectedFilters((prev) => {
       if (title === "הכל") {
         return ["הכל"]
       }
-      const base = prev.filter((t) => t !== "הכל")
-      if (base.includes(title)) {
-        const next = base.filter((t) => t !== title)
-        return next.length ? next : ["הכל"]
+
+      const baseFilters = prev.filter((t) => t !== "הכל")
+
+      if (baseFilters.includes(title)) {
+        const newFilters = baseFilters.filter((t) => t !== title)
+        return newFilters.length ? newFilters : ["הכל"]
       } else {
-        return [...base, title]
+        return [...baseFilters, title]
       }
     })
   }, [])
@@ -220,7 +236,7 @@ export default function ToolsPage() {
           <Link href="/vizualization">
             <Button variant="back">חזור</Button>
           </Link>
-          <Link href="/vizualization">
+          <Link href="/projects">
             <Button variant="forward" color="purple">
               המשך
             </Button>

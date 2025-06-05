@@ -96,7 +96,7 @@ const FormRow: React.FC<FormRowProps> = ({
               paddingInline: "20px",
             }}
           >
-            <RowLabel>שאלוקיים</RowLabel>
+            <RowLabel>שאלון</RowLabel>
             <Box sx={{ display: "flex", gap: { xs: "20px", sm: "100px" } }}>
               <RowLabel>קיים</RowLabel>
               <RowLabel>רצוי</RowLabel>

@@ -5,6 +5,7 @@ import Box from "@mui/material/Box"
 export const SliderContainer = styled(Box)(() => ({
   width: "100%",
   maxWidth: "500px",
+  color: "#ededed",
 }))
 
 export const SliderArrow = styled(Box)(() => ({

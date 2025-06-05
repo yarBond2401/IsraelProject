@@ -189,13 +189,18 @@ export const ToolContent: React.FC<Props> = ({ data }) => {
         </ContactBlock>
       </Box>
       <HeaderNav>
-        <Link style={{ fontSize: "12px" }} href="/">
+        <Link style={{ fontSize: "12px", textDecoration: "none" }} href="/">
           ראשי
         </Link>
-        <Link style={{ fontSize: "12px" }} href="/tools">
+        <Link
+          style={{ fontSize: "12px", textDecoration: "none" }}
+          href="/tools"
+        >
           פרויקטים
         </Link>
-        <Typography sx={{ fontSize: "12px" }}>{data.headerTitle}</Typography>
+        <Typography sx={{ fontSize: "12px", lineHeight: "1" }}>
+          {data.headerTitle}
+        </Typography>
       </HeaderNav>
     </ProjectContentWrapper>
   )

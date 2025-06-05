@@ -92,6 +92,7 @@ export const DiagnosticImageSectionBody = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
+  color: theme.palette.common.white,
   [theme.breakpoints.down("sm")]: {
     padding: "20px",
   },

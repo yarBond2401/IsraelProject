@@ -20,6 +20,7 @@ export const EntrySectionWrapper = styled("section")<{ backgroundSrc: string }>(
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
+    color: theme.palette.common.white,
 
     [theme.breakpoints.down("md")]: {
       minHeight: "auto",

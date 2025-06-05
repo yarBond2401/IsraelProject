@@ -89,7 +89,12 @@ function WelcomePage() {
               </Box>
             </HomePageInfoSection>
             <HomePageSidebar>
-              <Typography sx={{ display: "block", marginBlockEnd: "25px" }}>
+              <Typography
+                sx={{
+                  display: "block",
+                  marginBlockEnd: "25px",
+                }}
+              >
                 למה להצטרף לתוכנית?
               </Typography>
               <Box
