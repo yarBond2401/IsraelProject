@@ -109,7 +109,7 @@ export interface CardsProps {
   imageSrc: string
 }
 export const FILTER_BUTTONS: FilterButton[] = [
-  { title: "הכל", filterKey: "all" },
+  { title: "הכל", filterKey: "הכל" },
   { title: "חינוך", filterKey: "חינוך" },
   { title: "תושב", filterKey: "תושב" },
   { title: "ניידות", filterKey: "ניידות" },

@@ -531,6 +531,9 @@ export default function Visualization() {
               </Button>
             </Link>
           )}
+          <Link href="/participants">
+            <Button variant="back">חזור</Button>
+          </Link>
         </Box>
       </VisualizationContent>
     </VisualizationWrapper>

@@ -1,8 +1,7 @@
 import { FormRowsData } from "@/interfaces/questionnaire"
-
 export const FORM_ROWS: FormRowsData[] = [
   {
-    title: "מיומנויות ",
+    title: "מיומנויות",
     expanded: [
       {
         number: "01",
@@ -177,7 +176,7 @@ export const FORM_ROWS: FormRowsData[] = [
     },
   },
   {
-    title: "משימות",
+    title: "משילות",
     expanded: [
       {
         number: "01",

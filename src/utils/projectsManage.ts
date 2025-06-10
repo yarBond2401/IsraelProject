@@ -16,8 +16,9 @@ export interface ProjectRecord {
 }
 
 export async function fetchRawProjectsFromSheet(): Promise<RawRow[]> {
-  const SHEET_ID = "1x5IgdJaaYHuvAiXrGjf-pp-b95lNYLUv5BWhLu3ayTs"
-  const API_KEY = "AIzaSyAKghJI5z7qchMXuDyiyZoFbttc4_lihtw"
+  const SHEET_ID = process.env.NEXT_PUBLIC_SHEETS_ID
+  const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY
+
   const RANGE = `suppliers!A2:G22`
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`
 

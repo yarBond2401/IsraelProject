@@ -10,8 +10,7 @@ export const ProjectSliderWrapper = styled(Box)(({ theme }) => ({
   minWidth: 0,
   position: "relative",
   [theme.breakpoints.down("lg")]: {
-    paddingBlockStart: 0,
-    maxWidth: "100%",
+    display: "none",
   },
 }))
 

@@ -89,8 +89,6 @@ export default function ToolsPage() {
           const sec = scores[tool.sectionKey.trim()]
           if (!sec) return
 
-          // if (sec.current === 0 && sec.desired === 0) return
-
           if (sec.score >= tool.threshold) {
             passing.add(tool.id)
           }
@@ -126,20 +124,6 @@ export default function ToolsPage() {
     }
   }, [selectedFilters, isLoading])
 
-  // const handleFilterToggle = useCallback((title: string) => {
-  //   setSelectedFilters((prev) => {
-  //     if (title === "הכל") {
-  //       return ["הכל"]
-  //     }
-  //     const base = prev.filter((t) => t !== "הכל")
-  //     if (base.includes(title)) {
-  //       const next = base.filter((t) => t !== title)
-  //       return next.length ? next : ["הכל"]
-  //     } else {
-  //       return [...base, title]
-  //     }
-  //   })
-  // }, [])
   const handleFilterToggle = useCallback((title: string) => {
     setSelectedFilters((prev) => {
       if (title === "הכל") {
@@ -157,14 +141,24 @@ export default function ToolsPage() {
     })
   }, [])
 
+  // const displayedTools = allTools.filter((tool) => {
+  //   if (selectedFilters.includes("הכל")) {
+  //     return true
+  //   }
+  //   if (eligibleToolIds.has(tool.id)) {
+  //     return true
+  //   }
+  //   return selectedFilters.includes(tool.filterKey)
+  // })
   const displayedTools = allTools.filter((tool) => {
     if (selectedFilters.includes("הכל")) {
       return true
     }
-    if (eligibleToolIds.has(tool.id)) {
-      return true
-    }
-    return selectedFilters.includes(tool.filterKey)
+
+    const isFilterOn = selectedFilters.includes(tool.filterKey)
+    const isEligible = eligibleToolIds.has(tool.id)
+
+    return isEligible && isFilterOn
   })
 
   if (isLoading) {
