@@ -5,6 +5,7 @@ import {
   ContactBlock,
   ContactButtons,
   ContactLink,
+  ContactLinkGray,
   HeaderNav,
   ProjectArticle,
   ProjectButton,
@@ -30,6 +31,7 @@ export const ToolContent: React.FC<Props> = ({ data }) => {
       <Box
         sx={{
           display: "flex",
+          flexWrap: "wrap",
           marginBlockEnd: { xs: "20px", lg: "100px" },
         }}
       >
@@ -141,13 +143,28 @@ export const ToolContent: React.FC<Props> = ({ data }) => {
             marginBlockEnd: "20px",
           }}
         >
-          <ContactLink href="/">{data.providerBlock.email}</ContactLink>
-          <Typography sx={{ fontSize: "14px", color: "#898c8b" }}>
+          <ContactLink href={`mailto:${data.providerBlock.email}`}>
+            {data.providerBlock.email}
+          </ContactLink>
+          <ContactLinkGray href={`tel:${data.providerBlock.phone}`}>
             {data.providerBlock.phone}
-          </Typography>
-          <Typography sx={{ fontSize: "14px", color: "#898c8b" }}>
+          </ContactLinkGray>
+          {/* <Typography sx={{ fontSize: "14px", color: "#898c8b" }}>
+            {data.providerBlock.phone}
+          </Typography> */}
+          <ContactLinkGray
+            href={`https://www.google.com/maps/search/?q=${encodeURIComponent(
+              data.providerBlock.adress
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontSize: "14px", color: "#898c8b" }}
+          >
             {data.providerBlock.adress}
-          </Typography>
+          </ContactLinkGray>
+          {/* <Typography sx={{ fontSize: "14px", color: "#898c8b" }}>
+            {data.providerBlock.adress}
+          </Typography> */}
         </Box>
         <Divider sx={{ marginBlockEnd: "20px" }} />
         <ContactBlock>
@@ -169,7 +186,7 @@ export const ToolContent: React.FC<Props> = ({ data }) => {
               //     />
               //   )}
               // </ProjectButton>
-              <Link href="/projects" key={index} style={{ cursor: "default" }}>
+              <Link href="/tools" key={index} style={{ cursor: "default" }}>
                 <ProjectButton isGradient={button.isGradient}>
                   <Typography sx={{ fontSize: "14px", fontWeight: 300 }}>
                     {button.title}

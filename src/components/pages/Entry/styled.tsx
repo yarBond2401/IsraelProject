@@ -11,7 +11,6 @@ export const EntryContainer = styled(Box)(({ theme }) => ({
   paddingInline: "20px",
 }))
 export const EntryContent = styled(Box)(({ theme }) => ({
-  marginBlockStart: "108px",
   gridColumn: "1/6",
   rowGap: "1rem",
   width: "100%",

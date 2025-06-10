@@ -88,7 +88,7 @@ const DiagnosticSwiper = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("md"))
   const [activeIndex, setActiveIndex] = useState(
-    DIAGNOSTIC_CARDS.findIndex((card) => card.title === "חתום עליון")
+    DIAGNOSTIC_CARDS.findIndex((card) => card.title === "תחומי עניין")
   )
 
   return (

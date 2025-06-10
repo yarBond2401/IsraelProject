@@ -1,4 +1,5 @@
-import React from "react"
+"use client"
+import React, { useRef, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { EntrySectionData } from "@/interfaces/entry"
@@ -21,8 +22,36 @@ const EntrySection: React.FC<EntrySectionData> = ({
   pathTo,
   backgroundSrc,
 }) => {
+  const wrapperRef = useRef<HTMLElement>(null)
+  const speed = 0.5
+
+  useEffect(() => {
+    let ticking = false
+
+    const handleScroll = () => {
+      if (!wrapperRef.current) return
+      const rect = wrapperRef.current.getBoundingClientRect()
+      const yOffset = rect.top * speed
+      wrapperRef.current.style.backgroundPosition = `center ${-yOffset}px`
+    }
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [speed])
+
   return (
-    <EntrySectionWrapper backgroundSrc={backgroundSrc}>
+    <EntrySectionWrapper ref={wrapperRef} backgroundSrc={backgroundSrc}>
       <EntrySectionContent>
         <EntrySectionImageWrapper>
           <Image src={iconSrc} alt={title} width={90} height={90} />

@@ -3,9 +3,9 @@ import Link from "next/link"
 import Image from "next/image"
 import {
   ContactBlock,
-  ContactButtonEmail,
   ContactButtons,
   ContactButtonTitle,
+  ContactLink,
   DataBlock,
   HeaderNav,
   ProjectArticle,
@@ -181,9 +181,9 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
               {data.contacts.role}
             </Typography>
           </Box>
-          <ContactButtonEmail href="#">
+          <ContactLink href={`mailto:${data.contacts.email}`}>
             {data.contacts.email}
-          </ContactButtonEmail>
+          </ContactLink>
         </Box>
       </Box>
 
@@ -228,9 +228,12 @@ export const ProjectContent: React.FC<Props> = ({ data }) => {
             ))}
             <Box sx={{ display: "flex", gap: "10px" }}>
               {data.providerBlock.emails.map((email, index) => (
-                <ContactButtonEmail key={index} href="#">
+                // <ContactButtonEmail key={index} href="#">
+                //   {email.title}
+                // </ContactButtonEmail>
+                <ContactLink key={index} href={`mailto:${email.title}`}>
                   {email.title}
-                </ContactButtonEmail>
+                </ContactLink>
               ))}
             </Box>
           </Box>

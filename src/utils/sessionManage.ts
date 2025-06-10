@@ -6,12 +6,8 @@ let cachedCreds: Array<{ municipality: string; key: string }> | null = null
 async function fetchCredentialsFromSheet(): Promise<
   Array<{ municipality: string; key: string }>
 > {
-  //   const SHEET_ID = process.env.NEXT_PUBLIC_SHEETS_ID
-  // 1x5IgdJaaYHuvAiXrGjf-pp-b95lNYLUv5BWhLu3ayTs
-  // const SHEET_ID = "1aUp0Uc9qoLTDeLf63Avme36QeHzC7-rycA-qHRt6C9c"
-  const SHEET_ID = "1x5IgdJaaYHuvAiXrGjf-pp-b95lNYLUv5BWhLu3ayTs"
-  //   const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY
-  const API_KEY = "AIzaSyAKghJI5z7qchMXuDyiyZoFbttc4_lihtw"
+  const SHEET_ID = process.env.NEXT_PUBLIC_SHEETS_ID
+  const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY
   const RANGE = `passwords!A2:B`
 
   const url =
@@ -55,7 +51,7 @@ export async function createSession(municipality: string): Promise<void> {
 
   document.cookie = `${COOKIE_NAME}=${encodeURIComponent(
     municipality
-  )}; path=/; max-age=${60 * 60 * 24 * 7}` // 7 days
+  )}; path=/; max-age=${60 * 60 * 24 * 7}` // 7
 }
 
 export async function restoreSession(): Promise<string | null> {

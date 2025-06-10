@@ -10,6 +10,7 @@ const Entry = () => {
       <Header isOnMainPage={false} />
       <Box
         sx={{
+          marginBlockStart: "108px",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           position: "relative",

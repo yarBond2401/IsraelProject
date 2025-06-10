@@ -23,20 +23,18 @@ export const SliderArrow = styled(Box)(() => ({
 export const SlideContent = styled(Box)(({ theme }) => ({
   padding: "10px",
   display: "flex",
+  gap: "5px",
   justifyContent: "space-between",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column-reverse",
     alignItems: "center",
   },
 }))
-export const SlideBody = styled(Box)(({ theme }) => ({
+export const SlideBody = styled(Box)(() => ({
   maxInlineSize: "270px",
-  [theme.breakpoints.up("md")]: {
-    transform: "translate(30px,0)",
-  },
 }))
 export const ImageWrapper = styled(Box)(() => ({
-  transform: "translate(10px,-35px)",
+  transform: "translate(5px,-35px)",
 }))
 export const SlideWrapper = styled(Box)(() => ({}))
 

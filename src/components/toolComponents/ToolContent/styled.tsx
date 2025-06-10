@@ -56,6 +56,10 @@ export const ContactLink = styled(Link)(({ theme }) => ({
   textDecoration: "underline",
   fontWeight: 300,
 }))
+export const ContactLinkGray = styled(Link)(() => ({
+  fontSize: "14px",
+  color: "#898c8b",
+}))
 
 export const ProjectButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== "isGradient",

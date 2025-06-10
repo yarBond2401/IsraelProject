@@ -8,7 +8,7 @@ export interface CardsProps {
 }
 export const FILTER_BUTTONS: ButtonsProps[] = [
   { title: "הכל" },
-  { title: "מיומנות" },
+  { title: "מיומנויות" },
   { title: "משאבים" },
   { title: "התנהגויות" },
   { title: "תקשורת" },

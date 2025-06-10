@@ -27,6 +27,7 @@ import {
 } from "@/utils/projectsManage"
 import { getAnswers } from "@/utils/questionnaireManage"
 import { computeSectionScores } from "@/utils/toolsUtils"
+import { FILTER_BUTTONS } from "./constants"
 
 export default function ProjectsPage() {
   const { user: municipality } = useAuth()
@@ -34,8 +35,8 @@ export default function ProjectsPage() {
   const [allProjects, setAllProjects] = useState<ProjectRecord[]>([])
   const [eligibleIds, setEligibleIds] = useState<Set<string>>(new Set())
   const [selectedFilters, setSelectedFilters] = useState<string[]>(["הכל"])
-  const [availableFilterKeys, setAvailableFilterKeys] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [initialLoad, setInitialLoad] = useState(true)
 
   useEffect(() => {
     fetchRawProjectsFromSheet()
@@ -52,7 +53,6 @@ export default function ProjectsPage() {
     if (!municipality) {
       setEligibleIds(new Set())
       setSelectedFilters(["הכל"])
-      setAvailableFilterKeys([])
       setIsLoading(false)
       return
     }
@@ -66,7 +66,6 @@ export default function ProjectsPage() {
         if (!hasAny) {
           setEligibleIds(new Set())
           setSelectedFilters(["הכל"])
-          setAvailableFilterKeys([])
           setIsLoading(false)
           return
         }
@@ -86,7 +85,6 @@ export default function ProjectsPage() {
         setEligibleIds(passing)
 
         if (passing.size === 0) {
-          setAvailableFilterKeys([])
           setSelectedFilters(["הכל"])
           setIsLoading(false)
           return
@@ -100,38 +98,21 @@ export default function ProjectsPage() {
         })
 
         const availableKeys = Array.from(eligibleFilterKeys)
-        setAvailableFilterKeys(availableKeys)
-
         setSelectedFilters([...availableKeys])
       })
       .catch((err) => {
         console.error("Error getting answers:", err)
         setEligibleIds(new Set())
         setSelectedFilters(["הכל"])
-        setAvailableFilterKeys([])
+        setInitialLoad(true)
       })
       .finally(() => {
         setIsLoading(false)
       })
   }, [municipality, allProjects])
 
-  // const handleFilterToggle = useCallback((title: string) => {
-  //   setSelectedFilters((prev) => {
-  //     if (title === "הכל") {
-  //       return ["הכל"]
-  //     }
-
-  //     const baseFilters = prev.filter((t) => t !== "הכל")
-
-  //     if (baseFilters.includes(title)) {
-  //       const newFilters = baseFilters.filter((t) => t !== title)
-  //       return newFilters.length ? newFilters : ["הכל"]
-  //     } else {
-  //       return [...baseFilters, title]
-  //     }
-  //   })
-  // }, [])
   const handleFilterToggle = useCallback((title: string) => {
+    setInitialLoad(false)
     setSelectedFilters((prev) => {
       if (title === "הכל") {
         return ["הכל"]
@@ -149,20 +130,13 @@ export default function ProjectsPage() {
   }, [])
 
   const displayed = allProjects.filter((proj) => {
+    if (initialLoad && eligibleIds.size > 0) {
+      return eligibleIds.has(proj.id)
+    }
+
     if (selectedFilters.includes("הכל")) {
-      if (eligibleIds.size > 0) {
-        return eligibleIds.has(proj.id)
-      }
       return true
     }
-
-    if (eligibleIds.size > 0) {
-      return (
-        eligibleIds.has(proj.id) &&
-        proj.filterKeys.some((fk) => selectedFilters.includes(fk))
-      )
-    }
-
     return proj.filterKeys.some((fk) => selectedFilters.includes(fk))
   })
 
@@ -186,32 +160,15 @@ export default function ProjectsPage() {
               justifyContent: "center",
             }}
           >
-            <FilterButton
-              selected={selectedFilters.includes("הכל")}
-              onClick={() => handleFilterToggle("הכל")}
-            >
-              הכל
-            </FilterButton>
-
-            {Array.from(new Set(allProjects.flatMap((p) => p.filterKeys)))
-              .filter((btnTitle) => {
-                if (eligibleIds.size === 0) {
-                  return true
-                }
-                return availableFilterKeys.includes(btnTitle)
-              })
-              .map((btnTitle) => {
-                const isSel = selectedFilters.includes(btnTitle)
-                return (
-                  <FilterButton
-                    key={btnTitle}
-                    selected={isSel}
-                    onClick={() => handleFilterToggle(btnTitle)}
-                  >
-                    {btnTitle}
-                  </FilterButton>
-                )
-              })}
+            {FILTER_BUTTONS.map(({ title, filterKey }) => (
+              <FilterButton
+                key={filterKey}
+                selected={selectedFilters.includes(filterKey)}
+                onClick={() => handleFilterToggle(filterKey)}
+              >
+                {title}
+              </FilterButton>
+            ))}
           </Box>
         </ProjectsUpperButtons>
 
@@ -235,7 +192,7 @@ export default function ProjectsPage() {
           <Link href="/diagnostic">
             <Button variant="back">חזור</Button>
           </Link>
-          <Link href="/vizualization">
+          <Link href="/tools">
             <Button variant="forward" color="green">
               המשך
             </Button>
