@@ -48,6 +48,7 @@ export default function ToolsPage() {
 
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState<ModalData | null>(null)
+  const [manualFilter, setManualFilter] = useState(false)
 
   useEffect(() => {
     fetchRawToolsFromSheet()
@@ -125,42 +126,31 @@ export default function ToolsPage() {
   }, [selectedFilters, isLoading])
 
   const handleFilterToggle = useCallback((title: string) => {
+    setManualFilter(true)
     setSelectedFilters((prev) => {
       if (title === "הכל") {
         return ["הכל"]
       }
-
-      const baseFilters = prev.filter((t) => t !== "הכל")
-
-      if (baseFilters.includes(title)) {
-        const newFilters = baseFilters.filter((t) => t !== title)
-        return newFilters.length ? newFilters : ["הכל"]
-      } else {
-        return [...baseFilters, title]
+      const base = prev.filter((t) => t !== "הכל")
+      if (base.includes(title)) {
+        const next = base.filter((t) => t !== title)
+        return next.length ? next : ["הכל"]
       }
+      return [...base, title]
     })
   }, [])
 
-  // const displayedTools = allTools.filter((tool) => {
-  //   if (selectedFilters.includes("הכל")) {
-  //     return true
-  //   }
-  //   if (eligibleToolIds.has(tool.id)) {
-  //     return true
-  //   }
-  //   return selectedFilters.includes(tool.filterKey)
-  // })
   const displayedTools = allTools.filter((tool) => {
-    if (selectedFilters.includes("הכל")) {
-      return true
+    if (!manualFilter) {
+      if (selectedFilters.includes("הכל")) return true
+      return (
+        eligibleToolIds.has(tool.id) && selectedFilters.includes(tool.filterKey)
+      )
+    } else {
+      if (selectedFilters.includes("הכל")) return true
+      return selectedFilters.includes(tool.filterKey)
     }
-
-    const isFilterOn = selectedFilters.includes(tool.filterKey)
-    const isEligible = eligibleToolIds.has(tool.id)
-
-    return isEligible && isFilterOn
   })
-
   if (isLoading) {
     return <LoadingScreen />
   }
